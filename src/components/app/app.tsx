@@ -1,4 +1,4 @@
-import './app.css'
+import './app.css';
 
 function App() {
   return (
@@ -8,7 +8,7 @@ function App() {
         <p>Hello, World!</p>
       </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
