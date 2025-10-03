@@ -1,6 +1,7 @@
 import { VitePWA } from 'vite-plugin-pwa';
 import { defineConfig } from 'vite';
 import solid from 'vite-plugin-solid';
+import path from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -55,4 +56,10 @@ export default defineConfig({
       },
     }),
   ],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+      '@shared': path.resolve(__dirname, './src/shared'),
+    },
+  },
 });
