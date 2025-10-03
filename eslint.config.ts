@@ -15,8 +15,8 @@ export default defineConfig([
       '**/.git/',
       'dist',
       'package-lock.json',
-      'tsconfig.json',
-      '**/global_style.css',
+      'tsconfig*.json',
+      '**/index.css',
     ],
   },
   {

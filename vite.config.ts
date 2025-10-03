@@ -1,30 +1,50 @@
 import { VitePWA } from 'vite-plugin-pwa';
 import { defineConfig } from 'vite';
+import solid from 'vite-plugin-solid';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
+    solid(),
     VitePWA({
-      strategies: 'injectManifest',
-      srcDir: 'src',
-      filename: 'sw.ts',
       registerType: 'prompt',
       injectRegister: false,
-
-      pwaAssets: {
-        disabled: false,
-        config: true,
-      },
 
       manifest: {
         name: 'final-project-vk-frontend',
         short_name: 'final-project-vk-frontend',
-        description: 'Final Vk education project',
+        description: 'final-project-vk-frontend',
         theme_color: '#ffffff',
+
+        icons: [
+          {
+            src: 'pwa-64x64.png',
+            sizes: '64x64',
+            type: 'image/png',
+          },
+          {
+            src: 'pwa-192x192.png',
+            sizes: '192x192',
+            type: 'image/png',
+          },
+          {
+            src: 'pwa-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+          },
+          {
+            src: 'maskable-icon-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'maskable',
+          },
+        ],
       },
 
-      injectManifest: {
+      workbox: {
         globPatterns: ['**/*.{js,css,html,svg,png,ico}'],
+        cleanupOutdatedCaches: true,
+        clientsClaim: true,
       },
 
       devOptions: {
