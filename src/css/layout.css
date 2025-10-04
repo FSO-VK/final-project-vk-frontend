@@ -2,6 +2,7 @@
 
 /* A common sizes for paddings and margins */
 :root {
+  --size-0: 0.0714rem;
   --size-1: 0.2857rem;
   --size-2: 1.1429rem;
   --size-3: 1.7143rem;
@@ -21,9 +22,7 @@
   --col-num: 24;
   --col-width: var(--size-4);
   --gutter-width: var(--size-3);
-  --max-screen-size: calc(
-    var(--col-num) * var(--col-width) + var(--gutter-width) * (var(--col-num) - 1)
-  );
+  --max-screen-size: calc(var(--col-num) * var(--col-width) + var(--gutter-width) * (var(--col-num) - 1));
 }
 
 /* Layout sizes */

@@ -7,4 +7,5 @@
 :root {
   font-size: 14px;
   line-height: 22px;
+  background-color: var(--clr-background);
 }
