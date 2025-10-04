@@ -1,0 +1,37 @@
+/** A module with font variables */
+
+/**
+*
+* fs = font size
+* lh = line height
+* fw = font weight
+*
+*/
+
+:root {
+  --fs-1: 0.8571rem;
+  --fs-2: 1.0000rem;
+  --fs-3: 1.1428rem;
+  --fs-4: 1.1285rem;
+  --fs-5: 1.7143rem;
+  --fs-6: 2.1430rem;
+  --fs-7: 2.7143rem;
+  --fs-8: 3.2857rem;
+  --fs-9: 4.0000rem;
+  --fs-10: 4.8571rem;
+
+  --lh-1: 0.9091rem;
+  --lh-2: 1.0000rem;
+  --lh-3: 1.0909rem;
+  --lh-4: 1.2727rem;
+  --lh-5: 1.4545rem;
+  --lh-6: 1.7272rem;
+  --lh-7: 2.0909rem;
+  --lh-8: 2.4545rem;
+  --lh-9: 2.9091rem;
+  --lh-10: 3.4545rem;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semi-bold: 600;
+}
