@@ -1,6 +1,6 @@
 /** A module with defined product-wide used colors */
 
-@import "system_colors.css";
+@import 'system_colors.css';
 
 :root {
   --clr-brand-1: var(--clr-geekblue-1);

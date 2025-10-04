@@ -8,7 +8,7 @@
   --size-4: 2.8571rem;
   --size-5: 4.5714rem;
   --size-6: 7.4285rem;
-  --size-7: 12.0000rem;
+  --size-7: 12rem;
   --size-8: 19.4286rem;
   --size-9: 31.4286rem;
   --size-10: 51.4286rem;
@@ -21,7 +21,9 @@
   --col-num: 24;
   --col-width: var(--size-4);
   --gutter-width: var(--size-3);
-  --max-screen-size: calc(var(--col-num) * var(--col-width) + var(--gutter-width) * (var(--col-num) - 1));
+  --max-screen-size: calc(
+    var(--col-num) * var(--col-width) + var(--gutter-width) * (var(--col-num) - 1)
+  );
 }
 
 /* Layout sizes */

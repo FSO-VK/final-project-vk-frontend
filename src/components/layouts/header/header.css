@@ -1,0 +1,6 @@
+.header {
+  width: 100%;
+  height: var(--size-top-nav-1);
+  position: sticky;
+  background-color: var(--clr-gold-5);
+}

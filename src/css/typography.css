@@ -10,18 +10,18 @@
 
 :root {
   --fs-1: 0.8571rem;
-  --fs-2: 1.0000rem;
+  --fs-2: 1rem;
   --fs-3: 1.1428rem;
   --fs-4: 1.1285rem;
   --fs-5: 1.7143rem;
-  --fs-6: 2.1430rem;
+  --fs-6: 2.143rem;
   --fs-7: 2.7143rem;
   --fs-8: 3.2857rem;
-  --fs-9: 4.0000rem;
+  --fs-9: 4rem;
   --fs-10: 4.8571rem;
 
   --lh-1: 0.9091rem;
-  --lh-2: 1.0000rem;
+  --lh-2: 1rem;
   --lh-3: 1.0909rem;
   --lh-4: 1.2727rem;
   --lh-5: 1.4545rem;
@@ -39,6 +39,7 @@
 /* Providing default fonts if available */
 
 :root {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
