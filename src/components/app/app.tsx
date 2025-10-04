@@ -6,13 +6,13 @@ import NotFoundPage from '../pages/not_found_page/not_found_page';
 import MedicinesPage from '../pages/medicines_page/medicines_page';
 
 function App() {
-    return (
-        <Router>
-            <Route path="/" component={MedicinesPage} />
-            <Route path="/hello" component={HelloWorldPage} />
-            <Route path="*" component={NotFoundPage} />
-        </Router>
-    );
+  return (
+    <Router>
+      <Route path="/" component={MedicinesPage} />
+      <Route path="/hello" component={HelloWorldPage} />
+      <Route path="*" component={NotFoundPage} />
+    </Router>
+  );
 }
 
 export default App;

@@ -1,4 +1,4 @@
 {
-  "backendRoot": "http://127.0.0.1:8000/api/v1",
+  "backendRoot": "https://myhealthbox.ddns.net/api/v1",
   "getMedicines": "/medicines"
 }

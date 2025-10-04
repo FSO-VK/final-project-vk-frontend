@@ -1,21 +1,17 @@
-import type { JSXElement } from "solid-js";
+import type { JSXElement } from 'solid-js';
 import { For } from 'solid-js';
-import "./list.css"
+import './list.css';
 
 export interface ListProps {
-    items?: JSXElement[];
+  items?: JSXElement[];
 }
 
 function List(props: ListProps) {
-    return <ul class="list">
-        <For each={props.items}>
-            {(item, _) => (
-                <li class="list__item">
-                    {item}
-                </li>
-            )}
-        </For>
+  return (
+    <ul class="list">
+      <For each={props.items}>{(item, _) => <li class="list__item">{item}</li>}</For>
     </ul>
+  );
 }
 
 export default List;

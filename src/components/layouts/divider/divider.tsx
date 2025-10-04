@@ -1,10 +1,7 @@
-import "./divider.css";
+import './divider.css';
 
 function Divider() {
-    return (
-        <div class="divider divider_small" aria-hidden="true"></div>
-    )
+  return <div class="divider divider_small" aria-hidden="true"></div>;
 }
 
 export default Divider;
-

@@ -2,17 +2,11 @@
   "files": [],
   "compilerOptions": {
     "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-      "@shared/*": [
-        "./src/shared/*"
-      ]
+      "@/*": ["./src/*"],
+      "@shared/*": ["./src/shared/*"]
     }
   },
-  "include": [
-    "src"
-  ],
+  "include": ["src"],
   "references": [
     {
       "path": "./tsconfig.app.json"
