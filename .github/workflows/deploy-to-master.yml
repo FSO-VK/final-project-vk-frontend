@@ -11,7 +11,7 @@ on:
 
 env:
   IMAGE_REPO: ghcr.io/fso-vk/fso-frontend
-  NODE_VERSION: '20.x'
+  NODE_VERSION: '24.9.x'
 
 permissions:
   contents: read
