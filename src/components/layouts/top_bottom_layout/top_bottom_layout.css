@@ -1,0 +1,4 @@
+.page-container {
+  max-width: min(var(--max-screen-size), calc(100% - var(--size-2)));
+  margin: 0px auto;
+}
