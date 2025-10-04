@@ -1,0 +1,3 @@
+.divider_small {
+  border: solid var(--size-0) var(--clr-divider);
+}

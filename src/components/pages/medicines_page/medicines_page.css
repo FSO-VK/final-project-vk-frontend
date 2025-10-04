@@ -1,0 +1,4 @@
+.medicines-page__list {
+  margin-left: calc(var(--col-width) * 4);
+  text-align: left;
+}

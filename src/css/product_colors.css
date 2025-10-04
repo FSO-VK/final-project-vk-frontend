@@ -47,12 +47,12 @@
   --clr-success-9: var(--clr-green-9);
   --clr-success-10: var(--clr-green-10);
 
-  --clr-title: rgba(255, 255, 255, 85%);
-  --clr-primary: rgba(255, 255, 255, 85%);
-  --clr-secondary: rgba(255, 255, 255, 45%);
-  --clr-disable: rgba(255, 255, 255, 25%);
-  --clr-border: rgba(255, 255, 255, 15%);
-  --clr-divider: rgba(255, 255, 255, 6%);
-  --clr-background: rgba(255, 255, 255, 4%);
-  --clr-table-header: rgba(255, 255, 255, 2%);
+  --clr-title: rgba(0, 0, 0, 85%);
+  --clr-primary: rgba(0, 0, 0, 85%);
+  --clr-secondary: rgba(0, 0, 0, 45%);
+  --clr-disable: rgba(0, 0, 0, 25%);
+  --clr-border: rgba(0, 0, 0, 15%);
+  --clr-divider: rgba(0, 0, 0, 6%);
+  --clr-background: rgba(0, 0, 0, 4%);
+  --clr-table-header: rgba(0, 0, 0, 2%);
 }
