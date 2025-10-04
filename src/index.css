@@ -1,3 +1,5 @@
+@import "css/product_colors.css";
+
 /* A module with global css cleaning.
   Do not touch. */
 
@@ -60,6 +62,7 @@ h6 {
 p {
   text-wrap: pretty;
 }
+
 h1,
 h2,
 h3,

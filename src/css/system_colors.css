@@ -1,0 +1,149 @@
+/** A module defining system css color system */
+
+:root {
+  --clr-red-1: #fff1f0;
+  --clr-red-2: #ffccc7;
+  --clr-red-3: #ffa39e;
+  --clr-red-4: #ff7875;
+  --clr-red-5: #ff4d4f;
+  --clr-red-6: #f5222d;
+  --clr-red-7: #cf1322;
+  --clr-red-8: #a8071a;
+  --clr-red-9: #820014;
+  --clr-red-10: #5c0011;
+
+  --clr-volcano-1: #fff2e8;
+  --clr-volcano-2: #ffd8bf;
+  --clr-volcano-3: #ffbb96;
+  --clr-volcano-4: #ff9c6e;
+  --clr-volcano-5: #ff7a45;
+  --clr-volcano-6: #fa541c;
+  --clr-volcano-7: #d4380d;
+  --clr-volcano-8: #ad2102;
+  --clr-volcano-9: #871400;
+  --clr-volcano-10: #610b00;
+
+  --clr-orange-1: #fff7e6;
+  --clr-orange-2: #ffe7ba;
+  --clr-orange-3: #ffd591;
+  --clr-orange-4: #ffc069;
+  --clr-orange-5: #ffa940;
+  --clr-orange-6: #fa8c16;
+  --clr-orange-7: #d46b08;
+  --clr-orange-8: #ad4e00;
+  --clr-orange-9: #873800;
+  --clr-orange-10: #612500;
+
+  --clr-gold-1: #fffbe6;
+  --clr-gold-2: #fff1b8;
+  --clr-gold-3: #ffe58f;
+  --clr-gold-4: #ffd666;
+  --clr-gold-5: #ffc53d;
+  --clr-gold-6: #faad14;
+  --clr-gold-7: #d48806;
+  --clr-gold-8: #ad6800;
+  --clr-gold-9: #873d00;
+  --clr-gold-10: #613400;
+
+  --clr-yellow-1: #feffe6;
+  --clr-yellow-2: #ffffb8;
+  --clr-yellow-3: #fffb8f;
+  --clr-yellow-4: #fff566;
+  --clr-yellow-5: #ffec3d;
+  --clr-yellow-6: #fadb14;
+  --clr-yellow-7: #d4b106;
+  --clr-yellow-8: #ad8b00;
+  --clr-yellow-9: #876800;
+  --clr-yellow-10: #614700;
+
+  --clr-lime-1: #fcffe6;
+  --clr-lime-2: #f4ffb8;
+  --clr-lime-3: #eaff8f;
+  --clr-lime-4: #d3f261;
+  --clr-lime-5: #bae637;
+  --clr-lime-6: #a0d911;
+  --clr-lime-7: #7cb305;
+  --clr-lime-8: #5b8c00;
+  --clr-lime-9: #3f6600;
+  --clr-lime-10: #254000;
+
+  --clr-green-1: #f6ffed;
+  --clr-green-2: #d9f7be;
+  --clr-green-3: #b7eb8f;
+  --clr-green-4: #95de64;
+  --clr-green-5: #73d13d;
+  --clr-green-6: #52c41a;
+  --clr-green-7: #389e0d;
+  --clr-green-8: #237804;
+  --clr-green-9: #135200;
+  --clr-green-10: #092b00;
+
+  --clr-cyan-1: #e6fffb;
+  --clr-cyan-2: #b5f5ec;
+  --clr-cyan-3: #87e8de;
+  --clr-cyan-4: #5cdbd3;
+  --clr-cyan-5: #36cfc9;
+  --clr-cyan-6: #13c2c2;
+  --clr-cyan-7: #08979c;
+  --clr-cyan-8: #006d75;
+  --clr-cyan-9: #00474f;
+  --clr-cyan-10: #002329;
+
+  --clr-blue-1: #e6f7ff;
+  --clr-blue-2: #bae67ff;
+  --clr-blue-3: #91d5ff;
+  --clr-blue-4: #69c0ff;
+  --clr-blue-5: #40a9ff;
+  --clr-blue-6: #1890ff;
+  --clr-blue-7: #096dd9;
+  --clr-blue-8: #0050b3;
+  --clr-blue-9: #003a8c;
+  --clr-blue-10: #002766;
+
+  --clr-geekblue-1: #f0f5ff;
+  --clr-geekblue-2: #d6e4ff;
+  --clr-geekblue-3: #adc6ff;
+  --clr-geekblue-4: #85a5ff;
+  --clr-geekblue-5: #597ef7;
+  --clr-geekblue-6: #2f54eb;
+  --clr-geekblue-7: #1d39c4;
+  --clr-geekblue-8: #10239e;
+  --clr-geekblue-9: #061178;
+  --clr-geekblue-10: #030852;
+
+  --clr-purple-1: #f9f0ff;
+  --clr-purple-2: #efdbff;
+  --clr-purple-3: #d3adf7;
+  --clr-purple-4: #b37feb;
+  --clr-purple-5: #9254de;
+  --clr-purple-6: #722ed1;
+  --clr-purple-7: #531dab;
+  --clr-purple-8: #391085;
+  --clr-purple-9: #22075e;
+  --clr-purple-10: #120338;
+
+  --clr-magenta-1: #fff0f6;
+  --clr-magenta-2: #ffd6e7;
+  --clr-magenta-3: #ffadd2;
+  --clr-magenta-4: #ff85c0;
+  --clr-magenta-5: #f769ab;
+  --clr-magenta-6: #eb2f96;
+  --clr-magenta-7: #c41d7f;
+  --clr-magenta-8: #9e1068;
+  --clr-magenta-9: #780650;
+  --clr-magenta-10: #520339;
+
+  --clr-gray-1: #ffffff;
+  --clr-gray-2: #fafafa;
+  --clr-gray-3: #f5f5f5;
+  --clr-gray-4: #f0f0f0;
+  --clr-gray-5: #d9d9d9;
+  --clr-gray-6: #bfbfbf;
+  --clr-gray-7: #8c8c8c;
+  --clr-gray-8: #595959;
+  --clr-gray-9: #434343;
+  --clr-gray-10: #262626;
+  --clr-gray-11: #1f1f1f;
+  --clr-gray-12: #141414;
+  --clr-gray-13: #000000;
+}
