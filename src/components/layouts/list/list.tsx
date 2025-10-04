@@ -9,7 +9,7 @@ export interface ListProps {
 function List(props: ListProps) {
   return (
     <ul class="list">
-      <For each={props.items}>{(item, _) => <li class="list__item">{item}</li>}</For>
+      <For each={props.items}>{(item) => <li class="list__item">{item}</li>}</For>
     </ul>
   );
 }
