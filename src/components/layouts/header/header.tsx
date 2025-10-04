@@ -1,10 +1,7 @@
-import "./header.css"
+import './header.css';
 
 function Header() {
-    return (
-        <nav class="header">
-        </nav>
-    )
+  return <nav class="header"></nav>;
 }
 
 export default Header;

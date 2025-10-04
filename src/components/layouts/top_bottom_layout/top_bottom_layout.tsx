@@ -1,15 +1,17 @@
-import type { JSXElement } from "solid-js";
-import Header from "../header/header.tsx";
+import type { JSXElement } from 'solid-js';
+import Header from '../header/header.tsx';
 
 export interface TopBottomLayoutProps {
-    children?: JSXElement[] | JSXElement
+  children?: JSXElement[] | JSXElement;
 }
 
 function TopBottomLayout(props: TopBottomLayoutProps) {
-    return (<>
-        <Header />
-        {props.children}
-    </>);
+  return (
+    <>
+      <Header />
+      {props.children}
+    </>
+  );
 }
 
 export default TopBottomLayout;
