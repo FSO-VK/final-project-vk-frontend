@@ -1,0 +1,81 @@
+import fs from 'node:fs/promises';
+import express from 'express';
+import { generateHydrationScript } from 'solid-js/web';
+
+const baseUrl = process.env.BASE || '/';
+const port = process.env.PORT || 5173;
+const host = process.env.HOST || '0.0.0.0';
+const mode = 'staging';
+const isDevelopment = process.env.NODE_ENV === 'development';
+const templateHtml = isDevelopment
+  ? ''
+  : await fs.readFile(`./dist/${mode}/client/index.html`, 'utf-8');
+
+const serverConfig = {
+  isDevelopment,
+  templateHtml,
+  baseUrl,
+  port,
+  mode,
+};
+
+async function createAppServer(serverConfig) {
+  const app = express();
+
+  /** @type {import('vite').ViteDevServer | undefined} */
+  let vite;
+  if (serverConfig.isDevelopment) {
+    const { createServer } = await import('vite');
+    vite = await createServer({
+      server: { middlewareMode: true },
+      appType: 'custom',
+      base: serverConfig.baseUrl,
+    });
+    app.use(vite.middlewares);
+  } else {
+    const compression = (await import('compression')).default;
+    const sirv = (await import('sirv')).default;
+    app.use(compression());
+    app.use(serverConfig.baseUrl, sirv(`./dist/${serverConfig.mode}/client`, { extensions: [] }));
+  }
+
+  app.use('*all', async (req, resp) => {
+    console.info(`${new Date(Date.now()).toISOString()} ${req.method} ${req.url}`);
+
+    try {
+      const url = req.originalUrl.replace(serverConfig.baseUrl, '');
+
+      let template;
+      let render;
+
+      if (serverConfig.isDevelopment) {
+        template = await fs.readFile('./index.html', 'utf-8');
+        template = await vite.transformIndexHtml(url, template);
+        render = (await vite.ssrLoadModule('/src/entry-server.tsx')).render;
+      } else {
+        template = serverConfig.templateHtml;
+        render = (await import(`./dist/${serverConfig.mode}/server/entry-server.js`)).render;
+      }
+
+      const rendered = await render(url);
+
+      const head = (rendered.head ?? '') + generateHydrationScript();
+
+      const html = template
+        .replace('<!--app-head-->', head)
+        .replace('<!--app-html-->', rendered.html ?? '');
+
+      resp.status(200).set({ 'Content-Type': 'text/html' }).send(html);
+    } catch (e) {
+      vite?.ssrFixStacktrace(e);
+      console.log(e.stack);
+      resp.status(500).end(e.stack);
+    }
+  });
+
+  app.listen(port, host, () => {
+    console.log(`Server started at http://${host}:${port}`);
+  });
+}
+
+createAppServer(serverConfig);
