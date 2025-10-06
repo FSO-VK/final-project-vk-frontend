@@ -6,7 +6,7 @@ import path from 'path';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    solid(),
+    solid({ ssr: true }),
     VitePWA({
       registerType: 'prompt',
       injectRegister: false,
@@ -61,8 +61,5 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
       '@shared': path.resolve(__dirname, './src/shared'),
     },
-  },
-  server: {
-    host: '127.0.0.1',
   },
 });

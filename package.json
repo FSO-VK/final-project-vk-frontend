@@ -4,9 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "prod-build": "tsc -b && vite build --mode=production --outDir=dist/prod",
-    "stage-build": "tsc -b && vite build --mode=staging --outDir=dist/stage",
+    "dev": "node ./server.js",
+    "prod-build:client": "tsc -b && vite build --mode=production --outDir=dist/prod/client",
+    "prod-build:server": "tsc -b && vite build --mode=production --outDir=dist/prod/server --ssrManifest src/entry-server.tsx",
+    "staging-build:client": "tsc -b && vite build --mode=staging --outDir=dist/staging/client",
+    "staging-build:server": "tsc -b && vite build --mode=staging --outDir=dist/staging/server --ssr src/entry-server.tsx",
     "preview": "vite preview",
     "lint": "npx eslint .",
     "format": "npx prettier . --write",
@@ -16,6 +18,9 @@
   },
   "dependencies": {
     "@solidjs/router": "^0.15.3",
+    "compression": "^1.8.1",
+    "express": "^5.1.0",
+    "sirv": "^3.0.2",
     "solid-js": "^1.9.4"
   },
   "devDependencies": {
