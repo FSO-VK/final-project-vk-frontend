@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "prod-build": "tsc -b && vite build --mode=production --outDir=dist/prod",
+    "stage-build": "tsc -b && vite build --mode=staging --outDir=dist/stage",
     "preview": "vite preview",
     "lint": "npx eslint .",
     "format": "npx prettier . --write",
