@@ -37,4 +37,8 @@ export default defineConfig([
     language: 'markdown/gfm',
     extends: ['markdown/recommended'],
   },
+  {
+    files: ['server.js'],
+    languageOptions: { globals: globals.node },
+  },
 ]);
