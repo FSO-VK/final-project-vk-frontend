@@ -1,20 +1,30 @@
+import { BackendHttpApiConfig } from '@/shared/api/api';
+
 export interface Config {
-  backendOrigin: string;
+  backendConfig?: BackendHttpApiConfig;
 }
 
 let config: Config;
 
 if (import.meta.env.MODE == 'development') {
-  config = {
-    backendOrigin: 'http://127.0.0.1:8001',
-  };
+  config = {};
 } else if (import.meta.env.MODE == 'staging') {
   config = {
-    backendOrigin: 'https://myhealthbox.ddns.net',
+    backendConfig: {
+      backendOrigin: 'https://myhealthbox.ddns.net/api/v1',
+      medicine: {
+        getMedicinesRoute: '/medicines',
+      },
+    },
   };
 } else if (import.meta.env.MODE == 'production') {
   config = {
-    backendOrigin: 'https://myhealthbox.ddns.net',
+    backendConfig: {
+      backendOrigin: 'https://myhealthbox.ddns.net/api/v1',
+      medicine: {
+        getMedicinesRoute: '/medicines',
+      },
+    },
   };
 } else {
   throw new Error(`Unexpected environment ${import.meta.env.MODE}`);
