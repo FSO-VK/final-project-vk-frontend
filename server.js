@@ -2,10 +2,15 @@ import fs from 'node:fs/promises';
 import express from 'express';
 import { generateHydrationScript } from 'solid-js/web';
 
+// base url on which frontend is served
 const baseUrl = process.env.BASE || '/';
-const port = process.env.PORT || 5173;
+
 const host = process.env.HOST || '0.0.0.0';
-const mode = 'staging';
+const port = process.env.PORT || 5173;
+
+// Server mode. Can be ether "development", "production" or "staging"
+const mode = process.env.MODE || 'development';
+
 const isDevelopment = process.env.NODE_ENV === 'development';
 const templateHtml = isDevelopment
   ? ''
