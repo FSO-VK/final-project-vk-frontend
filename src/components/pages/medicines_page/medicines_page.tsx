@@ -4,12 +4,12 @@ import type { Medicine } from '../../../shared/api/src/dto/medicine';
 import MedicineCard from '../../medicine_card/medicine_card';
 import Col from '../../layouts/col/col';
 import './medicines_page.css';
-import { getMedicinesList } from '../../../shared/api/api';
 import { createAsync } from '@solidjs/router';
 import { Suspense } from 'solid-js';
+import { Api } from '@/index';
 
 async function fetchCards() {
-  const medicines = await getMedicinesList();
+  const medicines = await Api.medicine.getMedicinesList();
   const cards = medicines.map((medicine: Medicine) => (
     <Col size={12}>
       {' '}

@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "node ./server.js",
+    "dev": "NODE_ENV=development node ./server.js",
     "prod-build:client": "tsc -b && vite build --mode=production --outDir=dist/prod/client --ssrManifest",
     "prod-build:server": "tsc -b && vite build --mode=production --outDir=dist/prod/server --ssr src/entry-server.tsx",
     "staging-build:client": "tsc -b && vite build --mode=staging --outDir=dist/staging/client --ssrManifest",

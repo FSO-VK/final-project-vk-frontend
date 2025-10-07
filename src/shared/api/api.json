@@ -1,4 +1,0 @@
-{
-  "backendRoot": "https://myhealthbox.ddns.net/api/v1",
-  "getMedicines": "/medicines"
-}
