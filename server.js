@@ -2,27 +2,32 @@ import fs from 'node:fs/promises';
 import express from 'express';
 import { generateHydrationScript } from 'solid-js/web';
 
-// base url on which frontend is served
-const baseUrl = process.env.BASE || '/';
+async function makeConfig() {
+  // base url on which frontend is served
+  const baseUrl = process.env.BASE || '/';
 
-const host = process.env.HOST || '0.0.0.0';
-const port = process.env.PORT || 5173;
+  const host = process.env.HOST || '0.0.0.0';
+  const port = process.env.PORT || 5173;
 
-// Server mode. Can be ether "development", "production" or "staging"
-const mode = process.env.MODE || 'development';
+  // Server mode. Can be ether "development", "production" or "staging"
+  const mode = process.env.MODE || 'development';
 
-const isDevelopment = process.env.NODE_ENV === 'development';
-const templateHtml = isDevelopment
-  ? ''
-  : await fs.readFile(`./dist/${mode}/client/index.html`, 'utf-8');
+  const isDevelopment = process.env.NODE_ENV === 'development';
+  const templateHtml = isDevelopment
+    ? ''
+    : await fs.readFile(`./dist/${mode}/client/index.html`, 'utf-8');
 
-const serverConfig = {
-  isDevelopment,
-  templateHtml,
-  baseUrl,
-  port,
-  mode,
-};
+  return {
+    isDevelopment,
+    host,
+    templateHtml,
+    baseUrl,
+    port,
+    mode,
+  };
+}
+
+const serverConfig = await makeConfig();
 
 async function createAppServer(serverConfig) {
   const app = express();
@@ -78,8 +83,8 @@ async function createAppServer(serverConfig) {
     }
   });
 
-  app.listen(port, host, () => {
-    console.log(`Server started at http://${host}:${port}`);
+  app.listen(serverConfig.port, serverConfig.host, () => {
+    console.log(`Server started at http://${serverConfig.host}:${serverConfig.port}`);
   });
 }
 
