@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "node ./server.js",
-    "prod-build:client": "tsc -b && vite build --mode=production --outDir=dist/prod/client",
-    "prod-build:server": "tsc -b && vite build --mode=production --outDir=dist/prod/server --ssrManifest src/entry-server.tsx",
-    "staging-build:client": "tsc -b && vite build --mode=staging --outDir=dist/staging/client",
+    "prod-build:client": "tsc -b && vite build --mode=production --outDir=dist/prod/client --ssrManifest",
+    "prod-build:server": "tsc -b && vite build --mode=production --outDir=dist/prod/server --ssr src/entry-server.tsx",
+    "staging-build:client": "tsc -b && vite build --mode=staging --outDir=dist/staging/client --ssrManifest",
     "staging-build:server": "tsc -b && vite build --mode=staging --outDir=dist/staging/server --ssr src/entry-server.tsx",
     "preview": "vite preview",
     "lint": "npx eslint .",
