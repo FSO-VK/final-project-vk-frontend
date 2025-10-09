@@ -1,18 +1,18 @@
-name: CI — frontend lint, build-check, test, publish-on-dev
+name: CI — frontend lint, build-check, test, publish-on-develop
 
 on:
   push:
     branches:
       - master
-      - dev
+      - developelop
   pull_request:
     branches:
       - master
-      - dev
+      - developelop
   workflow_dispatch:
     inputs:
       ref:
-        description: "Branch to run against (example: feature/x or dev or master)"
+        description: "Branch to run against (example: feature/x or develop or master)"
         required: false
         default: ""
 
@@ -78,16 +78,16 @@ jobs:
           # Определяем тег и режим один раз для всех случаев
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             TARGET="handmade"
-            MODE="dev"
+            MODE="develop"
           elif [ "${{ github.ref }}" = "refs/heads/master" ]; then
             TARGET="master"
             MODE="prod"
-          elif [ "${{ github.ref }}" = "refs/heads/dev" ]; then
-            TARGET="dev"
-            MODE="dev"
+          elif [ "${{ github.ref }}" = "refs/heads/develop" ]; then
+            TARGET="develop"
+            MODE="develop"
           else
             TARGET="pr-test"
-            MODE="dev"
+            MODE="develop"
           fi
           
           echo "TARGET=${TARGET}" >> $GITHUB_ENV
@@ -99,9 +99,9 @@ jobs:
 
       - name: Run frontend build to validate
         run: |
-          if [ "${MODE}" = "dev" ]; then
-            # try dev build scripts if present, otherwise fall back to generic build
-            npm run dev-build:client --if-present || npm run dev-build --if-present || npm run build --if-present || true
+          if [ "${MODE}" = "develop" ]; then
+            # try develop build scripts if present, otherwise fall back to generic build
+            npm run develop-build:client --if-present || npm run develop-build --if-present || npm run build --if-present || true
           else
             npm run prod-build:client --if-present || npm run build --if-present || true
           fi
@@ -116,7 +116,7 @@ jobs:
     name: Publish image (conditional)
     runs-on: ubuntu-latest
     needs: build
-    if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
     steps:
       - uses: actions/checkout@v5
         with:
@@ -134,10 +134,10 @@ jobs:
 
       - name: Build and push image
         run: |
-          # В publish всегда используем тег dev и режим dev
-          TAG="${{ env.IMAGE_REPO }}:dev"
-          echo "Buildx build+push -> ${TAG} (mode=dev)"
+          # В publish всегда используем тег develop и режим develop
+          TAG="${{ env.IMAGE_REPO }}:develop"
+          echo "Buildx build+push -> ${TAG} (mode=develop)"
           docker buildx build --push --platform linux/amd64,linux/arm64 \
-            --build-arg mode=dev \
+            --build-arg mode=develop \
             --tag "${TAG}" \
             -f ./Dockerfile .
