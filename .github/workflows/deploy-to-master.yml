@@ -45,9 +45,17 @@ jobs:
         env:
           TARGET: ${{ github.event.inputs.target }}
         run: |
-          IMAGE_TAG="${{ env.IMAGE_REPO }}:prod"
-          echo "Publishing ${IMAGE_TAG} with mode=prod"
+          # Определяем режим сборки на основе target
+          if [ "${TARGET}" = "master" ]; then
+            MODE="prod"
+            IMAGE_TAG="${{ env.IMAGE_REPO }}:prod"
+          else
+            MODE="staging"  # ← меняем на staging для develop ветки
+            IMAGE_TAG="${{ env.IMAGE_REPO }}:develop"
+          fi
+          
+          echo "Publishing ${IMAGE_TAG} with mode=${MODE}"
           docker buildx build --push --platform linux/amd64,linux/arm64 \
-            --build-arg mode=prod \
+            --build-arg mode=${MODE} \
             --tag "${IMAGE_TAG}" \
             -f ./Dockerfile .

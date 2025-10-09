@@ -75,19 +75,18 @@ jobs:
       - name: Determine build parameters
         id: vars
         run: |
-          # Определяем тег и режим один раз для всех случаев
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             TARGET="handmade"
-            MODE="develop"
+            MODE="staging"  # ← меняем на staging
           elif [ "${{ github.ref }}" = "refs/heads/master" ]; then
             TARGET="master"
             MODE="prod"
           elif [ "${{ github.ref }}" = "refs/heads/develop" ]; then
             TARGET="develop"
-            MODE="develop"
+            MODE="staging"  # ← меняем на staging
           else
             TARGET="pr-test"
-            MODE="develop"
+            MODE="staging"  # ← меняем на staging
           fi
           
           echo "TARGET=${TARGET}" >> $GITHUB_ENV
@@ -134,10 +133,10 @@ jobs:
 
       - name: Build and push image
         run: |
-          # В publish всегда используем тег develop и режим develop
+          # В publish всегда используем тег develop и режим staging
           TAG="${{ env.IMAGE_REPO }}:develop"
-          echo "Buildx build+push -> ${TAG} (mode=develop)"
+          echo "Buildx build+push -> ${TAG} (mode=staging)"
           docker buildx build --push --platform linux/amd64,linux/arm64 \
-            --build-arg mode=develop \
+            --build-arg mode=staging \  # ← меняем на staging
             --tag "${TAG}" \
             -f ./Dockerfile .
