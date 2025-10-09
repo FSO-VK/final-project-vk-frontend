@@ -77,16 +77,16 @@ jobs:
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             TARGET="handmade"
-            MODE="staging"  # ← меняем на staging
+            MODE="staging"
           elif [ "${{ github.ref }}" = "refs/heads/master" ]; then
             TARGET="master"
             MODE="prod"
           elif [ "${{ github.ref }}" = "refs/heads/develop" ]; then
             TARGET="develop"
-            MODE="staging"  # ← меняем на staging
+            MODE="staging"
           else
             TARGET="pr-test"
-            MODE="staging"  # ← меняем на staging
+            MODE="staging"
           fi
           
           echo "TARGET=${TARGET}" >> $GITHUB_ENV
@@ -137,6 +137,6 @@ jobs:
           TAG="${{ env.IMAGE_REPO }}:develop"
           echo "Buildx build+push -> ${TAG} (mode=staging)"
           docker buildx build --push --platform linux/amd64,linux/arm64 \
-            --build-arg mode=staging \  # ← меняем на staging
+            --build-arg mode=staging \  # ←  staging
             --tag "${TAG}" \
             -f ./Dockerfile .
