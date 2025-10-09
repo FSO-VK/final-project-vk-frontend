@@ -4,11 +4,11 @@ on:
   push:
     branches:
       - master
-      - developelop
+      - develop
   pull_request:
     branches:
       - master
-      - developelop
+      - develop
   workflow_dispatch:
     inputs:
       ref:
