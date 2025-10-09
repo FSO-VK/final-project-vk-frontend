@@ -17,7 +17,7 @@ on:
         default: ""
 
 env:
-  NODE_VERSION: '24.9.0'
+  NODE_VERSION: '24.9.x'
   IMAGE_REPO: ghcr.io/fso-vk/fso-frontend
 
 permissions:
