@@ -125,6 +125,6 @@ jobs:
           TAG="${{ env.IMAGE_REPO }}:develop"
           echo "Buildx build+push -> ${TAG} (mode=staging)"
           docker buildx build --push --platform linux/amd64,linux/arm64 \
-            --build-arg mode=staging \  # ←  staging
+            --build-arg mode=staging \
             --tag "${TAG}" \
             -f ./Dockerfile .
