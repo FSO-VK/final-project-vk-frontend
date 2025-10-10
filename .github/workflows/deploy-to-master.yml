@@ -1,11 +1,10 @@
 name: Deploy — manual publish frontend image
 
-# Триггеры: ручной запуск
 on:
   workflow_dispatch:
     inputs:
       target:
-        description: "target branch to publish (master or dev)"
+        description: "target branch to publish"
         required: true
         default: "master"
 
@@ -29,19 +28,7 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-      - name: Install dependencies
-        run: |
-          npm ci
-
-      - name: Build frontend
-        run: |
-          npm run lint
-          npm run build
-
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
-
-      - name: Set up Docker Buildx
+      - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v3
 
       - name: Login to GHCR
@@ -51,12 +38,14 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GHCR_PAT || secrets.GITHUB_TOKEN }}
 
-      - name: Build and push Docker image
+      - name: Build and push image
         env:
           TARGET: ${{ github.event.inputs.target }}
         run: |
-          IMAGE_TAG="${{ env.IMAGE_REPO }}:${TARGET}"
-          echo "Publishing ${IMAGE_TAG}"
+          MODE="prod"
+          IMAGE_TAG="${{ env.IMAGE_REPO }}:prod"
+          echo "Publishing ${IMAGE_TAG} with mode=${MODE}"
           docker buildx build --push --platform linux/amd64,linux/arm64 \
+            --build-arg mode=${MODE} \
             --tag "${IMAGE_TAG}" \
-            -f ./build/services/frontend.Dockerfile .
+            -f ./Dockerfile .
