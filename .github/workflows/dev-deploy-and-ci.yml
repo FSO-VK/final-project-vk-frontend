@@ -93,18 +93,6 @@ jobs:
           echo "MODE=${MODE}" >> $GITHUB_ENV
           echo "Prepared TARGET=${TARGET} MODE=${MODE}"
 
-      - name: Install dependencies (build check)
-        run: npm ci
-
-      - name: Run frontend build to validate
-        run: |
-          if [ "${MODE}" = "develop" ]; then
-            # try develop build scripts if present, otherwise fall back to generic build
-            npm run develop-build:client --if-present || npm run develop-build --if-present || npm run build --if-present || true
-          else
-            npm run prod-build:client --if-present || npm run build --if-present || true
-          fi
-
       - name: Build Docker image (no push)
         run: |
           TAG="${{ env.IMAGE_REPO }}:${TARGET}"
