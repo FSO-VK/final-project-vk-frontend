@@ -17,7 +17,7 @@ export interface MedicationDTO {
 }
 
 // Preserved for future use
-type Medication = MedicationDTO;
+export type Medication = MedicationDTO;
 
 export function adaptMedicationDTO(d: MedicationDTO): Medication {
   return d;
