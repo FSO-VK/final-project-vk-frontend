@@ -1,5 +1,5 @@
 import { renderToStringAsync } from 'solid-js/web';
-import App from './components/app/app';
+import { App } from './app';
 
 export async function render() {
   const html = renderToStringAsync(() => <App />);
