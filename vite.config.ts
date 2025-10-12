@@ -12,9 +12,9 @@ export default defineConfig({
       injectRegister: false,
 
       manifest: {
-        name: 'final-project-vk-frontend',
-        short_name: 'final-project-vk-frontend',
-        description: 'final-project-vk-frontend',
+        name: 'Умная аптечка',
+        short_name: 'Аптечка',
+        description: 'Приложения для учета лекарств и их приема',
         theme_color: '#ffffff',
 
         icons: [
