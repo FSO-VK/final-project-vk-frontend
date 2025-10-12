@@ -1,0 +1,17 @@
+import './app.css';
+
+import { Router, Route } from '@solidjs/router';
+import { NotFoundPage } from '@/pages/not_found';
+import { MedicationsPage } from '@/pages/medications';
+import { TopBottomLayout } from '../layouts/top_bottom_layout/top_bottom_layout';
+
+export function App() {
+  return (
+    <Router>
+      <Route path="/" component={TopBottomLayout}>
+        <Route path="/" component={MedicationsPage} />
+      </Route>
+      <Route path="*" component={NotFoundPage} />
+    </Router>
+  );
+}

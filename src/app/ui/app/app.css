@@ -1,0 +1,9 @@
+@import 'css/cleaning.css';
+@import 'css/product_colors.css';
+@import 'css/typography.css';
+@import 'css/layout.css';
+
+#root {
+  margin: 0 auto;
+  text-align: center;
+}
