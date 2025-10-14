@@ -3,16 +3,16 @@
 @import 'system_colors.css';
 
 :root {
-  --clr-brand-1: var(--clr-geekblue-1);
-  --clr-brand-2: var(--clr-geekblue-2);
-  --clr-brand-3: var(--clr-geekblue-3);
-  --clr-brand-4: var(--clr-geekblue-4);
-  --clr-brand-5: var(--clr-geekblue-5);
-  --clr-brand-6: var(--clr-geekblue-6);
-  --clr-brand-7: var(--clr-geekblue-7);
-  --clr-brand-8: var(--clr-geekblue-8);
-  --clr-brand-9: var(--clr-geekblue-9);
-  --clr-brand-10: var(--clr-geekblue-10);
+  --clr-brand-1: var(--clr-blue-1);
+  --clr-brand-2: var(--clr-blue-2);
+  --clr-brand-3: var(--clr-blue-3);
+  --clr-brand-4: var(--clr-blue-4);
+  --clr-brand-5: var(--clr-blue-5);
+  --clr-brand-6: var(--clr-blue-6);
+  --clr-brand-7: var(--clr-blue-7);
+  --clr-brand-8: var(--clr-blue-8);
+  --clr-brand-9: var(--clr-blue-9);
+  --clr-brand-10: var(--clr-blue-10);
 
   --clr-danger-1: var(--clr-red-1);
   --clr-danger-2: var(--clr-red-2);
