@@ -14,10 +14,8 @@
 
   &__info {
     text-align: left;
-    overflow-block: hidden;
     block-size: fit-content;
     max-block-size: 80vb;
-    block-size: 100%;
   }
 
   &__info-header {
@@ -28,8 +26,11 @@
   &__button-container {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     gap: var(--size-2);
+    position: absolute;
+    inset-block-end: var(--size-3);
+    inset-inline: var(--size-3);
   }
 
   &__button {

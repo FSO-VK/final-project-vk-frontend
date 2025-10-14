@@ -1,9 +1,6 @@
+import type { ParentComponent } from 'solid-js';
 import './p.css';
 
-export interface PProps {
-  text?: string;
-}
-
-export function P({ text }: PProps) {
-  return <p class="paragraph">{text}</p>;
-}
+export const P: ParentComponent = (props) => {
+  return <p class="paragraph">{props.children}</p>;
+};
