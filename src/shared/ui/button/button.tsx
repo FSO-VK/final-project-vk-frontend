@@ -17,7 +17,7 @@ export interface ButtonProps {
 export function Button(props: ButtonProps) {
   return (
     <button
-      class={`button button_${props.type ?? ButtonType.brand} ${props.class ?? ''}`}
+      class={`${props.class ?? ''} button button_${props.type ?? ButtonType.brand}`}
       onClick={props.onClick}
     >
       <Show when={props.children !== undefined}>{props.children as JSXElement}</Show>
