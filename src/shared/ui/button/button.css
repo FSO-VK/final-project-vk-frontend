@@ -7,7 +7,6 @@
   min-height: var(--lh-6);
   text-overflow: ellipsis;
   overflow: hidden;
-  inline-size: fit-content;
 }
 
 .button_brand {
