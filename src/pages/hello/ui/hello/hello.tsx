@@ -2,7 +2,7 @@ import logoSvg from '/favicon.svg';
 import './hello.css';
 import { Button, ButtonType, P } from '@/shared/ui';
 import { createSignal } from 'solid-js';
-import { Dynamic, Show } from 'solid-js/web'
+import { Dynamic, Show } from 'solid-js/web';
 import { useNavigate } from '@solidjs/router';
 
 const firstSubpage = () => (
@@ -37,7 +37,7 @@ const lastSubpage = () => (
 );
 
 // Will be removed as soon as login page is created
-const LOGIN_ROUTE = "/login";
+const LOGIN_ROUTE = '/login';
 
 export function HelloPage() {
   const [currentPage, setCurrentPage] = createSignal(0);
@@ -60,19 +60,21 @@ export function HelloPage() {
       return;
     }
     setCurrentPage(currentPage() - 1);
-  }
+  };
 
   return (
     <div class="hello-page">
-      <main class="hello-page__info"><Dynamic component={subpages[currentPage()]} /></main>
+      <main class="hello-page__info">
+        <Dynamic component={subpages[currentPage()]} />
+      </main>
       <footer class="hello-page__button-container">
         <Button type={ButtonType.secondary} class="hello-page__button" onClick={onBackButtonClick}>
-          {currentPage() == 0 ? "Пропустить" : "Назад"}
+          {currentPage() == 0 ? 'Пропустить' : 'Назад'}
         </Button>
         <Button class="hello-page__button" onClick={onNextButtonClick}>
-          {currentPage() < subpages.length - 1 ? "Дальше" : "Войти"}
+          {currentPage() < subpages.length - 1 ? 'Дальше' : 'Войти'}
         </Button>
       </footer>
-    </div >
+    </div>
   );
 }

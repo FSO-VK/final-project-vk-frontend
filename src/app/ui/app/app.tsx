@@ -9,10 +9,7 @@ import { HelloPage } from '@/pages/hello';
 export function App() {
   return (
     <Router>
-      <Route path="/hello" component={HelloPage} />
-      <Route path="/" component={TopBottomLayout}>
-        <Route path="/" component={MedicationsPage} />
-      </Route>
+      <Route path="/" component={HelloPage} />
       <Route path="*" component={NotFoundPage} />
     </Router>
   );
