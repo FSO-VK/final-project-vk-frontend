@@ -2,7 +2,7 @@ import logoSvg from '/favicon.svg';
 import './hello.css';
 import { Button, ButtonType, P } from '@/shared/ui';
 import { createSignal } from 'solid-js';
-import { Dynamic, Show } from 'solid-js/web';
+import { Dynamic } from 'solid-js/web';
 import { useNavigate } from '@solidjs/router';
 
 const firstSubpage = () => (
