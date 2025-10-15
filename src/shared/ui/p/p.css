@@ -1,0 +1,4 @@
+.paragraph {
+  margin: var(--size-2) 0px;
+  text-wrap: wrap pretty;
+}

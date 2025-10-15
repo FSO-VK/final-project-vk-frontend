@@ -1,0 +1,64 @@
+.hello-page {
+  box-sizing: border-box;
+  max-block-size: 100vb;
+  max-inline-size: 100vi;
+  padding: var(--size-3);
+
+  &__logo-container {
+    padding: var(--size-3) 0px;
+  }
+
+  &__logo {
+    inline-size: min(50vb, 50vi);
+    margin: auto;
+  }
+
+  &__info {
+    text-align: left;
+    block-size: fit-content;
+    max-block-size: 80vb;
+    margin-bottom: var(--size-3);
+    overflow-block: auto;
+  }
+
+  &__subpage {
+    animation: fade-up 0.5s;
+  }
+
+  &__info-header {
+    text-align: center;
+    margin: var(--size-2) auto;
+  }
+
+  &__button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: var(--size-2);
+    position: fixed;
+    inset-inline: 0;
+    inset-block-end: 0;
+    padding-inline: var(--size-3);
+    padding-block-end: var(--size-3);
+    background-color: var(--clr-gray-1);
+  }
+
+  &__button {
+    inline-size: 50%;
+  }
+
+  &__login-link {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+@keyframes fade-up {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

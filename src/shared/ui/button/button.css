@@ -1,0 +1,23 @@
+.button {
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  border: none;
+  border-radius: var(--size-1);
+  min-height: var(--lh-6);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  inline-size: fit-content;
+}
+
+.button_brand {
+  background-color: var(--clr-brand-5);
+  color: var(--clr-brand-1);
+}
+
+.button_secondary {
+  background-color: rgba(0, 0, 0, 0);
+  color: var(--clr-primary);
+  border: solid 1px var(--clr-border);
+  font-weight: var(--fw-semi-bold);
+}
