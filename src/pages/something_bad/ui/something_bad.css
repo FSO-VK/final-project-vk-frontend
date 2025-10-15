@@ -1,0 +1,33 @@
+.something-bad-page {
+  box-sizing: border-box;
+  max-block-size: 100vb;
+  max-inline-size: 100vi;
+  padding: var(--size-3);
+
+  &__img-container {
+    padding: var(--size-3) 0px;
+  }
+
+  &__img {
+    inline-size: min(50vb, 50vi);
+    margin: auto;
+  }
+
+  &__info {
+    text-align: left;
+    block-size: fit-content;
+    max-block-size: 80vb;
+    margin-bottom: var(--size-3);
+    overflow-block: auto;
+  }
+
+  &__info-header {
+    text-align: center;
+    margin: var(--size-2) auto;
+  }
+
+  &__reason {
+    text-align: center;
+    color: var(--clr-secondary);
+  }
+}
