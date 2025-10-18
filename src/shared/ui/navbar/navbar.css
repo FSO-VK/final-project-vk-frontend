@@ -1,0 +1,39 @@
+.navbar {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: var(--size-1);
+  padding-inline: var(--size-2);
+  padding-block: var(--size-1);
+
+  &__back-button {
+    display: flex;
+    flex-direction: inline;
+    justify-content: start;
+    align-items: center;
+
+    text-decoration: none;
+    color: inherit;
+  }
+
+  &__back-icon {
+    inline-size: var(--size-3);
+    block-size: var(--size-3);
+    min-inline-size: fit-content;
+  }
+
+  &__back-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__header {
+    text-wrap-mode: wrap;
+    text-wrap-style: pretty;
+    text-align: center;
+  }
+}
+
+.navbar_brand {
+  color: var(--clr-brand-6);
+  background-color: inherit;
+}
