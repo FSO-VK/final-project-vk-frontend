@@ -1,0 +1,20 @@
+.navbar-layout {
+  box-sizing: border-box;
+  block-size: 100dvb;
+  inline-size: 100dvi;
+
+  &__navbar {
+    inline-size: 100%;
+  }
+
+  &__page {
+    padding: var(--size-3);
+  }
+}
+
+@media (min-width: 50em) {
+  .navbar-layout {
+    max-inline-size: var(--max-screen-size);
+    margin: 0px auto;
+  }
+}
