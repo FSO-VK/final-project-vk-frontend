@@ -2,33 +2,37 @@
 
 /* A common sizes for paddings and margins */
 :root {
-  --size-0: 0.0714rem;
-  --size-1: 0.2857rem;
-  --size-2: 1.1429rem;
-  --size-3: 1.7143rem;
-  --size-4: 2.8571rem;
-  --size-5: 4.5714rem;
-  --size-6: 7.4285rem;
-  --size-7: 12rem;
-  --size-8: 19.4286rem;
-  --size-9: 31.4286rem;
-  --size-10: 51.4286rem;
-  --size-11: 82.2857rem;
-  --size-12: 137.1429rem;
+  --size-0: 0.25rem;
+  --size-1: 0.5rem;
+  --size-2: 0.75rem;
+  --size-3: 1.25rem;
+  --size-4: 2rem;
+  --size-5: 3rem;
+  --size-6: 5rem;
+  --size-7: 8rem;
+  --size-8: 13rem;
+  --size-9: 21rem;
+  --size-10: 34.5rem;
+  --size-11: 56rem;
+  --size-12: 90rem;
 }
 
 /* Grid definition */
 :root {
   --col-num: 24;
-  --col-width: var(--size-4);
-  --gutter-width: var(--size-3);
-  --max-screen-size: calc(
-    var(--col-num) * var(--col-width) + var(--gutter-width) * (var(--col-num) - 1)
+  --col-width: var(--size-3);
+  --max-screen-size: var(--size-12);
+  --gutter-width: calc(
+    (var(--max-screen-size) - (var(--col-num) * var(--col-width))) / (var(--col-num) - 1)
   );
 }
 
 /* Layout sizes */
 :root {
-  --size-top-nav-1: 4.5714rem;
-  --size-top-nav-2: 3.4286rem;
+  --size-top-nav-1: 4rem;
+  --size-top-nav-2: 3rem;
+}
+
+:root {
+  --size-breakpoint-desktop: 50em;
 }

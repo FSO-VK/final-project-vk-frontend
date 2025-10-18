@@ -1,8 +1,9 @@
 .hello-page {
-  box-sizing: border-box;
-  max-block-size: 100vb;
-  max-inline-size: 100vi;
-  padding: var(--size-3);
+  display: grid;
+  grid-template-rows: 1fr auto;
+  /* Without this line the page wont fill all of the layout
+  * and the buttons wont be on the bottom */
+  block-size: 100%;
 
   &__logo-container {
     padding: var(--size-3) 0px;
@@ -16,9 +17,7 @@
   &__info {
     text-align: left;
     block-size: fit-content;
-    max-block-size: 80vb;
     margin-bottom: var(--size-3);
-    overflow-block: auto;
   }
 
   &__subpage {
@@ -35,12 +34,8 @@
     flex-direction: row;
     justify-content: space-between;
     gap: var(--size-2);
-    position: fixed;
-    inset-inline: 0;
-    inset-block-end: 0;
-    padding-inline: var(--size-3);
-    padding-block-end: var(--size-3);
     background-color: var(--clr-gray-1);
+    min-block-size: fit-content;
   }
 
   &__button {
