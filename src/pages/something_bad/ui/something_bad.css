@@ -1,9 +1,4 @@
 .something-bad-page {
-  box-sizing: border-box;
-  max-block-size: 100vb;
-  max-inline-size: 100vi;
-  padding: var(--size-3);
-
   &__img-container {
     padding: var(--size-3) 0px;
   }

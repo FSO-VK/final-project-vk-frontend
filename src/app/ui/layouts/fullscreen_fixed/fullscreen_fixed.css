@@ -1,0 +1,13 @@
+.fullscreen-fixed {
+  box-sizing: border-box;
+  block-size: 100dvb;
+  inline-size: 100dvi;
+  padding: var(--size-3);
+}
+
+@media (min-width: 50em) {
+  .fullscreen-fixed {
+    max-inline-size: var(--max-screen-size);
+    margin: 0px auto;
+  }
+}

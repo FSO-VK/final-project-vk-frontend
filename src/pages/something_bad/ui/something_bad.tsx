@@ -15,7 +15,7 @@ export function SomethingBadPage(props: SomethingBadPageProps) {
         </div>
         <h1 class="something-bad-page__info-header">Что-то сломалось</h1>
         <P>Мы уже приложили подорожник, чтобы это исправить</P>
-        <div class="something-bad-page__reason">{`(${props.reason ?? 'Причина неизвестна (HTTP 500)'})`}</div>
+        <div class="something-bad-page__reason">{`${props.reason ?? 'Причина неизвестна (HTTP 500)'}`}</div>
       </main>
     </div>
   );
