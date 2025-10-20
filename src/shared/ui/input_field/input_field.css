@@ -23,7 +23,8 @@
 
   &__input {
     border: none;
-    width: 100%;
+    flex: 1 1 auto;
+    min-inline-size: 0;
 
     &:focus {
       outline: none;
@@ -35,6 +36,8 @@
     flex-direction: row;
     align-items: center;
     justify-content: end;
+    gap: var(--size-1);
+    flex: 0 0 fit-content;
   }
 
   &__state-icon {

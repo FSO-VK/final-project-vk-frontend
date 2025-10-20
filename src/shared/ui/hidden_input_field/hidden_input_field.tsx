@@ -30,10 +30,14 @@ export function HiddenInputField(props: HiddenInputFieldProps) {
         >
           <Switch>
             <Match when={type() !== 'password'}>
-              <img alt="Иконка открытого глаза" src={EyeSvg} />
+              <img class="hidden-input-field__eye" alt="Иконка открытого глаза" src={EyeSvg} />
             </Match>
             <Match when={type() === 'password'}>
-              <img alt="Иконка закрытого глаза" src={ClosedEyeSvg} />
+              <img
+                class="hidden-input-field__eye"
+                alt="Иконка закрытого глаза"
+                src={ClosedEyeSvg}
+              />
             </Match>
           </Switch>
         </button>
