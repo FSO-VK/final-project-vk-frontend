@@ -1,0 +1,8 @@
+.hidden-input-field__show-button {
+  cursor: pointer;
+  text-decoration: none;
+  text-align: none;
+  border: none;
+  background-color: transparent;
+  -webkit-tap-highlight-color: transparent;
+}

@@ -2,6 +2,7 @@
 
 /* A common sizes for paddings and margins */
 :root {
+  --size-00: 0.125rem;
   --size-0: 0.25rem;
   --size-1: 0.5rem;
   --size-2: 0.75rem;
