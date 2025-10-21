@@ -49,12 +49,9 @@ export async function fetchJsonCors(
  * it will be excluded
  * @param queryObject An object whose key and values will be transformed into URLSearchParams
  */
-export function makeQueryParams(queryObject: { [key: string]: unknown }): URLSearchParams {
+export function makeQueryParams(queryObject: Record<string, unknown>): URLSearchParams {
   const definedQueries = Object.entries(queryObject).reduce(
-    (definedQueries: { [key: string]: string }, [name, value]) => {
-      if (value === undefined) {
-        return definedQueries;
-      }
+    (definedQueries: Record<string, string>, [name, value]) => {
       definedQueries[name] = String(value);
       return definedQueries;
     },

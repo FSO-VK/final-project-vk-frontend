@@ -10,7 +10,7 @@
     "staging-build:client": "tsc -b && vite build --mode=staging --outDir=dist/staging/client --ssrManifest",
     "staging-build:server": "tsc -b && vite build --mode=staging --outDir=dist/staging/server --ssr src/entry-server.tsx",
     "preview": "vite preview",
-    "lint": "npx eslint .",
+    "lint": "npx eslint --cache .",
     "format": "npx prettier . --write",
     "prepare": "husky",
     "generate-pwa-icons": "pwa-assets-generator",
@@ -53,7 +53,7 @@
     "sharp-ico": "0.1.5"
   },
   "lint-staged": {
-    "*.{tsx,ts,js,cjs,mjs,mts,cts,json,css}": "eslint --cache --fix -c ./eslint.config.ts",
+    "*.{tsx,ts,js,cjs,mjs,mts,cts,json,css}": "eslint --cache --fix",
     "*.{tsx,ts,js,cjs,mjs,mts,cts,json,css,md,json}": "prettier --write"
   },
   "postcss": {

@@ -20,7 +20,7 @@ export function Button(props: ButtonProps) {
       class={`${props.class ?? ''} button button_${props.type ?? ButtonType.brand}`}
       onClick={props.onClick}
     >
-      <Show when={props.children !== undefined}>{props.children as JSXElement}</Show>
+      <Show when={props.children !== undefined}>{props.children}</Show>
     </button>
   );
 }

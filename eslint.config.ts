@@ -26,14 +26,21 @@ export default defineConfig([
   },
   {
     files: ['**/*.{ts,mts,cts,tsx}'],
-    extends: [tseslint.configs.recommended],
+    ignores: ['pwa-assets.config.ts', 'eslint.config.ts'],
+    extends: [tseslint.configs.recommendedTypeChecked, tseslint.configs.stylisticTypeChecked],
     rules: {
-      'no-unused-vars': [
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': [
         'error',
         {
-          varsIgnorePattern: '^[iI]gnoredVar',
+          argsIgnorePattern: '^_',
         },
       ],
+    },
+    languageOptions: {
+      parserOptions: {
+        projectService: true,
+      },
     },
   },
   {
