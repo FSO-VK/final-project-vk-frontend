@@ -21,7 +21,8 @@
     "compression": "^1.8.1",
     "express": "^5.1.0",
     "sirv": "^3.0.2",
-    "solid-js": "^1.9.4"
+    "solid-js": "^1.9.4",
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "@eslint/css": "^0.11.1",
@@ -52,10 +53,8 @@
     "sharp-ico": "0.1.5"
   },
   "lint-staged": {
-    "*.{ts,js,json,css,scss}": "eslint --cache --fix",
-    "*.{ts,js,css,scss,md}": "prettier --write",
-    "*.js": "eslint --cache --fix",
-    "*.{js,css,scss,md,json}": "prettier --write"
+    "*.{tsx,ts,js,cjs,mjs,mts,cts,json,css}": "eslint --cache --fix -c ./eslint.config.ts",
+    "*.{tsx,ts,js,cjs,mjs,mts,cts,json,css,md,json}": "prettier --write"
   },
   "postcss": {
     "plugins": {

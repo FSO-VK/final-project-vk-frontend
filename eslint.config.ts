@@ -19,12 +19,23 @@ export default defineConfig([
     ],
   },
   {
-    files: ['**/*.{js,mjs,cjs,ts,mts,cts}'],
+    files: ['**/*.{js,mjs,cjs}'],
     plugins: { js },
     extends: ['js/recommended'],
     languageOptions: { globals: globals.browser },
   },
-  tseslint.configs.recommended,
+  {
+    files: ['**/*.{ts,mts,cts,tsx}'],
+    extends: [tseslint.configs.recommended],
+    rules: {
+      'no-unused-vars': [
+        'error',
+        {
+          varsIgnorePattern: '^[iI]gnoredVar',
+        },
+      ],
+    },
+  },
   {
     files: ['**/*.json'],
     plugins: { json },
