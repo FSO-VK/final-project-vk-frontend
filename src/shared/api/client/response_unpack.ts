@@ -18,7 +18,7 @@ export async function unpackResponse(response: Response): Promise<Record<string,
   let responseBody: BaseResponseBody;
 
   try {
-    responseBody = await response.json();
+    responseBody = (await response.json()) as BaseResponseBody;
   } catch {
     throw new UnmarshallError('Failed to unmarshall json');
   }
