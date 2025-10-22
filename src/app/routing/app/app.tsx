@@ -3,7 +3,7 @@ import './app.css';
 import { Router, Route } from '@solidjs/router';
 import { SomethingBadPage } from '@/pages/something_bad';
 import { HelloPage } from '@/pages/hello';
-import { FullscreenFixedLayout } from '../layouts/fullscreen_fixed/fullscreen_fixed';
+import { FullscreenFixedLayout } from '@/widgets/layouts';
 
 export function App() {
   return (
