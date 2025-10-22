@@ -1,6 +1,6 @@
 import { List, Col } from '@/shared/ui';
 import { medicationApi, type Medication } from '@/shared/api';
-import { MedicationCard } from '@/entities/medication';
+import { MedicationCard } from '../medication_card/medication_card';
 import './medications.css';
 import { createAsync } from '@solidjs/router';
 import { Suspense } from 'solid-js';
