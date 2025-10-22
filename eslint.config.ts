@@ -26,7 +26,7 @@ export default defineConfig([
   },
   {
     files: ['**/*.{ts,mts,cts,tsx}'],
-    ignores: ['pwa-assets.config.ts', 'eslint.config.ts'],
+    ignores: ['pwa-assets.config.ts', 'eslint.config.ts', 'steiger.config.ts'],
     extends: [tseslint.configs.recommendedTypeChecked, tseslint.configs.stylisticTypeChecked],
     rules: {
       'no-unused-vars': 'off',
