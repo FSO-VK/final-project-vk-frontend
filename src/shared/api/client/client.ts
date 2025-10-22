@@ -13,7 +13,8 @@ interface BaseOptions {
 type GetOptions = BaseOptions;
 
 interface BodyRequestOptions extends BaseOptions {
-  body?: BodyInit;
+  // JSON.stringify takes any, so we should too
+  body?: unknown;
 }
 
 class Client {
@@ -50,7 +51,7 @@ class Client {
   ) => {
     const response = await fetchJsonCors(this.makeUrl_(endpoint, query), {
       method,
-      body,
+      body: JSON.stringify(body),
       credentials: useCredentials ? 'include' : 'omit',
     });
     return unpackResponse(response);

@@ -19,12 +19,30 @@ export default defineConfig([
     ],
   },
   {
-    files: ['**/*.{js,mjs,cjs,ts,mts,cts}'],
+    files: ['**/*.{js,mjs,cjs}'],
     plugins: { js },
     extends: ['js/recommended'],
     languageOptions: { globals: globals.browser },
   },
-  tseslint.configs.recommended,
+  {
+    files: ['**/*.{ts,mts,cts,tsx}'],
+    ignores: ['pwa-assets.config.ts', 'eslint.config.ts'],
+    extends: [tseslint.configs.recommendedTypeChecked, tseslint.configs.stylisticTypeChecked],
+    rules: {
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+        },
+      ],
+    },
+    languageOptions: {
+      parserOptions: {
+        projectService: true,
+      },
+    },
+  },
   {
     files: ['**/*.json'],
     plugins: { json },

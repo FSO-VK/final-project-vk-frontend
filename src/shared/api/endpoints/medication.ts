@@ -29,16 +29,18 @@ async function getMedicationsList(): Promise<Medication[]> {
 }
 
 async function getMedicationsListMock(): Promise<Medication[]> {
-  return [
-    {
-      id: '1',
-      name: 'Нурофен',
-      items: 15,
-      itemsUnit: 'шт.',
-      expires: new Date(Date.now()),
-      categories: [],
-    },
-  ] as Medication[];
+  return new Promise(() => {
+    return [
+      {
+        id: '1',
+        name: 'Нурофен',
+        items: 15,
+        itemsUnit: 'шт.',
+        expires: new Date(Date.now()),
+        categories: [],
+      },
+    ] as Medication[];
+  });
 }
 
 export interface MedicationApi {
