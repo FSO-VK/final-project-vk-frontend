@@ -9,7 +9,6 @@ root!.innerHTML = '';
 
 const initMe = async () => {
   const meActions = useMeActions();
-  // TODO: add suspence (FSO-143)
   await meActions.initializeStore();
 
   if (import.meta.env.MODE === 'development') {
@@ -18,6 +17,4 @@ const initMe = async () => {
   }
 };
 
-await initMe();
-
-render(() => <App />, root!);
+render(() => <App beforeJob={initMe} />, root!);

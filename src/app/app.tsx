@@ -4,16 +4,29 @@ import { Router, Route } from '@solidjs/router';
 import { SomethingBadPage } from '@/pages/something_bad';
 import { HelloPage } from '@/pages/hello';
 import { FullscreenFixedLayout } from '@/widgets/layouts';
+import { createResource, Suspense, Show } from 'solid-js';
 
-export function App() {
+export interface AppProps {
+  // Jobs that must be over before routing started
+  beforeJob?: () => Promise<void>;
+}
+
+export function App(props: AppProps) {
+  const job = createResource(props.beforeJob ?? (() => Promise.resolve()));
+
+  // TODO: add suspence (FSO-143)
   return (
     <Router>
       <Route path="*" component={FullscreenFixedLayout}>
-        <Route path="/" component={HelloPage} />
-        <Route
-          path="*"
-          component={() => <SomethingBadPage reason="Ресурс не найден (HTTP 404)" />}
-        />
+        <Suspense>
+          <Show when={job}>
+            <Route path="/" component={HelloPage} />
+            <Route
+              path="*"
+              component={() => <SomethingBadPage reason="Ресурс не найден (HTTP 404)" />}
+            />
+          </Show>
+        </Suspense>
       </Route>
     </Router>
   );
