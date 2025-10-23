@@ -6,7 +6,5 @@ export async function logout() {
 }
 
 export async function logoutMock() {
-  return new Promise<void>(() => {
-    return;
-  });
+  return await Promise.resolve();
 }

@@ -1,6 +1,6 @@
 /* Api exports */
 export { medicationApi } from './endpoints/medication';
-export { authApi } from './endpoints/auth';
+export { authApi, type AuthApi } from './endpoints/auth';
 
 /* Type exports */
 export type { Medication } from './endpoints/medication';

@@ -20,9 +20,5 @@ export async function login(options: LoginOptions): Promise<z.infer<typeof Login
 export async function loginMock(_options: LoginOptions): Promise<z.infer<typeof LoginDTO>> {
   // This shit-looking code is a way to shut up linter who wants
   // await statement inside async functions
-  return await new Promise(() => {
-    return {
-      userId: 'cce5d740-e92a-4634-b2c9-f6c7a980e8f7',
-    };
-  });
+  return await Promise.resolve({ userId: 'cce5d740-e92a-4634-b2c9-f6c7a980e8f7' });
 }
