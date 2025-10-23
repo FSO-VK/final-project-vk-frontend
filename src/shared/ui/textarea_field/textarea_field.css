@@ -1,0 +1,31 @@
+.textarea-field {
+  border: var(--size-00) solid;
+  border-radius: var(--size-0);
+  padding-inline: var(--size-2);
+  padding-block: var(--size-1);
+  padding: 0 var(--size-1);
+
+  &_brand {
+    border-color: var(--clr-brand-5);
+  }
+
+  &__textarea {
+    width: 100%;
+    resize: none;
+    border: none;
+    padding: 0;
+
+    &:focus {
+      outline: none;
+    }
+
+    &::placeholder {
+      color: var(--clr-secondary);
+    }
+  }
+
+  &__counter {
+    color: var(--clr-secondary);
+    text-align: right;
+  }
+}

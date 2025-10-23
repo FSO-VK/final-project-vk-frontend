@@ -1,0 +1,42 @@
+import { createMemo, Show, type JSX } from 'solid-js';
+
+import './textarea_field.css';
+
+export interface TextareaFieldProps {
+  id?: string;
+  name?: string;
+  placeholder?: string;
+  maxLength?: number;
+  value?: string;
+  isDisabled?: boolean;
+  hasCounter?: boolean;
+  onInput?: JSX.EventHandler<HTMLElement, InputEvent>;
+  onFocusOut?: JSX.EventHandler<HTMLElement, FocusEvent>;
+}
+
+export function TextareaField(props: TextareaFieldProps) {
+  const count = createMemo(() => {
+    const value = props.value?.length ?? 0;
+    return props.maxLength ? `${value}/${props.maxLength}` : value.toString();
+  });
+
+  return (
+    <div class="textarea-field textarea-field_brand">
+      <textarea
+        class="textarea-field__textarea"
+        name={props.name}
+        id={props.id}
+        placeholder={props.placeholder}
+        maxLength={props.maxLength}
+        disabled={props.isDisabled}
+        onInput={props.onInput}
+        onFocusOut={props.onFocusOut}
+      >
+        {props.value ?? ''}
+      </textarea>
+      <Show when={props.hasCounter}>
+        <div class="textarea-field__counter">{count()}</div>
+      </Show>
+    </div>
+  );
+}
