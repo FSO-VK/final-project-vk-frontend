@@ -13,7 +13,5 @@ export async function checkAuth(): Promise<z.infer<typeof CheckAuthDTO>> {
 }
 
 export async function checkAuthMock(): Promise<z.infer<typeof CheckAuthDTO>> {
-  return new Promise(() => {
-    return { userId: 'cce5d740-e92a-4634-b2c9-f6c7a980e8f7' };
-  });
+  return await Promise.resolve({ userId: 'cce5d740-e92a-4634-b2c9-f6c7a980e8f7' });
 }
