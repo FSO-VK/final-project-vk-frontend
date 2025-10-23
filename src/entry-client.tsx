@@ -12,7 +12,7 @@ const initMe = async () => {
   // TODO: add suspence (FSO-143)
   await meActions.initializeStore();
 
-  if (import.meta.env.DEV) {
+  if (import.meta.env.MODE === 'development') {
     const meStore = useMeStore();
     console.info(`meStore {isAuthorized: ${meStore.isAuthorized()}, userId: ${meStore.userId()}}`);
   }
