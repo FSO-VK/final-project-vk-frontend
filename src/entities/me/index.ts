@@ -1,8 +1,8 @@
 import { authApi } from '@/shared/api';
-import { MeActions } from './models/me';
-import { meStore } from './models/me_solid';
+import { MeActions } from './model/me';
+import { meStore } from './model/me_solid';
 
-export type { Me, MeActions, MeStore } from './models/me';
+export type { Me, MeActions, MeStore } from './model/me';
 
 export function useMeStore() {
   return meStore;
