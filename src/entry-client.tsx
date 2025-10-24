@@ -17,4 +17,4 @@ const initMe = async () => {
   }
 };
 
-render(() => <App beforeJob={initMe} />, root!);
+render(() => <App initialJob={initMe} />, root!);

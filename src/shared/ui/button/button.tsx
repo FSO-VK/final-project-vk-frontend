@@ -18,7 +18,7 @@ export function Button(props: ButtonProps) {
   return (
     <button
       class={`${props.class ?? ''} button button_${props.type ?? ButtonType.brand}`}
-      onClick={props.onClick}
+      onClick={(e) => props.onClick?.(e)}
     >
       <Show when={props.children !== undefined}>{props.children}</Show>
     </button>
