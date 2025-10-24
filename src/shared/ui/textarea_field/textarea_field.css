@@ -3,14 +3,21 @@
   border-radius: var(--size-0);
   padding-inline: var(--size-2);
   padding-block: var(--size-1);
-  padding: 0 var(--size-1);
 
   &_brand {
     border-color: var(--clr-brand-5);
   }
 
+  &_error {
+    border-color: var(--clr-danger-5);
+  }
+
+  &_success {
+    border-color: var(--clr-success-5);
+  }
+
   &__textarea {
-    width: 100%;
+    inline-size: 100%;
     resize: none;
     border: none;
     padding: 0;

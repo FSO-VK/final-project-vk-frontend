@@ -2,12 +2,25 @@ import { createMemo, Show, type JSX } from 'solid-js';
 
 import './textarea_field.css';
 
+const enum TextareaState {
+  Primary,
+  Error,
+  Success,
+}
+
+const stateToClass = {
+  [TextareaState.Primary]: 'textarea-field_brand',
+  [TextareaState.Error]: 'textarea-field_error',
+  [TextareaState.Success]: 'textarea-field_success',
+};
+
 export interface TextareaFieldProps {
   id?: string;
   name?: string;
   placeholder?: string;
   maxLength?: number;
   value?: string;
+  state?: TextareaState;
   isDisabled?: boolean;
   hasCounter?: boolean;
   onInput?: JSX.EventHandler<HTMLElement, InputEvent>;
@@ -21,7 +34,7 @@ export function TextareaField(props: TextareaFieldProps) {
   });
 
   return (
-    <div class="textarea-field textarea-field_brand">
+    <div class={`textarea-field ${stateToClass[props.state ?? TextareaState.Primary]}`}>
       <textarea
         class="textarea-field__textarea"
         name={props.name}
