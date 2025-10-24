@@ -42,8 +42,8 @@ export function TextareaField(props: TextareaFieldProps) {
         placeholder={props.placeholder}
         maxLength={props.maxLength}
         disabled={props.isDisabled}
-        onInput={props.onInput}
-        onFocusOut={props.onFocusOut}
+        onInput={(e) => props.onInput?.(e)}
+        onFocusOut={(e) => props.onFocusOut?.(e)}
       >
         {props.value ?? ''}
       </textarea>

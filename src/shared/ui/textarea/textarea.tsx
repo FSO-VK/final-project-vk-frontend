@@ -15,7 +15,9 @@ export function Textarea(props: TextareaProps) {
         <Show when={props.isRequired}>
           <span class="textarea__required-sign">*</span>
         </Show>
-        <span class="textarea__label">{props.label}</span>
+        <label for={props.id} class="textarea__label">
+          {props.label}
+        </label>
       </div>
       <TextareaField {...props} />
       <Show when={props.feedbackMessage}>
