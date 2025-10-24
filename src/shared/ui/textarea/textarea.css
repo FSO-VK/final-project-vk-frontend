@@ -1,0 +1,15 @@
+.textarea {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-1);
+
+  &__feedback {
+    &_danger {
+      color: var(--clr-danger-5);
+    }
+  }
+
+  &__required-sign {
+    color: var(--clr-danger-5);
+  }
+}
