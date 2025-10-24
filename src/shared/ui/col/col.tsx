@@ -8,7 +8,7 @@ export interface ColProps {
 export function Col(props: ColProps) {
   return (
     <div class="col" style={{ width: `calc(var(--col-width) * ${props.size})` }}>
-      {props.children ?? <div aria-hidden="true"></div>}
+      {props.children ?? <div aria-hidden="true" />}
     </div>
   );
 }

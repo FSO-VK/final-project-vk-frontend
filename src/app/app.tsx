@@ -8,11 +8,11 @@ import { createResource, Suspense, Show } from 'solid-js';
 
 export interface AppProps {
   // Jobs that must be over before routing started
-  beforeJob?: () => Promise<void>;
+  initialJob?: () => Promise<void>;
 }
 
 export function App(props: AppProps) {
-  const job = createResource(props.beforeJob ?? (() => Promise.resolve()));
+  const job = createResource(props.initialJob ?? (() => Promise.resolve()));
 
   // TODO: add suspence (FSO-143)
   return (

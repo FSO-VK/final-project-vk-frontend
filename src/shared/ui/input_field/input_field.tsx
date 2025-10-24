@@ -41,8 +41,8 @@ export function InputField(props: InputFieldProps) {
         id={props.id}
         placeholder={props.placeholder}
         maxlength={props.maxlength}
-        onFocusOut={props.onFocusOut}
-        onInput={props.onInput}
+        onFocusOut={(e) => props.onFocusOut?.(e)}
+        onInput={(e) => props.onInput?.(e)}
       />
       <div class="input-field__after-elements">
         <Show when={props.afterElements !== undefined}>{props.afterElements}</Show>

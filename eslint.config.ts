@@ -5,6 +5,8 @@ import json from '@eslint/json';
 import markdown from '@eslint/markdown';
 import { defineConfig } from 'eslint/config';
 import eslintConfigPrettier from 'eslint-config-prettier';
+import solid from 'eslint-plugin-solid/configs/typescript';
+import * as tsParser from '@typescript-eslint/parser';
 
 export default defineConfig([
   eslintConfigPrettier,
@@ -40,6 +42,18 @@ export default defineConfig([
     languageOptions: {
       parserOptions: {
         projectService: true,
+      },
+    },
+  },
+  {
+    files: ['**/*.{ts,tsx}'],
+    ignores: ['pwa-assets.config.ts', 'eslint.config.ts', 'steiger.config.ts'],
+    ...solid,
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        projectService: true,
+        project: 'tsconfig.json',
       },
     },
   },
