@@ -1,6 +1,6 @@
 import { Button, Input, InputState } from '@/shared/ui';
 import { ButtonStyle } from '@/shared/ui/button/button';
-import { A } from '@solidjs/router';
+import { A, useNavigate } from '@solidjs/router';
 import { type AnyFieldApi, createForm } from '@tanstack/solid-form';
 import { EMAIL_ERROR_STRINGS, emailValidator, MAX_EMAIL_LEN } from '@/entities/email';
 import { type Accessor } from 'solid-js';
@@ -21,6 +21,7 @@ export interface RegisterPageProps {
 
 export function RegisterPage(props: RegisterPageProps) {
   const meActions = useMeActions();
+  const navigate = useNavigate();
 
   const form = createForm(() => ({
     defaultValues: {
@@ -33,6 +34,8 @@ export function RegisterPage(props: RegisterPageProps) {
         email: value.email,
         password: value.password,
       });
+      // Will be removed when medications list will be there.
+      navigate('/', { replace: true });
     },
   }));
 
@@ -153,7 +156,10 @@ export function RegisterPage(props: RegisterPageProps) {
           <A href={props.loginLocation}>Уже есть аккаунт?</A>
           <form.Subscribe
             selector={(state) => ({
-              canSubmit: state.isValid && !state.isPristine,
+              canSubmit:
+                state.isTouched &&
+                state.isFieldsValid &&
+                Object.values(state.values).every((field) => field.length > 0),
             })}
             children={(state) => {
               return (
