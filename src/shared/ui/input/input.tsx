@@ -12,7 +12,7 @@ export interface InputProps extends InputFieldProps {
 export function Input(props: InputProps) {
   return (
     <div class="input">
-      <label class="input__label">
+      <label class="input__label" for={props.id}>
         <Show when={props.isRequired}>
           <span class="input__required-sign">*</span>
         </Show>

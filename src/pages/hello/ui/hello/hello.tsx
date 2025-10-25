@@ -1,6 +1,6 @@
 import logoSvg from '/favicon.svg';
 import './hello.css';
-import { Button, ButtonType, P } from '@/shared/ui';
+import { Button, ButtonStyle, P } from '@/shared/ui';
 import { createSignal } from 'solid-js';
 import { Dynamic } from 'solid-js/web';
 import { useNavigate } from '@solidjs/router';
@@ -68,7 +68,11 @@ export function HelloPage() {
         <Dynamic component={subpages[currentPage()]} />
       </main>
       <footer class="hello-page__button-container">
-        <Button type={ButtonType.secondary} class="hello-page__button" onClick={onBackButtonClick}>
+        <Button
+          colorStyle={ButtonStyle.secondary}
+          class="hello-page__button"
+          onClick={onBackButtonClick}
+        >
           {currentPage() == 0 ? 'Пропустить' : 'Назад'}
         </Button>
         <Button class="hello-page__button" onClick={onNextButtonClick}>
