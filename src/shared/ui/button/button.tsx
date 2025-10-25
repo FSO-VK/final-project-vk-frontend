@@ -22,7 +22,7 @@ export function Button(props: ButtonProps) {
       class={`${props.class ?? ''} button button_${props.colorStyle ?? ButtonStyle.brand} ${props.isDisabled ? 'button_disabled' : ''}`}
       onClick={(e) => props.onClick?.(e)}
       type={props.type}
-      disabled={props.isDisabled ?? false}
+      aria-disabled={props.isDisabled ?? false}
     >
       <Show when={props.children !== undefined}>{props.children}</Show>
     </button>
