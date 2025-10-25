@@ -27,6 +27,7 @@ export interface InputFieldProps {
   onInput?: JSX.EventHandler<HTMLElement, InputEvent>;
   onFocusOut?: JSX.EventHandler<HTMLElement, FocusEvent>;
   afterElements?: JSXElement;
+  value?: string | string[] | number;
 }
 
 export function InputField(props: InputFieldProps) {
@@ -43,6 +44,7 @@ export function InputField(props: InputFieldProps) {
         maxlength={props.maxlength}
         onFocusOut={(e) => props.onFocusOut?.(e)}
         onInput={(e) => props.onInput?.(e)}
+        value={props.value}
       />
       <div class="input-field__after-elements">
         <Show when={props.afterElements !== undefined}>{props.afterElements}</Show>

@@ -13,14 +13,16 @@ export interface ButtonProps {
   colorStyle?: ButtonStyle;
   class?: string;
   onClick?: JSX.EventHandler<HTMLElement, MouseEvent>;
+  isDisabled?: boolean;
 }
 
 export function Button(props: ButtonProps) {
   return (
     <button
-      class={`${props.class ?? ''} button button_${props.colorStyle ?? ButtonStyle.brand}`}
+      class={`${props.class ?? ''} button button_${props.colorStyle ?? ButtonStyle.brand} ${props.isDisabled ? 'button_disabled' : ''}`}
       onClick={(e) => props.onClick?.(e)}
       type={props.type}
+      disabled={props.isDisabled ?? false}
     >
       <Show when={props.children !== undefined}>{props.children}</Show>
     </button>

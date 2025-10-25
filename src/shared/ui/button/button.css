@@ -20,3 +20,8 @@
   border: solid 1px var(--clr-border);
   font-weight: var(--fw-semi-bold);
 }
+
+.button_disabled {
+  opacity: 0.3;
+  cursor: default;
+}
