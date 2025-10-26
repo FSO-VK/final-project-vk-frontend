@@ -1,19 +1,12 @@
-import { Button, Input, InputState } from '@/shared/ui';
+import { Button, Input } from '@/shared/ui';
 import { ButtonStyle } from '@/shared/ui/button/button';
 import { A, useNavigate } from '@solidjs/router';
-import { type AnyFieldApi, createForm } from '@tanstack/solid-form';
+import { createForm } from '@tanstack/solid-form';
 import { EMAIL_ERROR_STRINGS, emailValidator, MAX_EMAIL_LEN } from '@/entities/email';
-import { type Accessor } from 'solid-js';
 import { MAX_PASSWORD_LEN, PASSWORD_ERROR_STRINGS, passwordValidator } from '@/entities/password';
 import { useMeActions } from '@/entities/me';
 import './register.css';
-
-const transformFieldState = (field: Accessor<AnyFieldApi>) => {
-  if (!field().state.meta.isPristine) {
-    return field().state.meta.isValid ? InputState.Success : InputState.Error;
-  }
-  return InputState.None;
-};
+import { transformFieldState } from '@/shared/ui';
 
 export interface RegisterPageProps {
   loginLocation: string;
@@ -51,6 +44,7 @@ export function RegisterPage(props: RegisterPageProps) {
             console.error('failed to submit registration form');
           });
         }}
+        novalidate
       >
         <form.Field
           name="email"
