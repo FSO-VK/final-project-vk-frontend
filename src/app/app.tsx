@@ -6,6 +6,7 @@ import { HelloPage } from '@/pages/hello';
 import { FullscreenFixedLayout, NavbarLayout } from '@/widgets/layouts';
 import { createResource, Suspense, Show } from 'solid-js';
 import { RegisterPage } from '@/pages/register';
+import { LoginPage } from '@/pages/login';
 
 export interface AppProps {
   // Jobs that must be over before routing started
@@ -33,6 +34,7 @@ export function App(props: AppProps) {
             )}
           >
             <Route path="/register" component={() => <RegisterPage loginLocation="/login" />} />
+            <Route path="/login" component={() => <LoginPage registerLocation="/register" />} />
           </Route>
 
           <Route path="*" component={FullscreenFixedLayout}>

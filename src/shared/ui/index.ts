@@ -6,6 +6,7 @@ export { Button, ButtonStyle } from './button/button';
 export { Navbar } from './navbar/navbar';
 export { Input } from './input/input';
 export { InputField, InputState } from './input_field/input_field';
+export { transformFieldState } from './input_field/tanstack_adapter.ts';
 export { HiddenInputField } from './hidden_input_field/hidden_input_field';
 export { TextareaField } from './textarea_field/textarea_field';
 export { Textarea } from './textarea/textarea';
