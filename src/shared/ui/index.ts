@@ -10,3 +10,9 @@ export { transformFieldState } from './input_field/tanstack_adapter.ts';
 export { HiddenInputField } from './hidden_input_field/hidden_input_field';
 export { TextareaField } from './textarea_field/textarea_field';
 export { Textarea } from './textarea/textarea';
+export { Tabbar, type TabbarOption } from './tabbar/tabbar';
+
+export { CalendarIcon } from './icons/calendar';
+export { UserIcon } from './icons/user';
+export { FolderIcon } from './icons/folder';
+export { type IconComponent, IconStyle, type IconProps } from './icons/icon';
