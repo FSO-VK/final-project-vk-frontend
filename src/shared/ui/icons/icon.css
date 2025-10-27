@@ -1,0 +1,9 @@
+.icon {
+  &_active {
+    fill: var(--clr-brand-7);
+  }
+
+  &_inactive {
+    fill: var(--clr-disable);
+  }
+}
