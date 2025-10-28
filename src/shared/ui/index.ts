@@ -12,8 +12,10 @@ export { TextareaField } from './textarea_field/textarea_field';
 export { Textarea } from './textarea/textarea';
 export { Tabbar, type TabbarOption } from './tabbar/tabbar';
 export { AuthGuard } from './auth_guard/auth_guard';
+export { SelectField } from './select_field/select_field';
 
 export { CalendarIcon } from './icons/calendar';
 export { UserIcon } from './icons/user';
 export { FolderIcon } from './icons/folder';
+export { DownArrowIcon } from './icons/down_arrow';
 export { type IconComponent, IconStyle, type IconProps } from './icons/icon';
