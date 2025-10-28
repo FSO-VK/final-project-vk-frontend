@@ -8,6 +8,7 @@ export enum IconStyle {
 
 export interface IconProps {
   iconStyle?: IconStyle;
+  elementClass?: string;
 }
 
 export type IconComponent = (props: IconProps) => JSXElement;
@@ -20,7 +21,7 @@ export function Icon(props: IconProps & ParentProps) {
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
-      class={`icon ${props.iconStyle ?? ''}`}
+      class={`icon ${props.iconStyle ?? ''} ${props.elementClass ?? ''}`}
     >
       {props.children}
     </svg>
