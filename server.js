@@ -49,11 +49,17 @@ async function createAppServer(serverConfig) {
     app.use(serverConfig.baseUrl, sirv(`./dist/${serverConfig.mode}/client`, { extensions: [] }));
   }
 
+  const cookieParser = (await import('cookie-parser')).default;
+  app.use(cookieParser());
+
   app.use('*all', async (req, resp) => {
-    console.info(`${new Date(Date.now()).toISOString()} ${req.method} ${req.url}`);
+    console.info(`${new Date(Date.now()).toISOString()} ${req.method} ${req.originalUrl}`);
 
     try {
-      const url = req.originalUrl.replace(serverConfig.baseUrl, '');
+      const url =
+        serverConfig.baseUrl !== '/'
+          ? req.originalUrl.replace(serverConfig.baseUrl, '')
+          : req.originalUrl;
 
       let template;
       let render;
@@ -67,7 +73,8 @@ async function createAppServer(serverConfig) {
         render = (await import(`./dist/${serverConfig.mode}/server/entry-server.js`)).render;
       }
 
-      const rendered = await render(url);
+      const sessionId = req.cookies['session_id'] ?? '';
+      const rendered = await render(url, sessionId);
 
       const head = (rendered.head ?? '') + generateHydrationScript();
 

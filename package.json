@@ -21,6 +21,7 @@
     "@solidjs/router": "^0.15.3",
     "@tanstack/solid-form": "^1.23.8",
     "compression": "^1.8.1",
+    "cookie-parser": "^1.4.7",
     "express": "^5.1.0",
     "sirv": "^3.0.2",
     "solid-js": "^1.9.4",
