@@ -9,10 +9,13 @@ import { RegisterPage } from '@/pages/register';
 import { LoginPage } from '@/pages/login';
 import { useMeStore } from '@/entities/me';
 import { AuthGuard } from '@/shared/ui';
+import { isServer } from 'solid-js/web';
 
 export interface AppProps {
   // Jobs that must be over before routing started
   initialJob?: () => Promise<void>;
+  // Application initial URL
+  initialUrl?: string;
 }
 
 export function App(props: AppProps) {
@@ -21,7 +24,7 @@ export function App(props: AppProps) {
 
   // TODO: add suspence (FSO-143)
   return (
-    <Router>
+    <Router url={isServer ? props.initialUrl : ''}>
       <Suspense fallback={<div>Загрузка</div>}>
         <Show when={job}>
           <Route
