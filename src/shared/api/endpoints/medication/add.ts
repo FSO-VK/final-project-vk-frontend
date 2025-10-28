@@ -4,16 +4,20 @@ import { RequiredOptions, OptionalOptions } from './options';
 
 import * as z from 'zod/mini';
 
-export interface AddOptions extends RequiredOptions, OptionalOptions {}
+export interface AddMedicationOptions extends RequiredOptions, OptionalOptions {}
 
-export const AddDTO = BaseDTO;
+export const AddMedicationDTO = BaseDTO;
 
-export async function add(options: AddOptions): Promise<z.infer<typeof AddDTO>> {
+export async function add(
+  options: AddMedicationOptions,
+): Promise<z.infer<typeof AddMedicationDTO>> {
   const body = await backendClient.post('/medication', { body: options, useCredentials: true });
-  return AddDTO.parse(body);
+  return AddMedicationDTO.parse(body);
 }
 
-export async function addMock(options: AddOptions): Promise<z.infer<typeof AddDTO>> {
+export async function addMock(
+  options: AddMedicationOptions,
+): Promise<z.infer<typeof AddMedicationDTO>> {
   return await Promise.resolve({
     id: 'fab5d740-e92a-4634-b2c9-f6c7a980e8f7',
     ...options,

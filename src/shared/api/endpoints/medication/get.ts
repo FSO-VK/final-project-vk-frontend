@@ -2,18 +2,22 @@ import { backendClient } from '../../client';
 import * as z from 'zod/mini';
 import { BaseDTO } from './dto';
 
-export interface GetOptions {
+export interface GetMedicationOptions {
   id: string;
 }
 
-export const GetDTO = BaseDTO;
+export const GetMedicationDTO = BaseDTO;
 
-export async function get(options: GetOptions): Promise<z.infer<typeof GetDTO>> {
+export async function get(
+  options: GetMedicationOptions,
+): Promise<z.infer<typeof GetMedicationDTO>> {
   const body = await backendClient.get(`/medication/${options.id}`, { useCredentials: true });
-  return GetDTO.parse(body);
+  return GetMedicationDTO.parse(body);
 }
 
-export async function getMock(options: GetOptions): Promise<z.infer<typeof GetDTO>> {
+export async function getMock(
+  options: GetMedicationOptions,
+): Promise<z.infer<typeof GetMedicationDTO>> {
   return await Promise.resolve({
     id: options.id,
     name: 'Фарингосепт',

@@ -1,26 +1,35 @@
-import type { AddOptions, AddDTO as _AddDTO } from './add';
-import type { UpdateOptions, UpdateDTO as _UpdateDTO } from './update';
-import type { DeleteOptions } from './delete';
-import type { GetOptions, GetDTO as _GetDTO } from './get';
+import type { AddMedicationOptions, AddMedicationDTO as _AddDTO } from './add';
+import type { UpdateMedicationOptions, UpdateMedicationDTO as _UpdateDTO } from './update';
+import type { DeleteMedicationOptions } from './delete';
+import type { GetMedicationOptions, GetMedicationDTO as _GetDTO } from './get';
+import type { ScanMedicationOptions, ScanMedicationDTO as _ScanDTO } from './scan';
 import { add, addMock } from './add';
 import { update, updateMock } from './update';
 import { del, delMock } from './delete';
 import { get, getMock } from './get';
+import { scan, scanMock } from './scan';
 
 import * as z from 'zod/mini';
 
-export { AddOptions, UpdateOptions, DeleteOptions, GetOptions };
+export {
+  AddMedicationOptions,
+  UpdateMedicationOptions,
+  DeleteMedicationOptions,
+  GetMedicationOptions,
+};
 
 // Hiding zod from importer
-export type GetDTO = z.infer<typeof _GetDTO>;
-export type AddDTO = z.infer<typeof _AddDTO>;
-export type UpdateDTO = z.infer<typeof _UpdateDTO>;
+export type GetMedicationDTO = z.infer<typeof _GetDTO>;
+export type AddMedicationDTO = z.infer<typeof _AddDTO>;
+export type UpdateMedicationDTO = z.infer<typeof _UpdateDTO>;
+export type ScanMedicationDTO = z.infer<typeof _ScanDTO>;
 
 export interface MedicationApi {
-  get: (o: GetOptions) => Promise<GetDTO>;
-  add: (o: AddOptions) => Promise<AddDTO>;
-  update: (o: UpdateOptions) => Promise<UpdateDTO>;
-  delete: (o: DeleteOptions) => Promise<void>;
+  get: (o: GetMedicationOptions) => Promise<GetMedicationDTO>;
+  add: (o: AddMedicationOptions) => Promise<AddMedicationDTO>;
+  update: (o: UpdateMedicationOptions) => Promise<UpdateMedicationDTO>;
+  delete: (o: DeleteMedicationOptions) => Promise<void>;
+  scan: (o: ScanMedicationOptions) => Promise<ScanMedicationDTO>;
 }
 
 export let medicationApi: MedicationApi;
@@ -31,6 +40,7 @@ if (import.meta.env.MODE === 'development') {
     add: addMock,
     update: updateMock,
     delete: delMock,
+    scan: scanMock,
   };
 } else {
   medicationApi = {
@@ -38,5 +48,6 @@ if (import.meta.env.MODE === 'development') {
     add: add,
     update: update,
     delete: del,
+    scan: scan,
   };
 }

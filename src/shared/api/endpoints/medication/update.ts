@@ -4,17 +4,21 @@ import { RequiredOptions, OptionalOptions } from './options';
 
 import * as z from 'zod/mini';
 
-export interface UpdateOptions extends RequiredOptions, OptionalOptions {
+export interface UpdateMedicationOptions extends RequiredOptions, OptionalOptions {
   id: string;
 }
 
-export const UpdateDTO = BaseDTO;
+export const UpdateMedicationDTO = BaseDTO;
 
-export async function update(options: UpdateOptions): Promise<z.infer<typeof UpdateDTO>> {
+export async function update(
+  options: UpdateMedicationOptions,
+): Promise<z.infer<typeof UpdateMedicationDTO>> {
   const body = await backendClient.put('/medication', { body: options, useCredentials: true });
-  return UpdateDTO.parse(body);
+  return UpdateMedicationDTO.parse(body);
 }
 
-export async function updateMock(options: UpdateOptions): Promise<z.infer<typeof UpdateDTO>> {
+export async function updateMock(
+  options: UpdateMedicationOptions,
+): Promise<z.infer<typeof UpdateMedicationDTO>> {
   return await Promise.resolve(options);
 }
