@@ -11,6 +11,7 @@ export { HiddenInputField } from './hidden_input_field/hidden_input_field';
 export { TextareaField } from './textarea_field/textarea_field';
 export { Textarea } from './textarea/textarea';
 export { Tabbar, type TabbarOption } from './tabbar/tabbar';
+export { AuthGuard } from './auth_guard/auth_guard';
 
 export { CalendarIcon } from './icons/calendar';
 export { UserIcon } from './icons/user';
