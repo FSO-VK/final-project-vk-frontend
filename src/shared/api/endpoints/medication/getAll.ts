@@ -1,6 +1,6 @@
-/** @fileoverview A module describing medication API */
+/** @deprecated */
 
-import { backendClient } from '../client';
+import { backendClient } from '../../client';
 
 export interface MedicationCategory {
   id: string;

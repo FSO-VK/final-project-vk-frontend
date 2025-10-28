@@ -1,9 +1,18 @@
 /* Api exports */
-export { medicationApi } from './endpoints/medication';
+export { medicationApi, type MedicationApi } from './endpoints/medication';
 export { authApi, type AuthApi } from './endpoints/auth';
 
 /* Type exports */
-export type { Medication } from './endpoints/medication';
+export type {
+  GetMedicationOptions,
+  GetMedicationDTO,
+  AddMedicationOptions,
+  AddMedicationDTO,
+  UpdateMedicationOptions,
+  UpdateMedicationDTO,
+  DeleteMedicatoinOptions,
+  ScanMedicationDTO,
+} from './endpoints/medication';
 
 export type {
   CheckAuthDTO,
