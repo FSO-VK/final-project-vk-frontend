@@ -10,8 +10,7 @@ export type {
   AddMedicationDTO,
   UpdateMedicationOptions,
   UpdateMedicationDTO,
-  DeleteMedicatoinOptions,
-  Medication,
+  DeleteMedicationOptions,
   ScanMedicationDTO,
 } from './endpoints/medication';
 
