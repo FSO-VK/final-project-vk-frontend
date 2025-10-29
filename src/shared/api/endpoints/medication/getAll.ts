@@ -7,7 +7,9 @@ export const GetAllMedicationsDTO = z.object({
 });
 
 export async function getAll(): Promise<z.infer<typeof GetAllMedicationsDTO>> {
-  const body = await backendClient.get('/medicine/all');
+  const body = await backendClient.get('/medicine/all', {
+    useCredentials: true,
+  });
   return GetAllMedicationsDTO.parse(body);
 }
 
