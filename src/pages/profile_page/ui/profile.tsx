@@ -1,5 +1,5 @@
 import { useMeActions } from '@/entities/me';
-import { Button, ButtonStyle, P } from '@/shared/ui';
+import { Button, ButtonStyle } from '@/shared/ui';
 import { useNavigate } from '@solidjs/router';
 import './profile.css';
 
@@ -20,8 +20,7 @@ export function ProfilePage() {
 
   return (
     <main class="profile-page">
-      <h1 class="profile-page__header">Профиль</h1>
-      <P>Сейчас тут пусто, но скоро что-то появится</P>
+      Сейчас тут пусто, но скоро что-то появится
       <section class="profile-page__logout-container">
         <Button
           colorStyle={ButtonStyle.danger}

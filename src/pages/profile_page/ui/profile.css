@@ -1,8 +1,4 @@
 .profile-page {
-  &__header {
-    color: var(--clr-brand-5);
-  }
-
   &__logout-container {
     position: absolute;
     inset-block-end: var(--size-3);
