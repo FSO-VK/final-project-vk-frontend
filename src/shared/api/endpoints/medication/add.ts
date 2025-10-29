@@ -11,7 +11,10 @@ export const AddMedicationDTO = BaseDTO;
 export async function add(
   options: AddMedicationOptions,
 ): Promise<z.infer<typeof AddMedicationDTO>> {
-  const body = await backendClient.post('/medication', { body: options, useCredentials: true });
+  const body = await backendClient.post('/medication/medication', {
+    body: options,
+    useCredentials: true,
+  });
   return AddMedicationDTO.parse(body);
 }
 

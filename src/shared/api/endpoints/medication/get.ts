@@ -11,7 +11,9 @@ export const GetMedicationDTO = BaseDTO;
 export async function get(
   options: GetMedicationOptions,
 ): Promise<z.infer<typeof GetMedicationDTO>> {
-  const body = await backendClient.get(`/medication/${options.id}`, { useCredentials: true });
+  const body = await backendClient.get(`/medication/medication/${options.id}`, {
+    useCredentials: true,
+  });
   return GetMedicationDTO.parse(body);
 }
 

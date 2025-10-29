@@ -13,7 +13,10 @@ export const UpdateMedicationDTO = BaseDTO;
 export async function update(
   options: UpdateMedicationOptions,
 ): Promise<z.infer<typeof UpdateMedicationDTO>> {
-  const body = await backendClient.put('/medication', { body: options, useCredentials: true });
+  const body = await backendClient.put('/medication/medication', {
+    body: options,
+    useCredentials: true,
+  });
   return UpdateMedicationDTO.parse(body);
 }
 
