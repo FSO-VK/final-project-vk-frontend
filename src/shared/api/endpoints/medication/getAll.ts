@@ -36,6 +36,50 @@ export async function getAllMock(): Promise<z.infer<typeof GetAllMedicationsDTO>
         expirationDate: new Date('2027-12-31'),
         releaseDate: new Date('2025-12-31'),
       },
+      {
+        id: '23637986-6453-43ad-9d10-7a7c8a271c71',
+        name: 'Фарингосепт',
+        internationalName: 'Амбазон',
+        amount: {
+          value: 20,
+          unit: 'шт.',
+        },
+        releaseForm: 'Таблетки для рассасывания',
+        group: 'Антисептическое средство',
+        producer: {
+          name: 'С.К. ТЕРАПИЯ С.А.',
+          country: 'Румыния',
+        },
+        activeSubstance: {
+          name: 'Амбазона моногидрат',
+          value: 10,
+          unit: 'мг',
+        },
+        expirationDate: new Date('2024-12-31'),
+        releaseDate: new Date('2025-12-31'),
+      },
+      {
+        id: '23637986-6453-43ad-9d10-7a7c8a271c71',
+        name: 'Фарингосепт',
+        internationalName: 'Амбазон',
+        amount: {
+          value: 20,
+          unit: 'шт.',
+        },
+        releaseForm: 'Таблетки для рассасывания',
+        group: 'Антисептическое средство',
+        producer: {
+          name: 'С.К. ТЕРАПИЯ С.А.',
+          country: 'Румыния',
+        },
+        activeSubstance: {
+          name: 'Амбазона моногидрат',
+          value: 10,
+          unit: 'мг',
+        },
+        expirationDate: new Date('2027-12-31'),
+        releaseDate: new Date('2025-12-31'),
+      },
     ],
   });
 }

@@ -4,13 +4,13 @@
   text-align: center;
   border: none;
   border-radius: var(--size-1);
-  min-height: var(--lh-6);
   text-overflow: ellipsis;
   overflow: hidden;
 }
 
 .button_brand {
   background-color: var(--clr-brand-5);
+  min-height: var(--lh-6);
   color: var(--clr-brand-1);
 }
 
@@ -18,7 +18,13 @@
   background-color: rgba(0, 0, 0, 0);
   color: var(--clr-primary);
   border: solid 1px var(--clr-border);
+  min-height: var(--lh-6);
   font-weight: var(--fw-semi-bold);
+}
+
+.button_none {
+  background-color: transparent;
+  padding: 0;
 }
 
 .button_disabled {

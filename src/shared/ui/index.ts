@@ -18,4 +18,5 @@ export { CalendarIcon } from './icons/calendar';
 export { UserIcon } from './icons/user';
 export { FolderIcon } from './icons/folder';
 export { DownArrowIcon } from './icons/down_arrow';
+export { EditIcon } from './icons/edit';
 export { type IconComponent, IconStyle, type IconProps } from './icons/icon';

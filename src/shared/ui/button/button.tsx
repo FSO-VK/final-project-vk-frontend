@@ -3,6 +3,7 @@ import { Show } from 'solid-js';
 import './button.css';
 
 export enum ButtonStyle {
+  none = 'none',
   brand = 'brand',
   secondary = 'secondary',
 }
