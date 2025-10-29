@@ -1,0 +1,7 @@
+.medication-list-page {
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-2);
+  }
+}

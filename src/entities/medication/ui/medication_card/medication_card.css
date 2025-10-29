@@ -1,0 +1,78 @@
+.medication-card {
+  background-color: var(--clr-gray-1);
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+  &_brand {
+    padding: var(--size-1);
+    border-radius: var(--size-1);
+  }
+
+  &__header-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: start;
+  }
+
+  &__header {
+    font-weight: var(--fw-semi-bold);
+    text-wrap: wrap pretty;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__edit-icon {
+    inline-size: var(--size-4);
+    block-size: var(--size-4);
+  }
+
+  &__edit-button {
+    min-inline-size: fit-content;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: end;
+  }
+
+  &__description {
+    display: flex;
+    flex-direction: row;
+    gap: var(--size-1);
+    align-items: center;
+  }
+
+  &__text-column {
+    display: flex;
+    flex-direction: column;
+    font-size: var(--fs-2);
+  }
+
+  &__expires-circle {
+    inline-size: 50px;
+    block-size: 50px;
+    text-align: center;
+    border: solid 1px;
+  }
+
+  &__expires {
+    &_ok {
+      color: var(--clr-success-5);
+    }
+
+    &_bad {
+      color: var(--clr-danger-5);
+    }
+  }
+
+  &__release-form {
+    color: var(--clr-disable);
+  }
+
+  &__amount {
+    text-wrap: nowrap;
+    min-inline-size: fit-content;
+  }
+}

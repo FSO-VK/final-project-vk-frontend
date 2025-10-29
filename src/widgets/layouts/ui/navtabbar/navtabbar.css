@@ -13,6 +13,7 @@
   &__page {
     padding: var(--size-3);
     overflow-y: auto;
+    background-color: var(--clr-background);
   }
 
   &__tabbar {

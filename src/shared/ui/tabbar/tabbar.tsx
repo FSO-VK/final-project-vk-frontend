@@ -28,6 +28,7 @@ export function Tabbar(props: TabbarProps) {
               >
                 {
                   <item.icon
+                    elementClass={'tabbar__option-icon'}
                     iconStyle={props.activeOption === idx() ? IconStyle.Active : IconStyle.Inactive}
                   />
                 }

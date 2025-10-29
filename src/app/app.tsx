@@ -10,6 +10,7 @@ import { LoginPage } from '@/pages/login';
 import { useMeStore } from '@/entities/me';
 import { AuthGuard } from '@/shared/ui';
 import { isServer } from 'solid-js/web';
+import { MedicationsListPage } from '@/pages/medications_list';
 
 export interface AppProps {
   // Jobs that must be over before routing started
@@ -62,14 +63,13 @@ export function App(props: AppProps) {
           >
             <Route
               path="/medications"
-              component={(c) => (
+              component={() => (
                 <NavTabbarLayout
                   navBarTitle="Препараты"
                   navBarBackLocation="/"
                   currentTabBarOption={0}
                 >
-                  <div>Это страница препаратов</div>
-                  {c.children}
+                  <MedicationsListPage />
                 </NavTabbarLayout>
               )}
             />
