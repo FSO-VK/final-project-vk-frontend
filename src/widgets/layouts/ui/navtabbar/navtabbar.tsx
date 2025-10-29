@@ -1,8 +1,7 @@
 import './navtabbar.css';
 import { Divider, FolderIcon, Navbar, Tabbar, UserIcon } from '@/shared/ui';
-import { TabbarOption } from '@/shared/ui/tabbar/tabbar';
 import type { ParentProps } from 'solid-js';
-import { CalendarIcon } from '@/shared/ui';
+import { CalendarIcon, TabbarOption } from '@/shared/ui';
 
 export interface NavTabBarLayoutProps extends ParentProps {
   navBarTitle: string;

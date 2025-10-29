@@ -1,5 +1,4 @@
-import { Button, Input } from '@/shared/ui';
-import { ButtonStyle } from '@/shared/ui/button/button';
+import { Button, Input, ButtonStyle } from '@/shared/ui';
 import { A, useNavigate } from '@solidjs/router';
 import { createForm } from '@tanstack/solid-form';
 import { EMAIL_ERROR_STRINGS, emailValidator, MAX_EMAIL_LEN } from '@/entities/email';

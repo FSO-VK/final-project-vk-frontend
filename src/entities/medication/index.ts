@@ -12,3 +12,5 @@ const medicationStore = medicationStoreFabric.createMedicationStore(medicationAp
 export function useMedicationStore() {
   return medicationStore;
 }
+
+export { MedicationCard } from './ui/medication_card/medication_card';

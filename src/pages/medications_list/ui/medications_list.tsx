@@ -1,5 +1,5 @@
 import { useMedicationStore } from '@/entities/medication';
-import { MedicationCard } from '@/entities/medication/ui/medication_card/medication_card';
+import { MedicationCard } from '@/entities/medication';
 import { List } from '@/shared/ui';
 import { createAsync } from '@solidjs/router';
 import './medication_list.css';
