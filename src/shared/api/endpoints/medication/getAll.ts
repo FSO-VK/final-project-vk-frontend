@@ -1,60 +1,41 @@
-/** @deprecated */
-
 import { backendClient } from '../../client';
+import { BaseDTO } from './dto';
+import * as z from 'zod/mini';
 
-export interface MedicationCategory {
-  id: string;
-  name: string;
-}
+export const GetAllMedicationsDTO = z.object({
+  medicationBox: z.array(BaseDTO),
+});
 
-export interface MedicationDTO {
-  id: string;
-  name: string;
-  categories: MedicationCategory[];
-  items: number;
-  itemsUnit: string;
-  expires: Date;
-}
-
-// Preserved for future use
-export type Medication = MedicationDTO;
-
-export function adaptMedicationDTO(d: MedicationDTO): Medication {
-  return d;
-}
-
-async function getMedicationsList(): Promise<Medication[]> {
+export async function getAll(): Promise<z.infer<typeof GetAllMedicationsDTO>> {
   const body = await backendClient.get('/medicine/all');
-  return (body.medicineList as MedicationDTO[]).map(adaptMedicationDTO);
+  return GetAllMedicationsDTO.parse(body);
 }
 
-async function getMedicationsListMock(): Promise<Medication[]> {
-  return new Promise(() => {
-    return [
+export async function getAllMock(): Promise<z.infer<typeof GetAllMedicationsDTO>> {
+  return await Promise.resolve({
+    medicationBox: [
       {
-        id: '1',
-        name: 'Нурофен',
-        items: 15,
-        itemsUnit: 'шт.',
-        expires: new Date(Date.now()),
-        categories: [],
+        id: '23637986-6453-43ad-9d10-7a7c8a271c71',
+        name: 'Фарингосепт',
+        internationalName: 'Амбазон',
+        amount: {
+          value: 20,
+          unit: 'шт.',
+        },
+        releaseForm: 'Таблетки для рассасывания',
+        group: 'Антисептическое средство',
+        producer: {
+          name: 'С.К. ТЕРАПИЯ С.А.',
+          country: 'Румыния',
+        },
+        activeSubstance: {
+          name: 'Амбазона моногидрат',
+          value: 10,
+          unit: 'мг',
+        },
+        expirationDate: new Date('2027-12-31'),
+        releaseDate: new Date('2025-12-31'),
       },
-    ] as Medication[];
+    ],
   });
-}
-
-export interface MedicationApi {
-  getMedicationsList: () => Promise<Medication[]>;
-}
-
-export let medicationApi: MedicationApi;
-
-if (import.meta.env.MODE === 'development') {
-  medicationApi = {
-    getMedicationsList: getMedicationsListMock,
-  };
-} else {
-  medicationApi = {
-    getMedicationsList,
-  };
 }
