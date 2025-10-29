@@ -27,6 +27,12 @@
   padding: 0;
 }
 
+.button_danger {
+  background-color: var(--clr-danger-5);
+  min-height: var(--lh-6);
+  color: var(--clr-gray-1);
+}
+
 .button_disabled {
   opacity: 0.3;
   cursor: default;

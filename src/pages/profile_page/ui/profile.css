@@ -1,0 +1,17 @@
+.profile-page {
+  &__header {
+    color: var(--clr-brand-5);
+  }
+
+  &__logout-container {
+    position: absolute;
+    inset-block-end: var(--size-3);
+    inset-inline: 0;
+    text-align: center;
+  }
+
+  &__logout-button {
+    inline-size: 100%;
+    max-inline-size: var(--size-8);
+  }
+}

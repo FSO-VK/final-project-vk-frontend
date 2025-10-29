@@ -11,6 +11,7 @@
   }
 
   &__page {
+    position: relative;
     padding: var(--size-3);
     overflow-y: auto;
     background-color: var(--clr-background);

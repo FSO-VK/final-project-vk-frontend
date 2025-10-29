@@ -11,6 +11,7 @@ import { useMeStore } from '@/entities/me';
 import { AuthGuard } from '@/shared/ui';
 import { isServer } from 'solid-js/web';
 import { MedicationsListPage } from '@/pages/medications_list';
+import { ProfilePage } from '@/pages/profile_page';
 
 export interface AppProps {
   // Jobs that must be over before routing started
@@ -90,14 +91,13 @@ export function App(props: AppProps) {
 
             <Route
               path="/me"
-              component={(c) => (
+              component={() => (
                 <NavTabbarLayout
                   navBarTitle="Профиль"
                   navBarBackLocation="/"
                   currentTabBarOption={2}
                 >
-                  <div>Это страница профиля</div>
-                  {c.children}
+                  <ProfilePage />
                 </NavTabbarLayout>
               )}
             />

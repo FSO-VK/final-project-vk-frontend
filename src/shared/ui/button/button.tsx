@@ -6,6 +6,7 @@ export enum ButtonStyle {
   none = 'none',
   brand = 'brand',
   secondary = 'secondary',
+  danger = 'danger',
 }
 
 export interface ButtonProps {
