@@ -8,6 +8,7 @@
   }
 
   &__page {
+    position: relative;
     padding: var(--size-3);
   }
 }
