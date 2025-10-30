@@ -28,6 +28,7 @@ export interface InputFieldProps {
   onFocusOut?: JSX.EventHandler<HTMLElement, FocusEvent>;
   afterElements?: JSXElement;
   value?: string | string[] | number;
+  autocomplete?: JSX.HTMLAutocomplete;
 }
 
 export function InputField(props: InputFieldProps) {
@@ -36,6 +37,7 @@ export function InputField(props: InputFieldProps) {
       class={`input-field ${props.state ? stateToClass[props.state] : stateToClass[InputState.None]} input-field_border`}
     >
       <input
+        autocomplete={props.autocomplete}
         type={props.type}
         class={`input-field__input ${props.elementClass}`}
         name={props.name}

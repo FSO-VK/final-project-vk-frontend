@@ -25,6 +25,7 @@ export interface TextareaFieldProps {
   hasCounter?: boolean;
   onInput?: JSX.EventHandler<HTMLElement, InputEvent>;
   onFocusOut?: JSX.EventHandler<HTMLElement, FocusEvent>;
+  autocomplete?: JSX.HTMLAutocomplete;
 }
 
 export function TextareaField(props: TextareaFieldProps) {
@@ -36,6 +37,7 @@ export function TextareaField(props: TextareaFieldProps) {
   return (
     <div class={`textarea-field ${stateToClass[props.state ?? TextareaState.Primary]}`}>
       <textarea
+        autocomplete={props.autocomplete}
         class="textarea-field__textarea"
         name={props.name}
         id={props.id}
