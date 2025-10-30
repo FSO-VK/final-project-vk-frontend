@@ -1,7 +1,8 @@
 import './input.css';
-import { InputField, InputFieldProps, InputState } from '../input_field/input_field';
-import { Show, Switch, Match } from 'solid-js';
+import { InputField, InputFieldProps } from '../input_field/input_field';
+import { Switch, Match } from 'solid-js';
 import { HiddenInputField } from '../hidden_input_field/hidden_input_field';
+import { FieldWrapper } from '../field_wrapper/field_wrapper';
 
 export interface InputProps extends InputFieldProps {
   label?: string;
@@ -11,13 +12,7 @@ export interface InputProps extends InputFieldProps {
 
 export function Input(props: InputProps) {
   return (
-    <div class="input">
-      <label class="input__label" for={props.id}>
-        <Show when={props.isRequired}>
-          <span class="input__required-sign">*</span>
-        </Show>
-        {props.label}
-      </label>
+    <FieldWrapper {...props} labelFor={props.name}>
       <Switch>
         <Match when={props.type !== 'password'}>
           <InputField {...props} />
@@ -26,9 +21,6 @@ export function Input(props: InputProps) {
           <HiddenInputField {...props} />
         </Match>
       </Switch>
-      <Show when={props.state === InputState.Error && props.feedbackMessage}>
-        <div class="input__feedback input__feedback_danger">{props.feedbackMessage}</div>
-      </Show>
-    </div>
+    </FieldWrapper>
   );
 }
