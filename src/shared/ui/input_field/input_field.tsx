@@ -48,17 +48,19 @@ export function InputField(props: InputFieldProps) {
         onInput={(e) => props.onInput?.(e)}
         value={props.value}
       />
-      <div class="input-field__after-elements">
-        <Show when={props.afterElements !== undefined}>{props.afterElements}</Show>
-        <Switch>
-          <Match when={props.state === InputState.Success}>
-            <img alt="Галочка" src={CheckMarkSvg} class="input-field__state-icon" />
-          </Match>
-          <Match when={props.state === InputState.Error}>
-            <img alt="Крестик" src={CrossMarkSvg} class="input-field__state-icon" />
-          </Match>
-        </Switch>
-      </div>
+      <Show when={props.afterElements && props.state !== InputState.None}>
+        <div class="input-field__after-elements">
+          <Show when={props.afterElements !== undefined}>{props.afterElements}</Show>
+          <Switch>
+            <Match when={props.state === InputState.Success}>
+              <img alt="Галочка" src={CheckMarkSvg} class="input-field__state-icon" />
+            </Match>
+            <Match when={props.state === InputState.Error}>
+              <img alt="Крестик" src={CrossMarkSvg} class="input-field__state-icon" />
+            </Match>
+          </Switch>
+        </div>
+      </Show>
     </div>
   );
 }
