@@ -58,6 +58,7 @@ export function RegisterPage(props: RegisterPageProps) {
           }}
           children={(field) => (
             <Input
+              autocomplete="email"
               label="Электронная почта"
               isRequired
               feedbackMessage={field().state.meta.errors.join(', ')}
@@ -89,6 +90,7 @@ export function RegisterPage(props: RegisterPageProps) {
             }}
             children={(field) => (
               <Input
+                autocomplete="new-password"
                 label="Пароль"
                 isRequired
                 feedbackMessage={field().state.meta.errors.join(', ')}
@@ -119,6 +121,7 @@ export function RegisterPage(props: RegisterPageProps) {
             }}
             children={(field) => (
               <Input
+                autocomplete="new-password"
                 label="Подтверждение пароля"
                 isRequired
                 feedbackMessage={field().state.meta.errors.join(', ')}
@@ -126,16 +129,13 @@ export function RegisterPage(props: RegisterPageProps) {
                 name={field().name}
                 id={field().name}
                 placeholder="Повторите пароль"
-                maxlength={10}
+                maxlength={MAX_PASSWORD_LEN}
                 state={transformFieldState(field)}
                 elementClass="register-page__password-confirm"
                 onFocusOut={(e: FocusEvent) =>
                   field().handleChange((e.target as HTMLInputElement).value)
                 }
                 onInput={(e: InputEvent) => {
-                  if (field().state.meta.isPristine) {
-                    return;
-                  }
                   if (!field().state.meta.isValid) {
                     return field().handleChange((e.target as HTMLInputElement).value);
                   }

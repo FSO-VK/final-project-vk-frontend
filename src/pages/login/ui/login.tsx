@@ -57,6 +57,7 @@ export function LoginPage(props: LoginPageProps) {
           name="email"
           children={(field) => (
             <Input
+              autocomplete="email"
               label="Электронная почта"
               type="email"
               name={field().name}
@@ -73,6 +74,7 @@ export function LoginPage(props: LoginPageProps) {
           name="password"
           children={(field) => (
             <Input
+              autocomplete="current-password"
               label="Пароль"
               type="password"
               name={field().name}
