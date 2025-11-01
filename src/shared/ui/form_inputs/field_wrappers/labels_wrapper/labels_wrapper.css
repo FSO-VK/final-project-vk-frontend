@@ -1,4 +1,4 @@
-.textarea {
+.labels-wrapper {
   display: flex;
   flex-direction: column;
   gap: var(--size-1);

@@ -39,6 +39,7 @@
     "eslint": "^9.36.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-solid": "^0.14.5",
+    "fsd-cruise": "^1.0.5-beta.8",
     "globals": "^16.4.0",
     "husky": "^9.1.7",
     "jiti": ">=2.6.1",

@@ -66,7 +66,7 @@ export function LoginPage(props: LoginPageProps) {
               placeholder="Введите email"
               maxlength={MAX_EMAIL_LEN}
               onInput={(e) => field().handleChange((e.target as HTMLInputElement).value)}
-              elementClass="login-page__email"
+              class="login-page__email"
             />
           )}
         />
@@ -81,7 +81,7 @@ export function LoginPage(props: LoginPageProps) {
               id={field().name}
               placeholder="Введите пароль"
               maxlength={MAX_PASSWORD_LEN}
-              elementClass="login-page__password"
+              class="login-page__password"
               onInput={(e) => field().handleChange((e.target as HTMLInputElement).value)}
               value={field().state.value}
             />
