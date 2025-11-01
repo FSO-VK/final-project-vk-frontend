@@ -1,0 +1,37 @@
+.pilled-input {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-1);
+
+  &__feedback {
+    &_danger {
+      color: var(--clr-danger-5);
+    }
+  }
+
+  &__required-sign {
+    color: var(--clr-danger-5);
+  }
+
+  &__autosuggestions {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--size-1);
+  }
+
+  &__pill {
+    border-radius: var(--size-3);
+    padding-inline: var(--size-2);
+    padding-block: var(--size-0);
+    cursor: pointer;
+    text-overflow: ellipsis;
+    text-align: center;
+    overflow: hidden;
+
+    &_brand {
+      color: var(--clr-brand-1);
+      background-color: var(--clr-brand-5);
+    }
+  }
+}

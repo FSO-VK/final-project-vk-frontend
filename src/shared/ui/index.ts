@@ -13,6 +13,7 @@ export { Textarea } from './textarea/textarea';
 export { Tabbar, type TabbarOption } from './tabbar/tabbar';
 export { AuthGuard } from './auth_guard/auth_guard';
 export { SelectField } from './select_field/select_field';
+export { PilledInput } from './pilled_input/pilled_input.tsx';
 
 export { CalendarIcon } from './icons/calendar';
 export { UserIcon } from './icons/user';
