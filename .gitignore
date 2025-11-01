@@ -26,3 +26,5 @@ dev-dist
 *.sln
 *.sw?
 tsconfig.tsbuildinfo
+
+fsd-high-level-dependencies.html
