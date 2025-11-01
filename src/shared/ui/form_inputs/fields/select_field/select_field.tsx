@@ -1,32 +1,23 @@
 import { For, type JSX } from 'solid-js';
 import './select_field.css';
-import { DownArrowIcon } from '../icons/down_arrow';
-import { IconStyle } from '../icons/icon';
+import { DownArrowIcon, IconStyle } from '@/shared/ui';
 
 export interface OptionSpec {
   value?: string;
   label?: string;
 }
 
-export interface SelectFieldProps {
-  elementClass?: string;
-  name?: string;
-  id?: string;
-  value?: string;
+export interface SelectFieldProps extends JSX.SelectHTMLAttributes<HTMLSelectElement> {
+  class?: string;
   options?: OptionSpec[];
-  onInput?: JSX.EventHandler<HTMLElement, InputEvent>;
-  onFocusOut?: JSX.EventHandler<HTMLElement, FocusEvent>;
 }
 
 export function SelectField(props: SelectFieldProps) {
   return (
-    <div class={'select-field select-field_border select-field_brand'}>
+    <div class={`select-field select-field_border select-field_brand ${props.class ?? ''}`}>
       <select
-        class={`select-field__select ${props.elementClass ?? ''}`}
-        name={props.name}
-        id={props.id}
-        onFocusOut={(e) => props.onFocusOut?.(e)}
-        onInput={(e) => props.onInput?.(e)}
+        class="select-field__select"
+        {...props}
         aria-disabled={props.options === undefined || props.options?.length === 0}
       >
         <For each={props.options}>

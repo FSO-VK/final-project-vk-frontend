@@ -60,7 +60,7 @@ export function RegisterPage(props: RegisterPageProps) {
             <Input
               autocomplete="email"
               label="Электронная почта"
-              isRequired
+              required
               feedbackMessage={field().state.meta.errors.join(', ')}
               type="email"
               name={field().name}
@@ -72,7 +72,7 @@ export function RegisterPage(props: RegisterPageProps) {
               onFocusOut={(e: FocusEvent) =>
                 field().handleChange((e.target as HTMLInputElement).value)
               }
-              elementClass="register-page__email"
+              class="register-page__email"
             />
           )}
         />
@@ -92,7 +92,7 @@ export function RegisterPage(props: RegisterPageProps) {
               <Input
                 autocomplete="new-password"
                 label="Пароль"
-                isRequired
+                required
                 feedbackMessage={field().state.meta.errors.join(', ')}
                 type="password"
                 name={field().name}
@@ -103,7 +103,7 @@ export function RegisterPage(props: RegisterPageProps) {
                 onInput={(e: InputEvent) =>
                   field().handleChange((e.target as HTMLInputElement).value)
                 }
-                elementClass="register-page__password"
+                class="register-page__password"
                 value={field().state.value}
               />
             )}
@@ -113,7 +113,7 @@ export function RegisterPage(props: RegisterPageProps) {
             validators={{
               onChangeListenTo: ['password'],
               onChange: ({ value, fieldApi }) => {
-                if (value !== fieldApi.form.getFieldValue('password')) {
+                if (value !== '' && value !== fieldApi.form.getFieldValue('password')) {
                   return 'Введенные пароли не совпадают';
                 }
                 return;
@@ -123,7 +123,7 @@ export function RegisterPage(props: RegisterPageProps) {
               <Input
                 autocomplete="new-password"
                 label="Подтверждение пароля"
-                isRequired
+                required
                 feedbackMessage={field().state.meta.errors.join(', ')}
                 type="password"
                 name={field().name}
@@ -131,7 +131,7 @@ export function RegisterPage(props: RegisterPageProps) {
                 placeholder="Повторите пароль"
                 maxlength={MAX_PASSWORD_LEN}
                 state={transformFieldState(field)}
-                elementClass="register-page__password-confirm"
+                class="register-page__password-confirm"
                 onFocusOut={(e: FocusEvent) =>
                   field().handleChange((e.target as HTMLInputElement).value)
                 }
