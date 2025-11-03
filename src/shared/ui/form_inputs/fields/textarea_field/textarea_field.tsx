@@ -23,7 +23,7 @@ export function TextareaField(props: TextareaFieldProps) {
 
   return (
     <div
-      class={`textarea-field ${stateToClass[props.state ?? FieldState.None]} ${props.class ?? ''}`}
+      class={`textarea-field textarea-field_basic ${stateToClass[props.state ?? FieldState.None]} ${props.class ?? ''}`}
     >
       <textarea {...props} class="textarea-field__textarea">
         {props.value ?? ''}

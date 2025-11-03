@@ -16,7 +16,7 @@ export function Input(props: InputProps) {
           <HiddenInputField {...props} />
         </Match>
         <Match when={props.type !== 'password'}>
-          <InputField />
+          <InputField {...props} />
         </Match>
       </Switch>
     </LabelsWrapper>

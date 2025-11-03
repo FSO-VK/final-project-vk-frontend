@@ -14,6 +14,7 @@ const stateToClass = {
 export interface InputFieldProps extends JSX.InputHTMLAttributes<HTMLInputElement> {
   state?: FieldState;
   class?: string;
+  inputClass?: string;
   afterElements?: JSXElement;
 }
 
@@ -22,7 +23,7 @@ export function InputField(props: InputFieldProps) {
     <div
       class={`input-field ${props.state ? stateToClass[props.state] : stateToClass[FieldState.None]} input-field_border`}
     >
-      <input {...props} class="input-field__input" />
+      <input {...props} class={`input-field__input ${props.inputClass}`} />
       <Show when={props.afterElements && props.state !== FieldState.None}>
         <div class="input-field__after-elements">
           <Show when={props.afterElements !== undefined}>{props.afterElements}</Show>

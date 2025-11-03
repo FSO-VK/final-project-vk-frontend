@@ -6,4 +6,8 @@
   &_inactive {
     fill: var(--clr-disable);
   }
+
+  &_danger {
+    fill: var(--clr-danger-7);
+  }
 }
