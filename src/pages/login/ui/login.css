@@ -1,6 +1,6 @@
 .login-page {
   &__header {
-    color: var(--clr-brand-5);
+    color: var(--clr-brand-7);
   }
 
   &__form {

@@ -1,19 +1,6 @@
 .medication-form {
-  &__combined-field {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--size-3);
-  }
-
-  &__button-container {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    gap: var(--size-3);
-  }
-
-  &__button {
-    flex: 1 1 auto;
+  &__header {
+    color: var(--clr-brand-7);
+    font-size: var(--fs-5);
   }
 }

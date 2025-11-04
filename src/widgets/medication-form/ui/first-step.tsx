@@ -6,6 +6,7 @@ import {
   SelectField,
   type OptionSpec,
   DateField,
+  ButtonStyle,
 } from '@/shared/ui';
 import { withForm } from '@/shared/lib';
 import './first-step.css';
@@ -22,7 +23,7 @@ export const MedicationFormRequiredForm = withForm({
   },
   props: {
     amountOptions: [] as OptionSpec[],
-    onSubmit: () => {
+    onBackClick: () => {
       return;
     },
   },
@@ -34,7 +35,9 @@ export const MedicationFormRequiredForm = withForm({
         onSubmit={(e) => {
           e.preventDefault();
           e.stopPropagation();
-          props.onSubmit();
+          props.form.handleSubmit().catch(() => {
+            console.error('failed to submit required form');
+          });
         }}
       >
         <h2 class="required-form__header">Обязательные поля</h2>
@@ -147,13 +150,19 @@ export const MedicationFormRequiredForm = withForm({
           })}
           children={(state) => {
             return (
-              <Button
-                class="required-form__next-button"
-                type="submit"
-                isDisabled={!state().canSubmit}
-              >
-                Далее
-              </Button>
+              <div class="required-form__button-container">
+                <Button
+                  class="required-form__button"
+                  type="button"
+                  colorStyle={ButtonStyle.secondary}
+                  onClick={() => props.onBackClick()}
+                >
+                  Назад
+                </Button>
+                <Button class="required-form__button" type="submit" isDisabled={!state().canSubmit}>
+                  Далее
+                </Button>
+              </div>
             );
           }}
         />

@@ -3,10 +3,21 @@
   flex-direction: column;
   gap: var(--size-3);
 
+  &__header {
+    font-size: var(--fs-3);
+    font-weight: var(--fw-regular);
+  }
+
   &__combined-field {
     display: grid;
     grid-template-columns: 4fr 1fr var(--lh-6);
-    gap: var(--size-2);
+    gap: var(--size-1);
+  }
+
+  &__group-input {
+    display: grid;
+    grid-template-columns: 1fr var(--lh-6);
+    gap: var(--size-1);
   }
 
   &__add-field-button {
@@ -30,7 +41,16 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: var(--size-1);
     outline-color: var(--clr-danger-7);
+  }
+
+  &__button-container {
+    display: flex;
+    flex-direction: row;
+    gap: var(--size-1);
+  }
+
+  &__button {
+    flex: 1 1 0;
   }
 }

@@ -22,7 +22,11 @@ export const MedicationFormOptionalForm = withForm({
     producer: '',
     comment: '',
   },
-  props: {},
+  props: {
+    onBackClick: () => {
+      return;
+    },
+  },
   render: function Render(props) {
     return (
       <form
@@ -31,6 +35,9 @@ export const MedicationFormOptionalForm = withForm({
         onSubmit={(e) => {
           e.preventDefault();
           e.stopPropagation();
+          props.form.handleSubmit().catch(() => {
+            console.error('failed to submit optional form');
+          });
         }}
       >
         <h2 class="optional-form__header">Опциональные поля</h2>
@@ -54,6 +61,7 @@ export const MedicationFormOptionalForm = withForm({
                                 id={subfield().name + i}
                                 placeholder="Действующее вещество"
                                 value={subfield().state.value}
+                                onChange={(e) => subfield().handleChange(e.target.value)}
                               />
                             );
                           }}
@@ -64,9 +72,10 @@ export const MedicationFormOptionalForm = withForm({
                               <InputField
                                 type="number"
                                 name={subfield().name}
-                                id={subfield().name + i}
+                                id={subfield().name}
                                 placeholder="мг"
                                 value={subfield().state.value}
+                                onChange={(e) => subfield().handleChange(Number(e.target.value))}
                               />
                             );
                           }}
@@ -122,13 +131,29 @@ export const MedicationFormOptionalForm = withForm({
                       <props.form.Field name={`group[${i}]`}>
                         {(subfield) => {
                           return (
-                            <InputField
-                              type="text"
-                              name={subfield().name}
-                              id={subfield().name + i}
-                              placeholder="Начните вводить"
-                              value={subfield().state.value}
-                            />
+                            <div class="optional-form__group-input">
+                              <InputField
+                                type="text"
+                                name={subfield().name}
+                                id={subfield().name + i}
+                                placeholder="Начните вводить"
+                                value={subfield().state.value}
+                                onChange={(e) => subfield().handleChange(e.target.value)}
+                              />
+                              <Button
+                                class="optional-form__remove-field-button"
+                                type="button"
+                                colorStyle={ButtonStyle.secondary}
+                                onClick={() => {
+                                  field().removeValue(i);
+                                }}
+                              >
+                                <TrashIcon
+                                  iconStyle={IconStyle.Danger}
+                                  elementClass="optional-form__add-field-button-icon"
+                                />
+                              </Button>
+                            </div>
                           );
                         }}
                       </props.form.Field>
@@ -198,7 +223,28 @@ export const MedicationFormOptionalForm = withForm({
             );
           }}
         />
-        <div class="optional-form__button-container" />
+        <props.form.Subscribe
+          selector={(state) => ({
+            canSubmit: state.canSubmit,
+          })}
+          children={(state) => {
+            return (
+              <div class="optional-form__button-container">
+                <Button
+                  class="optional-form__button"
+                  type="button"
+                  colorStyle={ButtonStyle.secondary}
+                  onClick={() => props.onBackClick()}
+                >
+                  Назад
+                </Button>
+                <Button class="optional-form__button" type="submit" isDisabled={!state().canSubmit}>
+                  Сохранить
+                </Button>
+              </div>
+            );
+          }}
+        />
       </form>
     );
   },
