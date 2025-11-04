@@ -8,9 +8,26 @@ import {
   TrashIcon,
   PlusIcon,
   TextareaField,
+  transformFieldState,
+  FieldState,
 } from '@/shared/ui';
 import { Index, Show } from 'solid-js';
 import './second-step.css';
+import {
+  MAX_ACTIVE_SUBSTANCE_NAME_LEN,
+  MAX_GROUP_NAME_LEN,
+  MAX_GROUP_SIZE,
+  MAX_PRODUCER_NAME_LEN,
+} from '@/entities/medication';
+import {
+  MAX_ACTIVE_SUBSTANCE_SIZE,
+  validateActiveSubstanceValue,
+  ValidationError,
+} from '@/entities/medication/model/medication';
+
+export const VALIDATION_ERROR_STRINGS = {
+  [ValidationError.MustBePositive]: 'Введите положительное число',
+};
 
 export const MedicationFormOptionalForm = withForm({
   defaultValues: {
@@ -41,7 +58,22 @@ export const MedicationFormOptionalForm = withForm({
         }}
       >
         <h2 class="optional-form__header">Опциональные поля</h2>
-        <props.form.Field name="activeSubstance" mode="array">
+        <props.form.Field
+          name="activeSubstance"
+          mode="array"
+          validators={{
+            onChange: ({ value }) => {
+              if (
+                !value.every((v) => {
+                  return !v.value || validateActiveSubstanceValue(v.value) === undefined;
+                })
+              ) {
+                return 'Введите положительные числа';
+              }
+              return undefined;
+            },
+          }}
+        >
           {(field) => (
             <LabelsWrapper
               label="Действующее вещество"
@@ -61,12 +93,24 @@ export const MedicationFormOptionalForm = withForm({
                                 id={subfield().name + i}
                                 placeholder="Действующее вещество"
                                 value={subfield().state.value}
+                                maxlength={MAX_ACTIVE_SUBSTANCE_NAME_LEN}
                                 onChange={(e) => subfield().handleChange(e.target.value)}
                               />
                             );
                           }}
                         </props.form.Field>
-                        <props.form.Field name={`activeSubstance[${i}].value`}>
+                        <props.form.Field
+                          name={`activeSubstance[${i}].value`}
+                          validators={{
+                            onChange: ({ value }) => {
+                              const validationResult = validateActiveSubstanceValue(value);
+                              if (validationResult === undefined) {
+                                return undefined;
+                              }
+                              return VALIDATION_ERROR_STRINGS[validationResult];
+                            },
+                          }}
+                        >
                           {(subfield) => {
                             return (
                               <InputField
@@ -76,6 +120,12 @@ export const MedicationFormOptionalForm = withForm({
                                 placeholder="мг"
                                 value={subfield().state.value}
                                 onChange={(e) => subfield().handleChange(Number(e.target.value))}
+                                onBlur={() => field().handleChange(field().state.value)}
+                                state={
+                                  transformFieldState(subfield) == FieldState.Error
+                                    ? FieldState.Error
+                                    : FieldState.None
+                                }
                               />
                             );
                           }}
@@ -85,6 +135,7 @@ export const MedicationFormOptionalForm = withForm({
                           type="button"
                           colorStyle={ButtonStyle.secondary}
                           onClick={() => {
+                            field().handleChange(field().state.value);
                             field().removeValue(i);
                           }}
                         >
@@ -98,23 +149,27 @@ export const MedicationFormOptionalForm = withForm({
                   }}
                 </Index>
               </Show>
-              <Button
-                class="optional-form__add-field-button"
-                type="button"
-                colorStyle={ButtonStyle.secondary}
-                onClick={() => {
-                  field().pushValue({
-                    name: '',
-                    value: '' as unknown as number,
-                  });
-                }}
-              >
-                Добавить
-                <PlusIcon
-                  iconStyle={IconStyle.Active}
-                  elementClass="optional-form__add-field-button-icon"
-                />
-              </Button>
+
+              <Show when={field().state.value.length < MAX_ACTIVE_SUBSTANCE_SIZE}>
+                <Button
+                  class="optional-form__add-field-button"
+                  type="button"
+                  colorStyle={ButtonStyle.secondary}
+                  onClick={() => {
+                    field().pushValue({
+                      name: '',
+                      value: '' as unknown as number,
+                    });
+                    field().handleChange(field().state.value);
+                  }}
+                >
+                  Добавить
+                  <PlusIcon
+                    iconStyle={IconStyle.Active}
+                    elementClass="optional-form__add-field-button-icon"
+                  />
+                </Button>
+              </Show>
             </LabelsWrapper>
           )}
         </props.form.Field>
@@ -138,6 +193,7 @@ export const MedicationFormOptionalForm = withForm({
                                 id={subfield().name + i}
                                 placeholder="Начните вводить"
                                 value={subfield().state.value}
+                                maxlength={MAX_GROUP_NAME_LEN}
                                 onChange={(e) => subfield().handleChange(e.target.value)}
                               />
                               <Button
@@ -161,20 +217,22 @@ export const MedicationFormOptionalForm = withForm({
                   }}
                 </Index>
               </Show>
-              <Button
-                class="optional-form__add-field-button"
-                type="button"
-                colorStyle={ButtonStyle.secondary}
-                onClick={() => {
-                  field().pushValue('');
-                }}
-              >
-                Добавить
-                <PlusIcon
-                  iconStyle={IconStyle.Active}
-                  elementClass="optional-form__add-field-button-icon"
-                />
-              </Button>
+              <Show when={field().state.value.length < MAX_GROUP_SIZE}>
+                <Button
+                  class="optional-form__add-field-button"
+                  type="button"
+                  colorStyle={ButtonStyle.secondary}
+                  onClick={() => {
+                    field().pushValue('');
+                  }}
+                >
+                  Добавить
+                  <PlusIcon
+                    iconStyle={IconStyle.Active}
+                    elementClass="optional-form__add-field-button-icon"
+                  />
+                </Button>
+              </Show>
             </LabelsWrapper>
           )}
         </props.form.Field>
@@ -192,8 +250,9 @@ export const MedicationFormOptionalForm = withForm({
                   type="text"
                   name={field().name}
                   id={field().name}
-                  maxlength={10}
+                  maxlength={MAX_PRODUCER_NAME_LEN}
                   value={field().state.value}
+                  onChange={(e) => field().handleChange(e.target.value)}
                 />
               </LabelsWrapper>
             );
@@ -215,7 +274,7 @@ export const MedicationFormOptionalForm = withForm({
                   maxlength={300}
                   value={field().state.value}
                   onInput={(e) => {
-                    field().setValue(e.currentTarget.value);
+                    field().handleChange(e.target.value);
                   }}
                   hasCounter
                 />
@@ -225,7 +284,7 @@ export const MedicationFormOptionalForm = withForm({
         />
         <props.form.Subscribe
           selector={(state) => ({
-            canSubmit: state.canSubmit,
+            canSubmit: state.canSubmit && state.isValid,
           })}
           children={(state) => {
             return (

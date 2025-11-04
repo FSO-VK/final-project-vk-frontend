@@ -7,9 +7,21 @@ import {
   type OptionSpec,
   DateField,
   ButtonStyle,
+  transformFieldState,
+  FieldState,
 } from '@/shared/ui';
 import { withForm } from '@/shared/lib';
 import './first-step.css';
+import {
+  MAX_NAME_LEN,
+  MAX_RELEASE_FORM_LEN,
+  validateAmountValue,
+  ValidationError,
+} from '@/entities/medication';
+
+export const VALIDATION_ERROR_STRINGS = {
+  [ValidationError.MustBePositive]: 'Введите положительное число',
+};
 
 export const MedicationFormRequiredForm = withForm({
   defaultValues: {
@@ -56,8 +68,9 @@ export const MedicationFormRequiredForm = withForm({
                   type="text"
                   name={field().name}
                   id={field().name}
-                  maxlength={10}
+                  maxlength={MAX_NAME_LEN}
                   value={field().state.value}
+                  onChange={(e) => field().handleChange(e.currentTarget.value)}
                 />
               </LabelsWrapper>
             );
@@ -76,8 +89,8 @@ export const MedicationFormRequiredForm = withForm({
                 <DateField
                   name={field().name}
                   id={field().name}
-                  maxlength={10}
                   value={field().state.value}
+                  onChange={(e) => field().handleChange(e.currentTarget.value)}
                 />
               </LabelsWrapper>
             );
@@ -102,8 +115,9 @@ export const MedicationFormRequiredForm = withForm({
                     type="text"
                     name={field().name}
                     id={field().name}
-                    maxlength={10}
+                    maxlength={MAX_RELEASE_FORM_LEN}
                     value={field().state.value}
+                    onChange={(e) => field().handleChange(e.currentTarget.value)}
                   />
                 </PilledWrapper>
               </LabelsWrapper>
@@ -112,6 +126,15 @@ export const MedicationFormRequiredForm = withForm({
         />
         <props.form.Field
           name="amount.value"
+          validators={{
+            onChange: ({ value }) => {
+              const validationResult = validateAmountValue(value);
+              if (validationResult === undefined) {
+                return undefined;
+              }
+              return VALIDATION_ERROR_STRINGS[validationResult];
+            },
+          }}
           children={(field) => {
             return (
               <LabelsWrapper
@@ -127,6 +150,12 @@ export const MedicationFormRequiredForm = withForm({
                     id={field().name}
                     placeholder="Количество"
                     value={field().state.value}
+                    onChange={(e) => field().handleChange(Number(e.currentTarget.value))}
+                    state={
+                      transformFieldState(field) == FieldState.Error
+                        ? FieldState.Error
+                        : FieldState.None
+                    }
                   />
                   <props.form.Field
                     name="amount.unit"
@@ -136,6 +165,7 @@ export const MedicationFormRequiredForm = withForm({
                         id={field().name}
                         options={props.amountOptions ?? []}
                         value={field().state.value}
+                        onChange={(e) => field().handleChange(e.currentTarget.value)}
                       />
                     )}
                   />
@@ -146,7 +176,11 @@ export const MedicationFormRequiredForm = withForm({
         />
         <props.form.Subscribe
           selector={(state) => ({
-            canSubmit: state.canSubmit,
+            canSubmit:
+              state.canSubmit &&
+              state.isValid &&
+              Object.values(state.values).every((field) => field) &&
+              state.values.amount.value,
           })}
           children={(state) => {
             return (
