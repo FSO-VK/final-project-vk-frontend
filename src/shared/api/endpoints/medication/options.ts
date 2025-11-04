@@ -10,7 +10,7 @@ export interface RequiredOptions {
 
 export interface OptionalOptions {
   internationalName?: string;
-  group?: string;
+  group?: string[];
   producer?: {
     name: string;
     country: string;
@@ -19,7 +19,7 @@ export interface OptionalOptions {
     name: string;
     value: number;
     unit: string;
-  };
+  }[];
   releaseDate?: Date;
   commentary?: string;
 }
