@@ -10,4 +10,8 @@
   &_danger {
     fill: var(--clr-danger-7);
   }
+
+  &_secondary {
+    fill: var(--clr-secondary);
+  }
 }

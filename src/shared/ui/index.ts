@@ -15,4 +15,5 @@ export { DownArrowIcon } from './icons/down_arrow';
 export { EditIcon } from './icons/edit';
 export { PlusIcon, BubblePlusIcon } from './icons/plus';
 export { TrashIcon } from './icons/trash';
+export { BookmarkIcon } from './icons/bookmark';
 export { type IconComponent, IconStyle, type IconProps } from './icons/icon';

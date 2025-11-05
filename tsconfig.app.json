@@ -22,7 +22,8 @@
     "noUncheckedSideEffectImports": true,
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "types": ["./types/global.d.ts"]
   },
-  "include": ["src"]
+  "include": ["src", "types"]
 }
