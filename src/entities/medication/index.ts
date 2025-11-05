@@ -1,5 +1,6 @@
 import { medicationApi } from '@/shared/api';
 import { medicationStoreFabric } from './model/medication_solid';
+import { MedicationActions } from './model/medication';
 
 export type { Medication, MedicationStore } from './model/medication';
 
@@ -11,6 +12,12 @@ const medicationStore = medicationStoreFabric.createMedicationStore(medicationAp
 
 export function useMedicationStore() {
   return medicationStore;
+}
+
+const medicationActions = new MedicationActions(medicationApi, medicationStore);
+
+export function useMedicationActions() {
+  return medicationActions;
 }
 
 export { MedicationCard } from './ui/medication_card/medication_card';

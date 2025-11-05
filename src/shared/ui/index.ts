@@ -13,6 +13,6 @@ export { UserIcon } from './icons/user';
 export { FolderIcon } from './icons/folder';
 export { DownArrowIcon } from './icons/down_arrow';
 export { EditIcon } from './icons/edit';
-export { PlusIcon } from './icons/plus';
+export { PlusIcon, BubblePlusIcon } from './icons/plus';
 export { TrashIcon } from './icons/trash';
 export { type IconComponent, IconStyle, type IconProps } from './icons/icon';

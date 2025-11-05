@@ -16,7 +16,7 @@ export const validateAmountValue = (value: number): ValidationError | undefined 
   return;
 };
 
-export const AMOUNT_UNITS = ['шт', 'г', 'мл'];
+export const AMOUNT_UNITS = ['шт.', 'г.', 'мл.'];
 
 export interface MedicationProducer {
   name: string;
@@ -82,4 +82,29 @@ export interface MedicationStore {
 
 export interface MedicationStoreFabric {
   createMedicationStore: (medicationApi: MedicationApi) => MedicationStore;
+}
+
+export class MedicationActions {
+  private medicationApi_: MedicationApi;
+  private store_: MedicationStore;
+
+  constructor(api: MedicationApi, store: MedicationStore) {
+    this.medicationApi_ = api;
+    this.store_ = store;
+  }
+
+  async addMedication(medDraft: MedicationDraft) {
+    const addedMedication = await this.medicationApi_.add(medDraft);
+    this.store_.addMedication(addedMedication);
+  }
+
+  async updateMedication(medication: Medication) {
+    const updatedMedication = await this.medicationApi_.update(medication);
+    this.store_.updateMedication(updatedMedication);
+  }
+
+  async removeMedication(id: string) {
+    await this.medicationApi_.delete({ id });
+    this.store_.removeMedication(id);
+  }
 }

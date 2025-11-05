@@ -4,6 +4,7 @@ import './medication_card.css';
 
 export interface MedicationCardProps {
   medication: Medication;
+  onEditClick?: () => void;
 }
 
 export function MedicationCard(props: MedicationCardProps) {
@@ -16,7 +17,12 @@ export function MedicationCard(props: MedicationCardProps) {
     <section class="medication-card medication-card_brand">
       <div class="medication-card__header-container">
         <h3 class="medication-card__header">{props.medication.name}</h3>
-        <Button type="button" colorStyle={ButtonStyle.none} class="medication-card__edit-button">
+        <Button
+          type="button"
+          colorStyle={ButtonStyle.none}
+          class="medication-card__edit-button"
+          onClick={() => props.onEditClick?.()}
+        >
           <EditIcon elementClass="medication-card__edit-icon" iconStyle={IconStyle.Active} />
         </Button>
       </div>
