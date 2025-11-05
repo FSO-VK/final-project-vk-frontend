@@ -1,6 +1,6 @@
 import './app.css';
 
-import { Router, Route } from '@solidjs/router';
+import { Router, Route, useParams } from '@solidjs/router';
 import { SomethingBadPage } from '@/pages/something_bad';
 import { HelloPage } from '@/pages/hello';
 import { FullscreenFixedLayout, NavbarLayout, NavTabbarLayout } from '@/widgets/layouts';
@@ -12,6 +12,8 @@ import { AuthGuard } from '@/shared/ui';
 import { isServer } from 'solid-js/web';
 import { MedicationsListPage } from '@/pages/medications_list';
 import { ProfilePage } from '@/pages/profile_page';
+import { MedicationAddPage } from '@/pages/medication_add';
+import { MedicationEditPage } from '@/pages/medication_edit';
 
 export interface AppProps {
   // Jobs that must be over before routing started
@@ -64,16 +66,37 @@ export function App(props: AppProps) {
           >
             <Route
               path="/medications"
-              component={() => (
+              component={(p) => (
                 <NavTabbarLayout
                   navBarTitle="Препараты"
                   navBarBackLocation="/"
                   currentTabBarOption={0}
                 >
-                  <MedicationsListPage />
+                  {p.children}
                 </NavTabbarLayout>
               )}
-            />
+            >
+              <Route path="/" component={MedicationsListPage} />
+              <Route
+                path="/add"
+                component={() => (
+                  <MedicationAddPage backLocation="/medications" afterSaveLocation="/medications" />
+                )}
+              />
+              <Route
+                path="/edit/:id"
+                component={() => {
+                  const params = useParams();
+                  return (
+                    <MedicationEditPage
+                      backLocation="/medications"
+                      afterSaveLocation="/medications"
+                      medicationId={params.id}
+                    />
+                  );
+                }}
+              />
+            </Route>
 
             <Route
               path="/planning"

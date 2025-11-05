@@ -17,7 +17,7 @@ export type IconComponent = (props: IconProps) => JSXElement;
 export function Icon(props: IconProps & ParentProps) {
   return (
     <svg
-      viewBox="0 0 24 24"
+      viewBox={props.viewBox ?? '0 0 24 24'}
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       class={`icon ${props.iconStyle ?? ''} ${props.elementClass ?? ''}`}

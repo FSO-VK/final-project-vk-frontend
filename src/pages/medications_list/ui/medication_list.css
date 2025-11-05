@@ -4,4 +4,11 @@
     flex-direction: column;
     gap: var(--size-2);
   }
+
+  &__add-medication-button {
+    position: absolute;
+    inset-inline-end: var(--size-3);
+    inset-block-end: var(--size-3);
+    inline-size: var(--size-5);
+  }
 }

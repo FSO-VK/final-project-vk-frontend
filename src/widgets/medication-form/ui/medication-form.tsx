@@ -29,7 +29,7 @@ export function MedicationForm(props: MedicationFormProps) {
   const requiredForm = useAppForm(() => ({
     defaultValues: {
       medicationName: props.initialMedication?.name ?? '',
-      expirationDate: props.initialMedication?.expirationDate.toDateString() ?? '',
+      expirationDate: props.initialMedication?.expirationDate.toISOString().split('T')[0] ?? '',
       releaseForm: props.initialMedication?.releaseForm ?? '',
       amount: {
         value: props.initialMedication?.amount.value ?? ('' as unknown as number),
@@ -86,17 +86,29 @@ export function MedicationForm(props: MedicationFormProps) {
     },
   }));
 
+  const amountOptions = AMOUNT_UNITS.map((u) => {
+    return {
+      value: u,
+      label: u,
+    };
+  });
+
+  if (
+    props.initialMedication !== undefined &&
+    AMOUNT_UNITS.find((unit) => unit === props.initialMedication!.amount.unit) === undefined
+  ) {
+    amountOptions.push({
+      value: props.initialMedication.amount.unit,
+      label: props.initialMedication.amount.unit,
+    });
+  }
+
   const forms = [
     () => {
       return (
         <MedicationFormRequiredForm
           form={requiredForm}
-          amountOptions={AMOUNT_UNITS.map((u) => {
-            return {
-              value: u,
-              label: u,
-            };
-          })}
+          amountOptions={amountOptions}
           onBackClick={() => {
             props.onBackClick();
           }}
