@@ -1,0 +1,27 @@
+.required-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-3);
+
+  &__header {
+    font-size: var(--fs-3);
+    font-weight: var(--fw-regular);
+  }
+
+  &__combined-field {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: var(--size-2);
+  }
+
+  &__button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: var(--size-1);
+  }
+
+  &__button {
+    flex: 1 1 0;
+  }
+}

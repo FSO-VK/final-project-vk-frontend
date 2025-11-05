@@ -9,7 +9,7 @@ export const BaseDTO = z.object({
     unit: z.string(),
   }),
   releaseForm: z.string(),
-  group: z.optional(z.string()),
+  group: z.optional(z.array(z.string())),
   producer: z.optional(
     z.object({
       name: z.string(),
@@ -17,11 +17,13 @@ export const BaseDTO = z.object({
     }),
   ),
   activeSubstance: z.optional(
-    z.object({
-      name: z.string(),
-      value: z.number(),
-      unit: z.string(),
-    }),
+    z.array(
+      z.object({
+        name: z.string(),
+        value: z.number(),
+        unit: z.string(),
+      }),
+    ),
   ),
   expirationDate: z.date(),
   releaseDate: z.optional(z.date()),

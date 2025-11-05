@@ -1,12 +1,13 @@
-import { JSXElement, type ParentProps } from 'solid-js';
+import { type JSX, type JSXElement, type ParentProps } from 'solid-js';
 import './icon.css';
 
 export enum IconStyle {
   Inactive = 'icon_inactive',
   Active = 'icon_active',
+  Danger = 'icon_danger',
 }
 
-export interface IconProps {
+export interface IconProps extends JSX.SvgSVGAttributes<SVGSVGElement> {
   iconStyle?: IconStyle;
   elementClass?: string;
 }
@@ -20,6 +21,7 @@ export function Icon(props: IconProps & ParentProps) {
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       class={`icon ${props.iconStyle ?? ''} ${props.elementClass ?? ''}`}
+      {...props}
     >
       {props.children}
     </svg>

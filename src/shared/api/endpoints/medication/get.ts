@@ -29,16 +29,18 @@ export async function getMock(
       unit: 'шт.',
     },
     releaseForm: 'Таблетки для рассасывания',
-    group: 'Антисептическое средство',
+    group: ['Антисептическое средство'],
     producer: {
       name: 'С.К. ТЕРАПИЯ С.А.',
       country: 'Румыния',
     },
-    activeSubstance: {
-      name: 'Амбазона моногидрат',
-      value: 10,
-      unit: 'мг',
-    },
+    activeSubstance: [
+      {
+        name: 'Амбазона моногидрат',
+        value: 10,
+        unit: 'мг',
+      },
+    ],
     expirationDate: new Date('2027-12-31'),
     releaseDate: new Date('2025-12-31'),
   });

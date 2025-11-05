@@ -12,5 +12,5 @@ export const MIN_PASSWORD_LEN = 8;
 export const MAX_PASSWORD_LEN = 254;
 
 export interface PasswordValidator {
-  validate: (email: Password) => PasswordError | undefined;
+  validate: (pass: Password) => PasswordError | undefined;
 }

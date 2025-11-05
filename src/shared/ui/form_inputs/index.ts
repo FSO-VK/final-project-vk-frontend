@@ -1,4 +1,12 @@
-export { FieldState, HiddenInputField, InputField, SelectField, TextareaField } from './fields';
+export {
+  FieldState,
+  HiddenInputField,
+  InputField,
+  SelectField,
+  TextareaField,
+  DateField,
+  type OptionSpec,
+} from './fields';
 export { Input } from './full_inputs/input';
 export { transformFieldState } from './tanstack_adapter';
 

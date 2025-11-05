@@ -36,8 +36,8 @@
     inset-block-start: 50%;
     transform: translate(-50%, -50%);
 
-    inline-size: var(--size-4);
-    block-size: var(--size-4);
+    inline-size: var(--size-3);
+    block-size: var(--size-3);
 
     /* To make select before the icon */
     z-index: -1;

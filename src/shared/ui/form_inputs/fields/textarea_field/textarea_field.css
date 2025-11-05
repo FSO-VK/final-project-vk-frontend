@@ -35,4 +35,8 @@
     color: var(--clr-secondary);
     text-align: right;
   }
+
+  &_basic {
+    background-color: var(--clr-gray-1);
+  }
 }
