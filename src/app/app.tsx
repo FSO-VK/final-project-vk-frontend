@@ -14,6 +14,7 @@ import { MedicationsListPage } from '@/pages/medications_list';
 import { ProfilePage } from '@/pages/profile_page';
 import { MedicationAddPage } from '@/pages/medication_add';
 import { MedicationEditPage } from '@/pages/medication_edit';
+import { MedicationPage } from '@/pages/medication';
 
 export interface AppProps {
   // Jobs that must be over before routing started
@@ -63,68 +64,71 @@ export function App(props: AppProps) {
                 {p.children}
               </AuthGuard>
             )}
+          />
+          <Route
+            path="/medications"
+            component={(p) => (
+              <NavTabbarLayout
+                navBarTitle="Препараты"
+                navBarBackLocation="/"
+                currentTabBarOption={0}
+              >
+                {p.children}
+              </NavTabbarLayout>
+            )}
           >
+            <Route path="/" component={MedicationsListPage} />
             <Route
-              path="/medications"
-              component={(p) => (
-                <NavTabbarLayout
-                  navBarTitle="Препараты"
-                  navBarBackLocation="/"
-                  currentTabBarOption={0}
-                >
-                  {p.children}
-                </NavTabbarLayout>
+              path="/add"
+              component={() => (
+                <MedicationAddPage backLocation="/medications" afterSaveLocation="/medications" />
               )}
-            >
-              <Route path="/" component={MedicationsListPage} />
-              <Route
-                path="/add"
-                component={() => (
-                  <MedicationAddPage backLocation="/medications" afterSaveLocation="/medications" />
-                )}
-              />
-              <Route
-                path="/edit/:id"
-                component={() => {
-                  const params = useParams();
-                  return (
-                    <MedicationEditPage
-                      backLocation="/medications"
-                      afterSaveLocation="/medications"
-                      medicationId={params.id}
-                    />
-                  );
-                }}
-              />
-            </Route>
-
+            />
             <Route
-              path="/planning"
-              component={(c) => (
-                <NavTabbarLayout
-                  navBarTitle="Планирование"
-                  navBarBackLocation="/"
-                  currentTabBarOption={1}
-                >
-                  <div>Это страница планирования</div>
-                  {c.children}
-                </NavTabbarLayout>
-              )}
+              path="/edit/:id"
+              component={() => {
+                const params = useParams();
+                return (
+                  <MedicationEditPage
+                    backLocation="/medications"
+                    afterSaveLocation="/medications"
+                    medicationId={params.id}
+                  />
+                );
+              }}
             />
 
             <Route
-              path="/me"
-              component={() => (
-                <NavTabbarLayout
-                  navBarTitle="Профиль"
-                  navBarBackLocation="/"
-                  currentTabBarOption={2}
-                >
-                  <ProfilePage />
-                </NavTabbarLayout>
-              )}
+              path="/view/:id"
+              component={() => {
+                const params = useParams();
+                return <MedicationPage medicationId={params.id} />;
+              }}
             />
           </Route>
+
+          <Route
+            path="/planning"
+            component={(c) => (
+              <NavTabbarLayout
+                navBarTitle="Планирование"
+                navBarBackLocation="/"
+                currentTabBarOption={1}
+              >
+                <div>Это страница планирования</div>
+                {c.children}
+              </NavTabbarLayout>
+            )}
+          />
+
+          <Route
+            path="/me"
+            component={() => (
+              <NavTabbarLayout navBarTitle="Профиль" navBarBackLocation="/" currentTabBarOption={2}>
+                <ProfilePage />
+              </NavTabbarLayout>
+            )}
+          />
 
           <Route path="*" component={FullscreenFixedLayout}>
             <Route
