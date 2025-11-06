@@ -1,0 +1,13 @@
+.empty-screen {
+  position: absolute;
+  inset: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+
+  inline-size: var(--size-6);
+  block-size: var(--size-6);
+
+  &__caption {
+    color: var(--clr-secondary);
+  }
+}

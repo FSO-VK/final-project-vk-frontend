@@ -4,6 +4,7 @@ import { BubblePlusIcon, IconStyle, List } from '@/shared/ui';
 import { A, createAsync, useNavigate } from '@solidjs/router';
 import './medication_list.css';
 import { Suspense } from 'solid-js';
+import { EmptyScreen } from '@/shared/ui/empty_screen/empty_screen';
 
 export function MedicationsListPage() {
   const medStore = useMedicationStore();
@@ -23,7 +24,7 @@ export function MedicationsListPage() {
               }}
             />
           ))}
-          fallback={<div>Кажется, ничего нет</div>}
+          fallback={<EmptyScreen />}
         />
         <A href="/medications/add">
           <BubblePlusIcon

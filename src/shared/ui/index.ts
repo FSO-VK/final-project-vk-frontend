@@ -16,4 +16,5 @@ export { EditIcon } from './icons/edit';
 export { PlusIcon, BubblePlusIcon } from './icons/plus';
 export { TrashIcon } from './icons/trash';
 export { BookmarkIcon } from './icons/bookmark';
+export { EmptyIcon } from './icons/empty';
 export { type IconComponent, IconStyle, type IconProps } from './icons/icon';
