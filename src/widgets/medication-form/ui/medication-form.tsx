@@ -33,7 +33,7 @@ export function MedicationForm(props: MedicationFormProps) {
       releaseForm: props.initialMedication?.releaseForm ?? '',
       amount: {
         value: props.initialMedication?.amount.value ?? ('' as unknown as number),
-        unit: props.initialMedication?.amount.unit ?? '',
+        unit: props.initialMedication?.amount.unit ?? AMOUNT_UNITS[0],
       },
     },
     onSubmit: ({ value }) => {
