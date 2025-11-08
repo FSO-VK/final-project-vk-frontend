@@ -7,6 +7,7 @@ import {
 import { NavigationRoute, registerRoute } from 'workbox-routing';
 import * as z from 'zod/mini';
 import logoSvg from '/favicon.svg';
+import { assertIfError } from './shared/lib';
 
 declare let self: ServiceWorkerGlobalScope;
 
@@ -41,17 +42,23 @@ self.addEventListener('push', (event: PushEvent) => {
   if (event.data === null) {
     return;
   }
-  const pushDataParseResult = NotificationPayload.safeParse(event.data.json());
-  if (!pushDataParseResult.success) {
-    console.error(`failed to parse push notification:`, pushDataParseResult.error);
-    return;
+
+  try {
+    const pushDataParseResult = NotificationPayload.safeParse(event.data.json());
+    if (!pushDataParseResult.success) {
+      console.error(`failed to parse push notification:`, pushDataParseResult.error);
+      return;
+    }
+    const pushData = pushDataParseResult.data;
+    event.waitUntil(
+      self.registration.showNotification(pushData.title, {
+        lang: 'ru',
+        body: pushData.body,
+        icon: logoSvg,
+      }),
+    );
+  } catch (e) {
+    assertIfError(e);
+    console.error(e);
   }
-  const pushData = pushDataParseResult.data;
-  event.waitUntil(
-    self.registration.showNotification(pushData.title, {
-      lang: 'ru',
-      body: pushData.body,
-      icon: logoSvg,
-    }),
-  );
 });

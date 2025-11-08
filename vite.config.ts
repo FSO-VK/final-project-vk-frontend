@@ -8,8 +8,11 @@ export default defineConfig({
   plugins: [
     solid({ ssr: true }),
     VitePWA({
-      registerType: 'prompt',
-      injectRegister: false,
+      strategies: 'injectManifest',
+      srcDir: 'src',
+      filename: 'sw.ts',
+
+      injectRegister: null,
 
       manifest: {
         name: 'Умная аптечка',
@@ -49,7 +52,7 @@ export default defineConfig({
       },
 
       devOptions: {
-        enabled: false,
+        enabled: true,
         navigateFallback: 'index.html',
         suppressWarnings: true,
         type: 'module',

@@ -1,6 +1,7 @@
 /* Api exports */
 export { medicationApi, type MedicationApi } from './endpoints/medication';
 export { authApi, type AuthApi } from './endpoints/auth';
+export { notificationApi, type NotificationApi } from './endpoints/notification';
 
 /* Type exports */
 export type {
@@ -21,3 +22,10 @@ export type {
   RegisterOptions,
   RegisterDTO,
 } from './endpoints/auth';
+
+export type {
+  SubscribeDTO,
+  GetVapidDTO,
+  SubscribeOptions,
+  UnsubscribeOptions,
+} from './endpoints/notification';
