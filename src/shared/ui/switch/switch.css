@@ -1,0 +1,39 @@
+.switch {
+  &__container {
+    box-sizing: inline-block;
+    position: relative;
+    cursor: pointer;
+    border: 2px solid var(--clr-border);
+    border-radius: var(--size-4);
+    background-color: var(--clr-gray-1);
+
+    min-width: 52px;
+    min-height: 32px;
+
+    &_checked {
+      background-color: var(--clr-branФd-5);
+    }
+  }
+
+  &__input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  &__slider {
+    position: absolute;
+    content: '';
+    height: 24px;
+    width: 24px;
+    left: 4px;
+    bottom: 4px;
+    background-color: var(--clr-gray-1);
+    border-radius: 50%;
+    transition: 0.4s;
+
+    &_checked {
+      transform: translateX(100px);
+    }
+  }
+}
