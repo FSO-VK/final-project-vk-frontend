@@ -5,6 +5,8 @@ import {
   precacheAndRoute,
 } from 'workbox-precaching';
 import { NavigationRoute, registerRoute } from 'workbox-routing';
+import * as z from 'zod/mini';
+import logoSvg from '/favicon.svg';
 
 declare let self: ServiceWorkerGlobalScope;
 
@@ -20,3 +22,36 @@ if (import.meta.env.DEV) allowlist = [/^\/$/];
 
 // to allow work offline
 registerRoute(new NavigationRoute(createHandlerBoundToURL('index.html'), { allowlist }));
+
+// push notifications
+
+interface NotificationPayload {
+  title: string;
+  body: string;
+  data: { userID: string };
+}
+
+const NotificationPayload = z.object({
+  title: z.string(),
+  body: z.string(),
+  data: z.object({ userID: z.string() }),
+});
+
+self.addEventListener('push', (event: PushEvent) => {
+  if (event.data === null) {
+    return;
+  }
+  const pushDataParseResult = NotificationPayload.safeParse(event.data.json());
+  if (!pushDataParseResult.success) {
+    console.error(`failed to parse push notification:`, pushDataParseResult.error);
+    return;
+  }
+  const pushData = pushDataParseResult.data;
+  event.waitUntil(
+    self.registration.showNotification(pushData.title, {
+      lang: 'ru',
+      body: pushData.body,
+      icon: logoSvg,
+    }),
+  );
+});
