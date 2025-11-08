@@ -1,5 +1,5 @@
 import { useMeStore } from '@/entities/me';
-import { notificationApi } from '@/shared/api/endpoints/notification';
+import { notificationApi } from '@/shared/api';
 import { useSwStore } from '@/shared/lib';
 
 export async function askNotificationPermission() {

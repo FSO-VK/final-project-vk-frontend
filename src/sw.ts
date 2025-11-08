@@ -6,7 +6,6 @@ import {
 } from 'workbox-precaching';
 import { NavigationRoute, registerRoute } from 'workbox-routing';
 import * as z from 'zod/mini';
-import logoSvg from '/favicon.svg';
 import { assertIfError } from './shared/lib';
 
 declare let self: ServiceWorkerGlobalScope;
@@ -54,7 +53,6 @@ self.addEventListener('push', (event: PushEvent) => {
       self.registration.showNotification(pushData.title, {
         lang: 'ru',
         body: pushData.body,
-        icon: logoSvg,
       }),
     );
   } catch (e) {
