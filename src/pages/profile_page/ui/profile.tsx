@@ -3,6 +3,9 @@ import { Button, ButtonStyle } from '@/shared/ui';
 import { useNavigate } from '@solidjs/router';
 import './profile.css';
 
+import { Show } from 'solid-js';
+import { ProfileNotificationSection } from './profile-notification-section';
+
 export function ProfilePage() {
   const meActions = useMeActions();
   const navigate = useNavigate();
@@ -20,7 +23,9 @@ export function ProfilePage() {
 
   return (
     <main class="profile-page">
-      Сейчас тут пусто, но скоро что-то появится
+      <Show when={!import.meta.env.SSR}>
+        <ProfileNotificationSection />
+      </Show>
       <section class="profile-page__logout-container">
         <Button
           colorStyle={ButtonStyle.danger}

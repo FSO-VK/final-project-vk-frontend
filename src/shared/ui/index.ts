@@ -7,6 +7,7 @@ export { Navbar } from './navbar/navbar';
 export * from './form_inputs';
 export { Tabbar, type TabbarOption } from './tabbar/tabbar';
 export { AuthGuard } from './auth_guard/auth_guard';
+export { SwitchButton } from './switch/switch';
 
 export { CalendarIcon } from './icons/calendar';
 export { UserIcon } from './icons/user';

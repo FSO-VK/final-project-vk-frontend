@@ -10,4 +10,19 @@
     inline-size: 100%;
     max-inline-size: var(--size-8);
   }
+
+  &__notification-subscribe-container {
+    display: grid;
+    grid-template-columns: 1fr var(--size-5);
+  }
+
+  &__notification-options {
+    background-color: var(--clr-background);
+    padding: var(--size-3);
+    border-radius: var(--size-3);
+  }
+
+  &__notification-options-header {
+    color: var(--clr-brand-7);
+  }
 }

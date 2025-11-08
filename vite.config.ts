@@ -52,7 +52,7 @@ export default defineConfig({
       },
 
       devOptions: {
-        enabled: process.env.MODE === 'development',
+        enabled: true,
         navigateFallback: 'index.html',
         suppressWarnings: true,
         type: 'module',

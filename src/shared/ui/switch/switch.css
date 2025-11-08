@@ -1,0 +1,36 @@
+.switch {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  border: var(--size-00) solid;
+  padding: 0;
+  block-size: var(--lh-3);
+  inline-size: 100%;
+  border-radius: var(--size-2);
+
+  &_checked {
+    background-color: var(--clr-brand-5);
+    border-color: var(--clr-brand-5);
+    justify-content: end;
+  }
+
+  &_unchecked {
+    justify-content: start;
+    background-color: var(--clr-gray-1);
+    border-color: var(--clr-gray-5);
+  }
+
+  &__circle {
+    block-size: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 100%;
+
+    &_checked {
+      background-color: var(--clr-gray-1);
+    }
+
+    &_unchecked {
+      background-color: var(--clr-secondary);
+    }
+  }
+}
