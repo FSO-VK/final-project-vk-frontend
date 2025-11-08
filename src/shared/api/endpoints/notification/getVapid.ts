@@ -2,7 +2,7 @@ import { backendClient } from '../../client';
 
 import * as z from 'zod/mini';
 
-const GetVapidDTO = z.object({
+export const GetVapidDTO = z.object({
   vapidPublicKey: z.string(),
 });
 
