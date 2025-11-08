@@ -1,39 +1,36 @@
 .switch {
-  &__container {
-    box-sizing: inline-block;
-    position: relative;
-    cursor: pointer;
-    border: 2px solid var(--clr-border);
-    border-radius: var(--size-4);
-    background-color: var(--clr-gray-1);
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  border: var(--size-00) solid;
+  padding: 0;
+  block-size: var(--lh-3);
+  inline-size: 100%;
+  border-radius: var(--size-2);
 
-    min-width: 52px;
-    min-height: 32px;
+  &_checked {
+    background-color: var(--clr-brand-5);
+    border-color: var(--clr-brand-5);
+    justify-content: end;
+  }
+
+  &_unchecked {
+    justify-content: start;
+    background-color: var(--clr-gray-1);
+    border-color: var(--clr-gray-5);
+  }
+
+  &__circle {
+    block-size: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 100%;
 
     &_checked {
-      background-color: var(--clr-branФd-5);
+      background-color: var(--clr-gray-1);
     }
-  }
 
-  &__input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-
-  &__slider {
-    position: absolute;
-    content: '';
-    height: 24px;
-    width: 24px;
-    left: 4px;
-    bottom: 4px;
-    background-color: var(--clr-gray-1);
-    border-radius: 50%;
-    transition: 0.4s;
-
-    &_checked {
-      transform: translateX(100px);
+    &_unchecked {
+      background-color: var(--clr-secondary);
     }
   }
 }

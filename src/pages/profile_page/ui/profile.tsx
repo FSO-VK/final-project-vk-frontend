@@ -1,8 +1,10 @@
 import { useMeActions } from '@/entities/me';
-import { Button, ButtonStyle, Switch } from '@/shared/ui';
-import { createSignal } from 'solid-js';
+import { Button, ButtonStyle } from '@/shared/ui';
 import { useNavigate } from '@solidjs/router';
 import './profile.css';
+
+import { Show } from 'solid-js';
+import { ProfileNotificationSection } from './profile-notification-section';
 
 export function ProfilePage() {
   const meActions = useMeActions();
@@ -19,19 +21,11 @@ export function ProfilePage() {
     );
   };
 
-  const [isClicked, setIsClicked] = createSignal(false);
-
-  const handleClick = () => {
-    const clicked = isClicked();
-    setIsClicked(!clicked);
-  };
-
   return (
     <main class="profile-page">
-      Сейчас тут пусто, но скоро что-то появится
-      <section>
-        <Switch onClick={handleClick} isChecked={isClicked()} />
-      </section>
+      <Show when={!import.meta.env.SSR}>
+        <ProfileNotificationSection />
+      </Show>
       <section class="profile-page__logout-container">
         <Button
           colorStyle={ButtonStyle.danger}
