@@ -26,13 +26,13 @@ export function MedicationsListPage() {
           ))}
           fallback={<EmptyScreen />}
         />
-        <A href="/medications/add">
-          <BubblePlusIcon
-            iconStyle={IconStyle.Active}
-            elementClass="medication-list-page__add-medication-button"
-          />
-        </A>
       </Suspense>
+      <A href="/medications/add" class="medication-list-page__add-medication-button">
+        <BubblePlusIcon
+          iconStyle={IconStyle.Active}
+          elementClass="medication-list-page__add-medication-button-icon"
+        />
+      </A>
     </main>
   );
 }
