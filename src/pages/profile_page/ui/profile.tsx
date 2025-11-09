@@ -5,10 +5,20 @@ import './profile.css';
 
 import { Show } from 'solid-js';
 import { ProfileNotificationSection } from './profile-notification-section';
+import { useLayoutStore } from '@/widgets/layouts';
 
 export function ProfilePage() {
   const meActions = useMeActions();
   const navigate = useNavigate();
+
+  const layoutStore = useLayoutStore();
+
+  layoutStore.setNavbarState({
+    showBackButton: true,
+    showDropdownMenu: false,
+    dropdownMenuItems: [],
+    title: 'Профиль',
+  });
 
   const handleLogoutClick = () => {
     meActions.logout().then(

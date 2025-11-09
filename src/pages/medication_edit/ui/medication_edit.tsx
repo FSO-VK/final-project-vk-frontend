@@ -6,6 +6,7 @@ import {
   useMedicationStore,
 } from '@/entities/medication';
 import { Match, Suspense, Switch } from 'solid-js';
+import { useLayoutStore } from '@/widgets/layouts';
 
 export interface MedicationEditPageProps {
   medicationId: string;
@@ -23,6 +24,15 @@ export function MedicationEditPage(props: MedicationEditPageProps) {
 
   const store = useMedicationStore();
   const medication = createAsync(() => store.medicationById(props.medicationId));
+
+  const layoutStore = useLayoutStore();
+
+  layoutStore.setNavbarState({
+    showBackButton: true,
+    showDropdownMenu: false,
+    dropdownMenuItems: [],
+    title: 'Редактирование препарата',
+  });
 
   return (
     <main class="medication-edit-page">

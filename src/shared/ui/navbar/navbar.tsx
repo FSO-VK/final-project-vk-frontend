@@ -4,7 +4,7 @@ import { createSignal, For, Show } from 'solid-js';
 import { clickOutside, Dropdown } from '../dropdown/dropdown';
 import { DotsIcon, type IconComponent, IconStyle } from '../icons';
 import { Divider } from '../divider/divider';
-import { JSX } from 'solid-js/h/jsx-runtime';
+import { type JSX } from 'solid-js';
 
 export interface NavbarProps {
   showBackButton?: boolean;

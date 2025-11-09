@@ -5,10 +5,20 @@ import { A, createAsync, useNavigate } from '@solidjs/router';
 import './medication_list.css';
 import { Suspense } from 'solid-js';
 import { EmptyScreen } from '@/shared/ui/empty_screen/empty_screen';
+import { useLayoutStore } from '@/widgets/layouts';
 
 export function MedicationsListPage() {
   const medStore = useMedicationStore();
   const navigate = useNavigate();
+
+  const layoutStore = useLayoutStore();
+
+  layoutStore.setNavbarState({
+    showBackButton: true,
+    showDropdownMenu: false,
+    dropdownMenuItems: [],
+    title: 'Список препаратов',
+  });
 
   const medications = createAsync(medStore.allMedications);
   return (
