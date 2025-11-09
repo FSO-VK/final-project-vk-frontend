@@ -25,6 +25,14 @@ export const BaseDTO = z.object({
       }),
     ),
   ),
-  expirationDate: z.date(),
-  releaseDate: z.optional(z.date()),
+  expirationDate: z.pipe(
+    z.iso.date(),
+    z.transform((val) => new Date(val)),
+  ),
+  releaseDate: z.optional(
+    z.pipe(
+      z.iso.date(),
+      z.transform((val) => new Date(val)),
+    ),
+  ),
 });
