@@ -52,7 +52,7 @@ export async function subscribeUserToPush() {
     subscription: {
       endpoint: subscriptionJSON.endpoint!,
       keys: {
-        p256dh: subscriptionJSON.keys.p256hd ?? '',
+        p256dh: subscriptionJSON.keys.p256dh ?? '',
         auth: subscriptionJSON.keys.auth ?? '',
       },
     },
