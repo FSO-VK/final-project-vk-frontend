@@ -14,7 +14,7 @@ export function MedicationsListPage() {
   const layoutStore = useLayoutStore();
 
   layoutStore.setNavbarState({
-    showBackButton: true,
+    showBackButton: false,
     showDropdownMenu: false,
     dropdownMenuItems: [],
     title: 'Список препаратов',

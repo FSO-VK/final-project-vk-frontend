@@ -15,6 +15,7 @@ import { ProfilePage } from '@/pages/profile_page';
 import { MedicationAddPage } from '@/pages/medication_add';
 import { MedicationEditPage } from '@/pages/medication_edit';
 import { MedicationPage } from '@/pages/medication';
+import { PlanningPage } from '@/pages/planning/ui/planning_stub';
 
 export interface AppProps {
   // Jobs that must be over before routing started
@@ -129,14 +130,13 @@ export function App(props: AppProps) {
 
           <Route
             path="/planning"
-            component={(c) => (
+            component={() => (
               <NavTabbarLayout
                 onBackClick={() => handleBackClick()}
                 currentTabBarOption={1}
                 tabbarOptions={tabbarOptions}
               >
-                <div>Это страница планирования</div>
-                {c.children}
+                <PlanningPage />
               </NavTabbarLayout>
             )}
           />
