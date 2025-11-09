@@ -9,13 +9,4 @@ export { Tabbar, type TabbarOption } from './tabbar/tabbar';
 export { AuthGuard } from './auth_guard/auth_guard';
 export { SwitchButton } from './switch/switch';
 
-export { CalendarIcon } from './icons/calendar';
-export { UserIcon } from './icons/user';
-export { FolderIcon } from './icons/folder';
-export { DownArrowIcon } from './icons/down_arrow';
-export { EditIcon } from './icons/edit';
-export { PlusIcon, BubblePlusIcon } from './icons/plus';
-export { TrashIcon } from './icons/trash';
-export { BookmarkIcon } from './icons/bookmark';
-export { EmptyIcon } from './icons/empty';
-export { type IconComponent, IconStyle, type IconProps } from './icons/icon';
+export * from './icons';
