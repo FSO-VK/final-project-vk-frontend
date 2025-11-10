@@ -7,6 +7,7 @@ import { MAX_PASSWORD_LEN } from '@/entities/password';
 import { Button, ButtonStyle } from '@/shared/ui';
 import { A } from '@solidjs/router';
 import './login.css';
+import { useLayoutStore } from '@/widgets/layouts/model/layout_solid';
 
 export interface LoginPageProps {
   registerLocation?: string;
@@ -15,6 +16,14 @@ export interface LoginPageProps {
 export function LoginPage(props: LoginPageProps) {
   const meActions = useMeActions();
   const navigate = useNavigate();
+  const layoutStore = useLayoutStore();
+
+  layoutStore.setNavbarState({
+    showBackButton: false,
+    showDropdownMenu: false,
+    dropdownMenuItems: [],
+    title: 'Вход',
+  });
 
   const form = createForm(() => ({
     defaultValues: {

@@ -6,6 +6,7 @@ import { MAX_PASSWORD_LEN, PASSWORD_ERROR_STRINGS, passwordValidator } from '@/e
 import { useMeActions } from '@/entities/me';
 import './register.css';
 import { transformFieldState } from '@/shared/ui';
+import { useLayoutStore } from '@/widgets/layouts';
 
 export interface RegisterPageProps {
   loginLocation: string;
@@ -14,6 +15,15 @@ export interface RegisterPageProps {
 export function RegisterPage(props: RegisterPageProps) {
   const meActions = useMeActions();
   const navigate = useNavigate();
+
+  const layoutStore = useLayoutStore();
+
+  layoutStore.setNavbarState({
+    showBackButton: false,
+    showDropdownMenu: false,
+    dropdownMenuItems: [],
+    title: 'Регистрация',
+  });
 
   const form = createForm(() => ({
     defaultValues: {

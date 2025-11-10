@@ -12,6 +12,7 @@ import {
 } from 'solid-js';
 import './medication.css';
 import { BookmarkIcon, IconStyle } from '@/shared/ui';
+import { useLayoutStore } from '@/widgets/layouts';
 
 const MS_IN_MONTH = 1000 * 60 * 60 * 24 * 30;
 const MS_IN_YEAR = 1000 * 60 * 60 * 24 * 365;
@@ -37,6 +38,15 @@ export interface MedicationPageProps {
 export function MedicationPage(props: MedicationPageProps) {
   const medStore = useMedicationStore();
   const medication = createAsync(() => medStore.medicationById(props.medicationId));
+
+  const layoutStore = useLayoutStore();
+
+  layoutStore.setNavbarState({
+    showBackButton: true,
+    showDropdownMenu: false,
+    dropdownMenuItems: [],
+    title: 'Препарат',
+  });
 
   const producerString = createMemo(() => {
     if (

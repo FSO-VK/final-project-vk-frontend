@@ -8,13 +8,14 @@ import { createResource, Suspense, Show, ParentProps } from 'solid-js';
 import { RegisterPage } from '@/pages/register';
 import { LoginPage } from '@/pages/login';
 import { useMeStore } from '@/entities/me';
-import { AuthGuard } from '@/shared/ui';
+import { AuthGuard, CalendarIcon, FolderIcon, TabbarOption, UserIcon } from '@/shared/ui';
 import { isServer } from 'solid-js/web';
 import { MedicationsListPage } from '@/pages/medications_list';
 import { ProfilePage } from '@/pages/profile_page';
 import { MedicationAddPage } from '@/pages/medication_add';
 import { MedicationEditPage } from '@/pages/medication_edit';
 import { MedicationPage } from '@/pages/medication';
+import { PlanningPage } from '@/pages/planning/ui/planning_stub';
 
 export interface AppProps {
   // Jobs that must be over before routing started
@@ -26,6 +27,28 @@ export interface AppProps {
 export function App(props: AppProps) {
   const job = createResource(props.initialJob ?? (() => Promise.resolve()));
   const meStore = useMeStore();
+
+  const handleBackClick = () => {
+    history.back();
+  };
+
+  const tabbarOptions: TabbarOption[] = [
+    {
+      label: 'Лекарства',
+      icon: FolderIcon,
+      href: '/medications',
+    },
+    {
+      label: 'Приём',
+      icon: CalendarIcon,
+      href: '/planning',
+    },
+    {
+      label: 'Профиль',
+      icon: UserIcon,
+      href: '/me',
+    },
+  ];
 
   // TODO: add suspence (FSO-143)
   return (
@@ -47,9 +70,7 @@ export function App(props: AppProps) {
             <Route
               path="/"
               component={(c) => (
-                <NavbarLayout navBarTitle="Авторизация" navBarBackLocation="/">
-                  {c.children}
-                </NavbarLayout>
+                <NavbarLayout onBackClick={() => handleBackClick()}>{c.children}</NavbarLayout>
               )}
             >
               <Route path="/register" component={() => <RegisterPage loginLocation="/login" />} />
@@ -69,9 +90,9 @@ export function App(props: AppProps) {
             path="/medications"
             component={(p) => (
               <NavTabbarLayout
-                navBarTitle="Препараты"
-                navBarBackLocation="/"
+                onBackClick={() => handleBackClick()}
                 currentTabBarOption={0}
+                tabbarOptions={tabbarOptions}
               >
                 {p.children}
               </NavTabbarLayout>
@@ -109,14 +130,13 @@ export function App(props: AppProps) {
 
           <Route
             path="/planning"
-            component={(c) => (
+            component={() => (
               <NavTabbarLayout
-                navBarTitle="Планирование"
-                navBarBackLocation="/"
+                onBackClick={() => handleBackClick()}
                 currentTabBarOption={1}
+                tabbarOptions={tabbarOptions}
               >
-                <div>Это страница планирования</div>
-                {c.children}
+                <PlanningPage />
               </NavTabbarLayout>
             )}
           />
@@ -124,7 +144,11 @@ export function App(props: AppProps) {
           <Route
             path="/me"
             component={() => (
-              <NavTabbarLayout navBarTitle="Профиль" navBarBackLocation="/" currentTabBarOption={2}>
+              <NavTabbarLayout
+                onBackClick={() => handleBackClick()}
+                currentTabBarOption={2}
+                tabbarOptions={tabbarOptions}
+              >
                 <ProfilePage />
               </NavTabbarLayout>
             )}

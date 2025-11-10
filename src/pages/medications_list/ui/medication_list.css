@@ -6,9 +6,12 @@
   }
 
   &__add-medication-button {
-    position: absolute;
+    position: fixed;
+    inset-block-end: calc(var(--size-3) + var(--size-5) + var(--size-2));
     inset-inline-end: var(--size-3);
-    inset-block-end: var(--size-3);
+  }
+
+  &__add-medication-button-icon {
     inline-size: var(--size-5);
   }
 }
