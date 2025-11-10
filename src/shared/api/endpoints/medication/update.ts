@@ -13,8 +13,9 @@ export const UpdateMedicationDTO = BaseDTO;
 export async function update(
   options: UpdateMedicationOptions,
 ): Promise<z.infer<typeof UpdateMedicationDTO>> {
-  const body = await backendClient.put('/medication/medication', {
-    body: options,
+  const { id, ...rest } = options;
+  const body = await backendClient.put(`/medication/medication/${id}`, {
+    body: rest,
     useCredentials: true,
   });
   return UpdateMedicationDTO.parse(body);

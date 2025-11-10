@@ -5,7 +5,9 @@ export interface DeleteMedicationOptions {
 }
 
 export async function del(options: DeleteMedicationOptions): Promise<void> {
-  await backendClient.delete('/medication/medication', { body: options, useCredentials: true });
+  await backendClient.delete(`/medication/medication/${options.id}`, {
+    useCredentials: true,
+  });
 }
 
 export async function delMock(_options: DeleteMedicationOptions): Promise<void> {
