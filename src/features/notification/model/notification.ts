@@ -76,7 +76,7 @@ export async function unsubscribeUserFromPush(): Promise<void> {
     throw new Error('failed to unsubscribe user: user is null');
   }
 
-  await notificationApi.unsubscribe({ id: userId });
+  await notificationApi.unsubscribe();
 
   const isSuccess = await existingSubscription.unsubscribe();
   if (!isSuccess) {

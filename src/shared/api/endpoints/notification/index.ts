@@ -7,16 +7,16 @@ import {
   subscribe,
 } from './subscribe';
 import { GetVapidDTO as _GetVapidDTO, getVapidMock, getVapid } from './getVapid';
-import { unsubscribe, unsubscribeMock, UnsubscribeOptions } from './unsubscribe';
+import { unsubscribe, unsubscribeMock } from './unsubscribe';
 
 export type SubscribeDTO = z.infer<typeof _SubscribeDTO>;
 export type GetVapidDTO = z.infer<typeof _GetVapidDTO>;
 
-export type { SubscribeOptions, UnsubscribeOptions };
+export type { SubscribeOptions };
 
 export interface NotificationApi {
   subscribe: (o: SubscribeOptions) => Promise<SubscribeDTO>;
-  unsubscribe: (o: UnsubscribeOptions) => Promise<void>;
+  unsubscribe: () => Promise<void>;
   getVapid: () => Promise<GetVapidDTO>;
 }
 

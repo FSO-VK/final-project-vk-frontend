@@ -1,15 +1,11 @@
 import { backendClient } from '../../client';
 
-export interface UnsubscribeOptions {
-  id: string;
-}
-
-export async function unsubscribe(options: UnsubscribeOptions): Promise<void> {
-  await backendClient.delete(`/notification/pushSubscription/${options.id}`, {
+export async function unsubscribe(): Promise<void> {
+  await backendClient.delete(`/notification/pushSubscription`, {
     useCredentials: true,
   });
 }
 
-export async function unsubscribeMock(_options: UnsubscribeOptions): Promise<void> {
+export async function unsubscribeMock(): Promise<void> {
   return Promise.resolve();
 }

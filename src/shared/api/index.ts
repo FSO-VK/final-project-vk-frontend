@@ -23,9 +23,4 @@ export type {
   RegisterDTO,
 } from './endpoints/auth';
 
-export type {
-  SubscribeDTO,
-  GetVapidDTO,
-  SubscribeOptions,
-  UnsubscribeOptions,
-} from './endpoints/notification';
+export type { SubscribeDTO, GetVapidDTO, SubscribeOptions } from './endpoints/notification';
