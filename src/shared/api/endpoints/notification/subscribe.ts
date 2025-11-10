@@ -24,7 +24,6 @@ export const SubscribeDTO = z.object({
     }),
   }),
   ua: z.string(),
-  isActive: z.boolean(),
 });
 
 export async function subscribe(options: SubscribeOptions): Promise<z.infer<typeof SubscribeDTO>> {
@@ -43,6 +42,5 @@ export async function subscribeMock(
     userId: 'cce5d740-e92a-4634-b2c9-f6c7a980e8f7',
     subscription: options.subscription,
     ua: options.ua,
-    isActive: true,
   });
 }
