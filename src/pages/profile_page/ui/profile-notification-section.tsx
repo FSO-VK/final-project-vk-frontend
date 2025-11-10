@@ -28,16 +28,21 @@ export function ProfileNotificationSection() {
   const isSubscribed = createAsync(() => isUserSubscribed());
 
   return (
-    <section class="profile-page__notification-options">
-      <h2 class="profile-page__notification-options-header">Уведомления</h2>
-      <div class="profile-page__notification-subscribe-container">
-        Подписаться на уведомления
-        <SwitchButton
-          onCheck={() => handleNotificationSubscribe()}
-          onUncheck={() => handleNotificationUnsubscribe()}
-          initialChecked={isSubscribed()}
-        />
-      </div>
-    </section>
+    // <section class="profile-page__notification-options">
+    //   <h2 class="profile-page__notification-options-header">Уведомления</h2>
+    //   <div class="profile-page__notification-subscribe-container">
+    //     Подписаться на уведомления
+    //     <SwitchButton
+    //       onCheck={() => handleNotificationSubscribe()}
+    //       onUncheck={() => handleNotificationUnsubscribe()}
+    //       initialChecked={isSubscribed()}
+    //     />
+    //   </div>
+    // </section>
+    <SwitchButton
+      onCheck={() => handleNotificationSubscribe()}
+      onUncheck={() => handleNotificationUnsubscribe()}
+      initialChecked={isSubscribed()}
+    />
   );
 }

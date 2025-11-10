@@ -1,3 +1,9 @@
+.switch__input {
+  display: flex;
+  width: 0;
+  height: 0;
+}
+
 .switch {
   display: flex;
   flex-direction: row;

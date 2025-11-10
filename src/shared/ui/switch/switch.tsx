@@ -27,6 +27,7 @@ export function SwitchButton(props: SwitchProps) {
 
   return (
     <div class="switch-container">
+      <input id={props.id} type="checkbox" class="switch__input" checked={isChecked()} />
       <button type="button" class={`switch switch${classChecked()}`} onClick={() => handleClick()}>
         <div class={`switch__circle switch__circle${classChecked()}`} />
       </button>
