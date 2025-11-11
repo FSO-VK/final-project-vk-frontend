@@ -1,5 +1,5 @@
-import { useMedicationStore } from '@/entities/medication';
-import { createAsync } from '@solidjs/router';
+import { useMedicationActions, useMedicationStore } from '@/entities/medication';
+import { createAsync, useNavigate } from '@solidjs/router';
 import {
   For,
   Suspense,
@@ -11,8 +11,9 @@ import {
   JSXElement,
 } from 'solid-js';
 import './medication.css';
-import { BookmarkIcon, IconStyle } from '@/shared/ui';
+import { BookmarkIcon, EditIcon, IconStyle, TrashIcon } from '@/shared/ui';
 import { useLayoutStore } from '@/widgets/layouts';
+import { SomethingBadScreen } from '@/features/something_bad';
 
 const MS_IN_MONTH = 1000 * 60 * 60 * 24 * 30;
 const MS_IN_YEAR = 1000 * 60 * 60 * 24 * 365;
@@ -33,18 +34,52 @@ function Labeled(
 
 export interface MedicationPageProps {
   medicationId: string;
+  medicationEditLocation: string;
+  medicationsLocation: string;
 }
 
 export function MedicationPage(props: MedicationPageProps) {
   const medStore = useMedicationStore();
   const medication = createAsync(() => medStore.medicationById(props.medicationId));
+  const medicationActions = useMedicationActions();
+  const navigate = useNavigate();
 
   const layoutStore = useLayoutStore();
+
+  const handleEdit = () => {
+    if (medication() !== null && medication() !== undefined) {
+      navigate(`${props.medicationEditLocation}/${medication()?.id}`);
+    }
+  };
+
+  const handleDelete = async () => {
+    if (medication() !== null && medication() !== undefined) {
+      await medicationActions.removeMedication(medication()!.id);
+      navigate(props.medicationsLocation, { replace: true });
+    }
+  };
 
   layoutStore.setNavbarState({
     showBackButton: true,
     showDropdownMenu: false,
-    dropdownMenuItems: [],
+    dropdownMenuItems: [
+      {
+        icon: EditIcon,
+        text: 'Редактировать',
+        onClick: () => handleEdit(),
+        style: 'brand',
+      },
+      {
+        icon: TrashIcon,
+        text: 'Удалить',
+        onClick: () => {
+          handleDelete().catch((e) => {
+            console.error('failed to delete medication:', e);
+          });
+        },
+        style: 'danger',
+      },
+    ],
     title: 'Препарат',
   });
 
@@ -86,7 +121,10 @@ export function MedicationPage(props: MedicationPageProps) {
   return (
     <main class="medication-page">
       <Suspense>
-        <Show when={medication() !== undefined && medication() !== null}>
+        <Show
+          when={medication() !== undefined && medication() !== null}
+          fallback=<SomethingBadScreen reason="Препарат не найден (HTTP 404)" />
+        >
           <section class="medication-page__header-card">
             <Labeled for="medication-page__header" label="Название">
               <h1 id="medication-page__header" class="medication-page__name">

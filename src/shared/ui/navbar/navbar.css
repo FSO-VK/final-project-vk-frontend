@@ -76,7 +76,6 @@
     background-color: var(--clr-gray-1);
     border: var(--size-00) solid var(--clr-border);
     border-radius: var(--size-1);
-    color: var(--clr-brand-6);
   }
 
   &__item-button {
@@ -93,6 +92,16 @@
 
   &__item-icon {
     min-inline-size: var(--size-3);
+  }
+
+  &__item-text {
+    &_brand {
+      color: var(--clr-brand-6);
+    }
+
+    &_danger {
+      color: var(--clr-danger-5);
+    }
   }
 }
 

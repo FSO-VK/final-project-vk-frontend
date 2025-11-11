@@ -102,7 +102,10 @@ export function App(props: AppProps) {
             <Route
               path="/add"
               component={() => (
-                <MedicationAddPage backLocation="/medications" afterSaveLocation="/medications" />
+                <MedicationAddPage
+                  onBackClick={() => handleBackClick()}
+                  afterSaveLocation="/medications"
+                />
               )}
             />
             <Route
@@ -111,7 +114,7 @@ export function App(props: AppProps) {
                 const params = useParams();
                 return (
                   <MedicationEditPage
-                    backLocation="/medications"
+                    onBackClick={() => handleBackClick()}
                     afterSaveLocation="/medications"
                     medicationId={params.id}
                   />
@@ -127,6 +130,7 @@ export function App(props: AppProps) {
                   <MedicationPage
                     medicationId={params.id}
                     medicationEditLocation="/medications/edit"
+                    medicationsLocation="/medications"
                   />
                 );
               }}

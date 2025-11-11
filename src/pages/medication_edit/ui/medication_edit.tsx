@@ -1,16 +1,17 @@
 import { MedicationForm } from '@/widgets/medication-form';
-import { createAsync, Navigate, useNavigate } from '@solidjs/router';
+import { createAsync, useNavigate } from '@solidjs/router';
 import {
   type MedicationDraft,
   useMedicationActions,
   useMedicationStore,
 } from '@/entities/medication';
-import { Match, Suspense, Switch } from 'solid-js';
+import { Show, Suspense } from 'solid-js';
 import { useLayoutStore } from '@/widgets/layouts';
+import { SomethingBadScreen } from '@/features/something_bad';
 
 export interface MedicationEditPageProps {
   medicationId: string;
-  backLocation: string;
+  onBackClick: () => void;
   afterSaveLocation: string;
 }
 
@@ -37,24 +38,22 @@ export function MedicationEditPage(props: MedicationEditPageProps) {
   return (
     <main class="medication-edit-page">
       <Suspense fallback="Загрузка...">
-        <Switch>
-          <Match when={medication() !== null}>
-            <MedicationForm
-              onBackClick={() => {
-                navigate(props.backLocation);
-              }}
-              onSaveClick={(m: MedicationDraft) => {
-                handleSave(m).catch(() => {
-                  console.error('failed to edit medication');
-                });
-              }}
-              initialMedication={medication() ?? undefined}
-            />
-          </Match>
-          <Match when={medication() === null}>
-            <Navigate href={props.backLocation} />
-          </Match>
-        </Switch>
+        <Show
+          when={medication() !== null}
+          fallback={<SomethingBadScreen reason="Препарат не найден (HTTP 404)" />}
+        >
+          <MedicationForm
+            onBackClick={() => {
+              props.onBackClick();
+            }}
+            onSaveClick={(m: MedicationDraft) => {
+              handleSave(m).catch(() => {
+                console.error('failed to edit medication');
+              });
+            }}
+            initialMedication={medication() ?? undefined}
+          />
+        </Show>
       </Suspense>
     </main>
   );
