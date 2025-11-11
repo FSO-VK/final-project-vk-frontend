@@ -1,6 +1,7 @@
 .medication-card {
   background-color: var(--clr-gray-1);
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  cursor: pointer;
 
   &_brand {
     padding: var(--size-1);

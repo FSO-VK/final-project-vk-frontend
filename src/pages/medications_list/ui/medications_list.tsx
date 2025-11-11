@@ -32,6 +32,7 @@ export function MedicationsListPage() {
               onEditClick={() => {
                 navigate(`/medications/edit/${m.id}`);
               }}
+              medicationPageLocation={`/medications/view/${m.id}`}
             />
           ))}
           fallback={<EmptyScreen />}
