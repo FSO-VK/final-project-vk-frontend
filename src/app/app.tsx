@@ -16,6 +16,7 @@ import { MedicationEditPage } from '@/pages/medication_edit';
 import { MedicationPage } from '@/pages/medication';
 import { PlanningPage } from '@/pages/planning';
 import { NotFoundPage } from '@/pages/not_found';
+import { Scanner } from '@/features/medication_scan';
 
 export interface AppProps {
   // Jobs that must be over before routing started
@@ -161,6 +162,13 @@ export function App(props: AppProps) {
                 <ProfilePage />
               </NavTabbarLayout>
             )}
+          />
+
+          <Route
+            path="/scan"
+            component={() => {
+              return <Scanner />;
+            }}
           />
 
           <Route path="*" component={FullscreenFixedLayout}>
