@@ -73,6 +73,7 @@ export function Navbar(props: NavbarProps) {
 export interface MenuItem {
   icon: IconComponent;
   text: string;
+  style: 'brand' | 'danger';
   onClick?: () => void;
 }
 
@@ -82,6 +83,11 @@ interface MenuContentProps extends JSX.HTMLAttributes<HTMLMenuElement> {
 }
 
 function Menu(props: MenuContentProps) {
+  const itemStyleToIconStyle = {
+    brand: IconStyle.Active,
+    danger: IconStyle.Danger,
+  };
+
   return (
     <menu class={`menu menu_brand ${props.class ?? ''}`}>
       <For each={props.items}>
@@ -90,8 +96,11 @@ function Menu(props: MenuContentProps) {
             <>
               <li class="menu__item">
                 <button onClick={item.onClick} class="menu__item-button">
-                  <item.icon iconStyle={IconStyle.Active} elementClass="menu__item-icon" />
-                  <span class="menu__item-text">{item.text}</span>
+                  <item.icon
+                    iconStyle={itemStyleToIconStyle[item.style]}
+                    elementClass="menu__item-icon"
+                  />
+                  <span class={`menu__item-text menu__item-text_${item.style}`}>{item.text}</span>
                 </button>
               </li>
               <Show when={idx() < props.items.length - 1}>

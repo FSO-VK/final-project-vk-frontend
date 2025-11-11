@@ -4,7 +4,7 @@ import { type MedicationDraft, useMedicationActions } from '@/entities/medicatio
 import { useLayoutStore } from '@/widgets/layouts';
 
 export interface MedicationAddPageProps {
-  backLocation: string;
+  onBackClick: () => void;
   afterSaveLocation: string;
 }
 
@@ -29,7 +29,7 @@ export function MedicationAddPage(props: MedicationAddPageProps) {
     <main class="medication-add-page">
       <MedicationForm
         onBackClick={() => {
-          navigate(props.backLocation);
+          props.onBackClick();
         }}
         onSaveClick={(m: MedicationDraft) => {
           handleSave(m).catch(() => {
