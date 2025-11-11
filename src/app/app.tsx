@@ -1,7 +1,6 @@
 import './app.css';
 
 import { Router, Route, useParams } from '@solidjs/router';
-import { SomethingBadPage } from '@/pages/something_bad';
 import { HelloPage } from '@/pages/hello';
 import { FullscreenFixedLayout, NavbarLayout, NavTabbarLayout } from '@/widgets/layouts';
 import { createResource, Suspense, Show, ParentProps } from 'solid-js';
@@ -15,7 +14,8 @@ import { ProfilePage } from '@/pages/profile_page';
 import { MedicationAddPage } from '@/pages/medication_add';
 import { MedicationEditPage } from '@/pages/medication_edit';
 import { MedicationPage } from '@/pages/medication';
-import { PlanningPage } from '@/pages/planning/ui/planning_stub';
+import { PlanningPage } from '@/pages/planning';
+import { NotFoundPage } from '@/pages/not_found';
 
 export interface AppProps {
   // Jobs that must be over before routing started
@@ -123,7 +123,12 @@ export function App(props: AppProps) {
               path="/view/:id"
               component={() => {
                 const params = useParams();
-                return <MedicationPage medicationId={params.id} />;
+                return (
+                  <MedicationPage
+                    medicationId={params.id}
+                    medicationEditLocation="/medications/edit"
+                  />
+                );
               }}
             />
           </Route>
@@ -155,10 +160,7 @@ export function App(props: AppProps) {
           />
 
           <Route path="*" component={FullscreenFixedLayout}>
-            <Route
-              path="*"
-              component={() => <SomethingBadPage reason="Ресурс не найден (HTTP 404)" />}
-            />
+            <Route path="*" component={() => <NotFoundPage />} />
           </Route>
         </Show>
       </Suspense>
