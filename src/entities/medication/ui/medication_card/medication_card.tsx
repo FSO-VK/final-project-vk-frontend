@@ -1,9 +1,11 @@
 import { Button, ButtonStyle, EditIcon, IconStyle } from '@/shared/ui';
 import { Medication } from '../../model/medication';
 import './medication_card.css';
+import { useNavigate } from '@solidjs/router';
 
 export interface MedicationCardProps {
   medication: Medication;
+  medicationPageLocation: string;
   onEditClick?: () => void;
 }
 
@@ -13,15 +15,28 @@ export function MedicationCard(props: MedicationCardProps) {
     year: 'numeric',
   });
 
+  let editButtonHTML!: HTMLButtonElement;
+
+  const navigate = useNavigate();
+
   return (
-    <section class="medication-card medication-card_brand">
+    <section
+      class="medication-card medication-card_brand"
+      onClick={(e) => {
+        if (editButtonHTML.contains(e.target)) {
+          props.onEditClick?.();
+          return;
+        }
+        navigate(props.medicationPageLocation);
+      }}
+    >
       <div class="medication-card__header-container">
         <h3 class="medication-card__header">{props.medication.name}</h3>
         <Button
           type="button"
           colorStyle={ButtonStyle.none}
           class="medication-card__edit-button"
-          onClick={() => props.onEditClick?.()}
+          ref={editButtonHTML}
         >
           <EditIcon elementClass="medication-card__edit-icon" iconStyle={IconStyle.Active} />
         </Button>
