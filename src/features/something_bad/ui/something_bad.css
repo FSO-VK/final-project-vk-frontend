@@ -1,22 +1,17 @@
-.something-bad-page {
+.something-bad-screen {
+  text-align: left;
+  margin-bottom: var(--size-3);
+
   &__img-container {
     padding: var(--size-3) 0px;
   }
 
   &__img {
-    inline-size: min(50vb, 50vi);
+    inline-size: min(50%, 50%);
     margin: auto;
   }
 
-  &__info {
-    text-align: left;
-    block-size: fit-content;
-    max-block-size: 80vb;
-    margin-bottom: var(--size-3);
-    overflow-block: auto;
-  }
-
-  &__info-header {
+  &__header {
     text-align: center;
     margin: var(--size-2) auto;
   }
