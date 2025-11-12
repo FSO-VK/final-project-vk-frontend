@@ -1,23 +1,38 @@
-import { type JSX, createSignal, onMount, onCleanup, createEffect, mergeProps } from 'solid-js';
+import { BrowserDatamatrixCodeReader, IScannerControls } from '@zxing/browser';
+import { type DecodeContinuouslyCallback } from '@zxing/browser/esm/common/DecodeContinuouslyCallback';
+import { type JSX, createSignal, onMount, onCleanup, mergeProps } from 'solid-js';
 
 function hasGetUserMedia() {
   return !!navigator.mediaDevices?.getUserMedia;
 }
 
+const stopMediaStream = (stream: MediaStream | null) => {
+  if (stream) {
+    if (stream.getVideoTracks) {
+      stream.getVideoTracks().map((track) => {
+        stream.removeTrack(track);
+        track.stop();
+      });
+    } else {
+      (stream as unknown as MediaStreamTrack).stop();
+    }
+  }
+};
+
 export type ScannerProps = JSX.VideoHTMLAttributes<HTMLVideoElement> & {
-  mirrored?: boolean;
   videoConstraints?: MediaStreamConstraints['video'];
   onUserMedia?: (stream: MediaStream) => void;
+  onControls?: (controls: IScannerControls) => void;
+  onScanResult?: (result: string) => void;
   onUserMediaError?: (error: string | DOMException) => void;
 };
 
 const defaultProps = {
-  mirrored: false,
   onUserMedia: () => undefined,
   onUserMediaError: () => undefined,
+  onControls: () => undefined,
+  onScanResult: () => undefined,
 } as const;
-
-const [hasUserMedia, setHasUserMedia] = createSignal<boolean>(false);
 
 export function Scanner(props: ScannerProps) {
   const mergedProps = mergeProps(defaultProps, props);
@@ -26,95 +41,79 @@ export function Scanner(props: ScannerProps) {
   let activeStream: MediaStream | null = null;
 
   const [requestUserMediaId, setRequestUserMediaId] = createSignal<number>(0);
-  const [unmounted, setUnmounted] = createSignal<boolean>(false);
+  const [acquiredUserMedia, setAcquiredUserMedia] = createSignal<boolean>(false);
 
-  onMount(() => {
-    setUnmounted(false);
-
-    if (!hasGetUserMedia()) {
-      mergedProps.onUserMediaError('getUserMedia not supported');
-
-      return;
-    }
-
-    if (!hasUserMedia()) {
-      requestUserMedia();
-    }
-  });
-
-  createEffect(() => {
-    if (!hasGetUserMedia()) {
-      mergedProps.onUserMediaError('getUserMedia not supported');
-
-      return;
-    }
-  });
-
-  onCleanup(() => {
-    setUnmounted(true);
-    stopAndCleanup();
-  });
-
-  const stopMediaStream = (stream: MediaStream | null) => {
-    if (stream) {
-      if (stream.getVideoTracks) {
-        stream.getVideoTracks().map((track) => {
-          stream.removeTrack(track);
-          track.stop();
-        });
-      } else {
-        (stream as unknown as MediaStreamTrack).stop();
-      }
-    }
+  const requestScanner = async (stream: MediaStream, callback: DecodeContinuouslyCallback) => {
+    const hints = new Map();
+    // 8 === ASSUME_GS1
+    hints.set(8, true);
+    const codeReader = new BrowserDatamatrixCodeReader(hints);
+    const controls = await codeReader.decodeFromStream(stream, undefined, callback);
+    return controls;
   };
 
-  const stopAndCleanup = () => {
-    if (hasUserMedia()) {
-      stopMediaStream(activeStream);
-    }
-  };
-
-  const requestUserMedia = () => {
+  const requestUserMedia = async () => {
     const constraints: MediaStreamConstraints = {
       video:
         typeof mergedProps.videoConstraints !== 'undefined' ? mergedProps.videoConstraints : true,
     };
 
     setRequestUserMediaId((prev) => prev + 1);
-    const myRequestUserMediaId = requestUserMediaId;
+    const currentRequestUserMediaId = requestUserMediaId;
 
-    navigator.mediaDevices
-      .getUserMedia(constraints)
-      .then((stream) => {
-        if (unmounted() || myRequestUserMediaId !== requestUserMediaId) {
-          stopMediaStream(stream);
-        } else {
-          handleUserMedia(null, stream);
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia(constraints);
+      if (currentRequestUserMediaId !== requestUserMediaId) {
+        stopMediaStream(stream);
+        return;
+      }
+      activeStream = stream;
+
+      if (video) {
+        video.srcObject = stream;
+      }
+
+      setAcquiredUserMedia(true);
+      mergedProps.onUserMedia(stream);
+
+      // Used to pass callback through promise function
+      const onScanResult = mergedProps.onScanResult;
+
+      const controls = await requestScanner(activeStream, (result, error, _controls) => {
+        if (error) {
+          return;
         }
-      })
-      .catch(() => {
-        // TODO: here was e
-        handleUserMedia('');
+        if (result !== undefined) {
+          const FNC1_REGEXP = /\u001d/g;
+          const filteredResult = result.getText().replace(FNC1_REGEXP, '');
+          onScanResult(filteredResult);
+        }
       });
+      mergedProps.onControls(controls);
+    } catch (err) {
+      setAcquiredUserMedia(false);
+      mergedProps.onUserMediaError(err as string | DOMException);
+    }
   };
 
-  const handleUserMedia = (err: string | DOMException | null, stream?: MediaStream) => {
-    if (err || !stream) {
-      setHasUserMedia(false);
-      if (err) mergedProps.onUserMediaError(err);
-
+  onMount(() => {
+    if (!hasGetUserMedia()) {
+      mergedProps.onUserMediaError('getUserMedia not supported');
       return;
     }
 
-    activeStream = stream;
-
-    if (video) {
-      video.srcObject = stream;
+    if (!acquiredUserMedia()) {
+      requestUserMedia().catch((e) => {
+        console.error('failed to request user media', e);
+      });
     }
-    setHasUserMedia(true);
+  });
 
-    mergedProps.onUserMedia(stream);
-  };
+  onCleanup(() => {
+    if (acquiredUserMedia()) {
+      stopMediaStream(activeStream);
+    }
+  });
 
   return (
     <video
