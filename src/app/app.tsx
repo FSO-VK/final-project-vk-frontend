@@ -1,6 +1,6 @@
 import './app.css';
 
-import { Router, Route, useParams } from '@solidjs/router';
+import { Router, Route, useParams, useSearchParams, useNavigate } from '@solidjs/router';
 import { HelloPage } from '@/pages/hello';
 import { FullscreenFixedLayout, NavbarLayout, NavTabbarLayout } from '@/widgets/layouts';
 import { createResource, Suspense, Show, ParentProps } from 'solid-js';
@@ -98,15 +98,33 @@ export function App(props: AppProps) {
               </NavTabbarLayout>
             )}
           >
-            <Route path="/" component={MedicationsListPage} />
+            <Route
+              path="/"
+              component={() => {
+                const navigate = useNavigate();
+                return (
+                  <MedicationsListPage
+                    onScanned={(result) => {
+                      navigate(`/medications/add?data=${result}`);
+                    }}
+                  />
+                );
+              }}
+            />
             <Route
               path="/add"
-              component={() => (
-                <MedicationAddPage
-                  onBackClick={() => handleBackClick()}
-                  afterSaveLocation="/medications"
-                />
-              )}
+              component={() => {
+                const rawData = useSearchParams()[0].data;
+                const data = rawData instanceof Array ? rawData[0] : rawData;
+
+                return (
+                  <MedicationAddPage
+                    onBackClick={() => handleBackClick()}
+                    afterSaveLocation="/medications"
+                    initialDataMatrix={data}
+                  />
+                );
+              }}
             />
             <Route
               path="/edit/:id"

@@ -8,4 +8,5 @@ export { TrashIcon } from './trash';
 export { BookmarkIcon } from './bookmark';
 export { EmptyIcon } from './empty';
 export { DotsIcon } from './dots';
+export { ScanIcon } from './scan';
 export { type IconComponent, IconStyle, type IconProps } from './icon';

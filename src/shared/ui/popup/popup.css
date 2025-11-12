@@ -1,0 +1,17 @@
+.popup {
+  position: fixed;
+  inset: 0;
+
+  &_shadowed {
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+
+  &__content {
+    &_centered {
+      position: relative;
+      inset-inline-start: 50%;
+      inset-block-start: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}

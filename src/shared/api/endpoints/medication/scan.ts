@@ -9,7 +9,7 @@ export const ScanMedicationDTO = z.object({
   name: z.string(),
   internationalName: z.string(),
   releaseForm: z.string(),
-  group: z.string(),
+  group: z.array(z.string()),
   producer: z.object({
     name: z.string(),
     country: z.string(),
@@ -21,12 +21,9 @@ export const ScanMedicationDTO = z.object({
 export async function scan(
   options: ScanMedicationOptions,
 ): Promise<z.infer<typeof ScanMedicationDTO>> {
-  const body = await backendClient.get(
-    `/medication/medication/scan?data=${options.dataMatrixCode}`,
-    {
-      useCredentials: true,
-    },
-  );
+  const body = await backendClient.get(`/medication/scan?data=${options.dataMatrixCode}`, {
+    useCredentials: true,
+  });
   return ScanMedicationDTO.parse(body);
 }
 
@@ -37,7 +34,7 @@ export async function scanMock(
     name: 'Фарингосепт',
     internationalName: 'Амбазон',
     releaseForm: 'Таблетки для рассасывания',
-    group: 'Антисептическое средство',
+    group: ['Антисептическое средство'],
     producer: {
       name: 'С.К. ТЕРАПИЯ С.А.',
       country: 'Румыния',

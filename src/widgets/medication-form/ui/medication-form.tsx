@@ -4,13 +4,14 @@ import { MedicationFormRequiredForm } from './first-step';
 import { MedicationFormOptionalForm } from './second-step';
 import { Dynamic } from 'solid-js/web';
 import { createSignal } from 'solid-js';
-import { ACTIVE_SUBSTANCE_UNIT, AMOUNT_UNITS, Medication } from '@/entities/medication';
+import { ACTIVE_SUBSTANCE_UNIT, AMOUNT_UNITS } from '@/entities/medication';
 import { ActiveSubstance, MedicationDraft } from '@/entities/medication';
 
 export interface MedicationFormProps {
   onBackClick: () => void;
-  initialMedication?: Medication;
+  initialMedication?: MedicationDraft;
   onSaveClick: (m: MedicationDraft) => void;
+  header: string;
 }
 
 export function MedicationForm(props: MedicationFormProps) {
@@ -120,11 +121,7 @@ export function MedicationForm(props: MedicationFormProps) {
 
   return (
     <section class="medication-form">
-      <h1 class="medication-form__header">
-        {props.initialMedication !== undefined
-          ? 'Редактирование препарата'
-          : 'Добавление препарата'}
-      </h1>
+      <h1 class="medication-form__header">{props.header ?? ''}</h1>
       <Dynamic component={forms[selected()]} />
     </section>
   );

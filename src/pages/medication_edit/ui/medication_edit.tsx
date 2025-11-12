@@ -43,6 +43,7 @@ export function MedicationEditPage(props: MedicationEditPageProps) {
           fallback={<SomethingBadScreen reason="Препарат не найден (HTTP 404)" />}
         >
           <MedicationForm
+            header="Редактирование препарата"
             onBackClick={() => {
               props.onBackClick();
             }}

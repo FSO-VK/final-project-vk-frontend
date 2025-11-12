@@ -70,6 +70,7 @@ export interface MedicationStore {
   // Getters
   allMedications: () => Promise<Medication[]>;
   medicationById: (id: string) => Promise<Medication | null>;
+  medicationByScan: (dataCode: string) => Promise<MedicationDraft | null>;
   medicationsCount: () => number;
 
   // Setters
