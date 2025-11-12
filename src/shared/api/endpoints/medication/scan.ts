@@ -15,12 +15,12 @@ export const ScanMedicationDTO = z.object({
     country: z.string(),
   }),
   expirationDate: z.pipe(
-    z.iso.date(),
+    z.string(),
     z.transform((val) => new Date(val)),
   ),
   releaseDate: z.optional(
     z.pipe(
-      z.iso.date(),
+      z.string(),
       z.transform((val) => new Date(val)),
     ),
   ),
