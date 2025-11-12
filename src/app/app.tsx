@@ -105,7 +105,7 @@ export function App(props: AppProps) {
                 return (
                   <MedicationsListPage
                     onScanned={(result) => {
-                      navigate(`/medications/add?data=${result}`);
+                      navigate(`/medications/add?data=${encodeURIComponent(result)}`);
                     }}
                   />
                 );
