@@ -8,5 +8,6 @@ export * from './form_inputs';
 export { Tabbar, type TabbarOption } from './tabbar/tabbar';
 export { AuthGuard } from './auth_guard/auth_guard';
 export { SwitchButton } from './switch/switch';
+export { Popup } from './popup/popup';
 
 export * from './icons';

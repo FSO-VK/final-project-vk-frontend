@@ -1,11 +1,17 @@
 import { MedicationForm } from '@/widgets/medication-form';
-import { useNavigate } from '@solidjs/router';
-import { type MedicationDraft, useMedicationActions } from '@/entities/medication';
+import { createAsync, useNavigate } from '@solidjs/router';
+import {
+  type MedicationDraft,
+  useMedicationActions,
+  useMedicationStore,
+} from '@/entities/medication';
 import { useLayoutStore } from '@/widgets/layouts';
+import { Suspense } from 'solid-js';
 
 export interface MedicationAddPageProps {
   onBackClick: () => void;
   afterSaveLocation: string;
+  initialDataMatrix?: string;
 }
 
 export function MedicationAddPage(props: MedicationAddPageProps) {
@@ -15,6 +21,7 @@ export function MedicationAddPage(props: MedicationAddPageProps) {
     await medicationActions.addMedication(m);
     navigate(props.afterSaveLocation, { replace: true });
   };
+  const medicationStore = useMedicationStore();
 
   const layoutStore = useLayoutStore();
 
@@ -25,18 +32,29 @@ export function MedicationAddPage(props: MedicationAddPageProps) {
     title: 'Добавление препарата',
   });
 
+  const medication = createAsync(async () => {
+    if (props.initialDataMatrix !== undefined) {
+      const med = await medicationStore.medicationByScan(props.initialDataMatrix);
+      return med;
+    }
+  });
+
   return (
     <main class="medication-add-page">
-      <MedicationForm
-        onBackClick={() => {
-          props.onBackClick();
-        }}
-        onSaveClick={(m: MedicationDraft) => {
-          handleSave(m).catch(() => {
-            console.error('failed to add medication');
-          });
-        }}
-      />
+      <Suspense fallback={<div>Загрузка...</div>}>
+        <MedicationForm
+          header="Добавление препарата"
+          onBackClick={() => {
+            props.onBackClick();
+          }}
+          onSaveClick={(m: MedicationDraft) => {
+            handleSave(m).catch(() => {
+              console.error('failed to add medication');
+            });
+          }}
+          initialMedication={medication() ?? undefined}
+        />
+      </Suspense>
     </main>
   );
 }

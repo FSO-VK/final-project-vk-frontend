@@ -21,7 +21,7 @@ const stopMediaStream = (stream: MediaStream | null) => {
 
 export type ScannerProps = JSX.VideoHTMLAttributes<HTMLVideoElement> & {
   videoConstraints?: MediaStreamConstraints['video'];
-  onUserMedia?: (stream: MediaStream) => void;
+  onUserMedia?: (stream: MediaStream, video: HTMLVideoElement) => void;
   onControls?: (controls: IScannerControls) => void;
   onScanResult?: (result: string) => void;
   onUserMediaError?: (error: string | DOMException) => void;
@@ -37,8 +37,9 @@ const defaultProps = {
 export function Scanner(props: ScannerProps) {
   const mergedProps = mergeProps(defaultProps, props);
 
-  let video: HTMLVideoElement | null = null;
+  let video: HTMLVideoElement;
   let activeStream: MediaStream | null = null;
+  let activeControls: IScannerControls | null = null;
 
   const [requestUserMediaId, setRequestUserMediaId] = createSignal<number>(0);
   const [acquiredUserMedia, setAcquiredUserMedia] = createSignal<boolean>(false);
@@ -74,7 +75,7 @@ export function Scanner(props: ScannerProps) {
       }
 
       setAcquiredUserMedia(true);
-      mergedProps.onUserMedia(stream);
+      mergedProps.onUserMedia(stream, video);
 
       // Used to pass callback through promise function
       const onScanResult = mergedProps.onScanResult;
@@ -89,6 +90,7 @@ export function Scanner(props: ScannerProps) {
           onScanResult(filteredResult);
         }
       });
+      activeControls = controls;
       mergedProps.onControls(controls);
     } catch (err) {
       setAcquiredUserMedia(false);
@@ -112,6 +114,7 @@ export function Scanner(props: ScannerProps) {
   onCleanup(() => {
     if (acquiredUserMedia()) {
       stopMediaStream(activeStream);
+      activeControls?.stop();
     }
   });
 

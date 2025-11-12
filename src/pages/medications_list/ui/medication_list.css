@@ -5,13 +5,33 @@
     gap: var(--size-2);
   }
 
-  &__add-medication-button {
+  &__add-medication-options {
     position: fixed;
     inset-block-end: calc(var(--size-3) + var(--size-5) + var(--size-2));
     inset-inline-end: var(--size-3);
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-3);
+  }
+
+  &__scan-medication-button {
+    border: none;
+    size: fit-content;
+    background-color: transparent;
+    padding: 0;
   }
 
   &__add-medication-button-icon {
     inline-size: var(--size-5);
+  }
+
+  &__scanner {
+    max-block-size: none;
+    max-inline-size: none;
+
+    inline-size: min(100%, 100dvi);
+    block-size: min(100%, 100dvb);
+    aspect-ratio: auto;
   }
 }

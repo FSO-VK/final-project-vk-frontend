@@ -50,12 +50,17 @@ function createMedicationStore(medicationApi: MedicationApi): MedicationStore {
   const medicationById = async (id: string) => {
     const med = await medicationApi.get({ id });
     addMedication(med);
-    return medicationStore.medications.find((m) => m.id === id);
+    return medicationStore.medications.find((m) => m.id === id) ?? null;
+  };
+
+  const medicationByScan = async (dataCode: string) => {
+    const med = await medicationApi.scan({ dataMatrixCode: dataCode });
+    return { ...med, amount: { value: 0, unit: 'шт.' } };
   };
 
   const medicationsCount = () => medicationStore.medications.length;
 
-  return {
+  const result: MedicationStore = {
     allMedications,
     medicationById,
     medicationsCount,
@@ -64,7 +69,10 @@ function createMedicationStore(medicationApi: MedicationApi): MedicationStore {
     removeMedication,
     clearMedications,
     setMedications,
-  } as MedicationStore;
+    medicationByScan,
+  };
+
+  return result;
 }
 
 export const medicationStoreFabric: MedicationStoreFabric = { createMedicationStore };

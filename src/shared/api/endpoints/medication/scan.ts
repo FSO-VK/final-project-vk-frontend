@@ -9,7 +9,7 @@ export const ScanMedicationDTO = z.object({
   name: z.string(),
   internationalName: z.string(),
   releaseForm: z.string(),
-  group: z.string(),
+  group: z.array(z.string()),
   producer: z.object({
     name: z.string(),
     country: z.string(),
@@ -34,7 +34,7 @@ export async function scanMock(
     name: 'Фарингосепт',
     internationalName: 'Амбазон',
     releaseForm: 'Таблетки для рассасывания',
-    group: 'Антисептическое средство',
+    group: ['Антисептическое средство'],
     producer: {
       name: 'С.К. ТЕРАПИЯ С.А.',
       country: 'Румыния',
