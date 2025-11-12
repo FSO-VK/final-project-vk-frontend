@@ -109,6 +109,9 @@ export function MedicationPage(props: MedicationPageProps) {
       return 'Неизвестно';
     }
     const delta = medication()!.expirationDate.getTime() - Date.now();
+    if (delta < 0) {
+      return 'Срок истек';
+    }
     const years = Math.floor(delta / MS_IN_YEAR);
     const months = Math.floor((delta - years * MS_IN_YEAR) / MS_IN_MONTH);
     return remainsFormatter.format({
