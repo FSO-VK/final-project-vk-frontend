@@ -21,12 +21,12 @@ export const ScanMedicationDTO = z.object({
 export async function scan(
   options: ScanMedicationOptions,
 ): Promise<z.infer<typeof ScanMedicationDTO>> {
-  const body = await backendClient.get(
-    `/medication/scan?data=${encodeURIComponent(options.dataMatrixCode)}`,
-    {
-      useCredentials: true,
+  const body = await backendClient.get(`/medication/scan`, {
+    query: {
+      data: options.dataMatrixCode,
     },
-  );
+    useCredentials: true,
+  });
   return ScanMedicationDTO.parse(body);
 }
 
