@@ -1,8 +1,18 @@
+.switch-container {
+  position: relative;
+}
+
+.switch-container__input {
+  position: absolute;
+  inline-size: 0;
+  block-size: 0;
+}
+
 .switch {
   display: flex;
   flex-direction: row;
   position: relative;
-  border: var(--size-00) solid;
+  border: var(--size-00) solid var(--clr-border);
   padding: 0;
   block-size: var(--lh-3);
   inline-size: 100%;
@@ -11,11 +21,9 @@
   &_checked {
     background-color: var(--clr-brand-5);
     border-color: var(--clr-brand-5);
-    justify-content: end;
   }
 
   &_unchecked {
-    justify-content: start;
     background-color: var(--clr-gray-1);
     border-color: var(--clr-gray-5);
   }
@@ -24,13 +32,29 @@
     block-size: 100%;
     aspect-ratio: 1 / 1;
     border-radius: 100%;
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
+    background-color: var(--clr-gray-1);
+    position: absolute;
 
     &_checked {
-      background-color: var(--clr-gray-1);
+      inset-inline-end: 0;
+      animation: move-right 0.3s;
     }
 
     &_unchecked {
-      background-color: var(--clr-secondary);
+      inset-inline-start: 0;
     }
+  }
+}
+
+@keyframes move-right {
+  0% {
+    inset-inline-start: 0;
+    transform: translateX(0%);
+  }
+
+  100% {
+    inset-inline-start: 100%;
+    transform: translateX(-100%);
   }
 }

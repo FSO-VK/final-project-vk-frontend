@@ -1,35 +1,22 @@
-import { createMemo, createSignal } from 'solid-js';
+import { createMemo, splitProps, JSX } from 'solid-js';
 import './switch.css';
 
-export interface SwitchProps {
-  id?: string;
-  initialChecked?: boolean;
-  onCheck?: () => void;
-  onUncheck?: () => void;
-}
-
-export function SwitchButton(props: SwitchProps) {
-  const [isChecked, setIsChecked] = createSignal(props.initialChecked ?? false);
-
+export function SwitchButton(props: JSX.InputHTMLAttributes<HTMLInputElement>) {
+  const [chosenProps, otherProps] = splitProps(props, ['class', 'type']);
   const classChecked = createMemo(() => {
-    return isChecked() ? '_checked' : '_unchecked';
+    return (props?.checked ?? false) ? '_checked' : '_unchecked';
   });
 
-  const handleClick = () => {
-    setIsChecked(!isChecked());
-    if (isChecked() && props.onCheck !== undefined) {
-      props.onCheck();
-    }
-    if (!isChecked() && props.onUncheck !== undefined) {
-      props.onUncheck();
-    }
-  };
-
   return (
-    <div class="switch-container">
-      <button type="button" class={`switch switch${classChecked()}`} onClick={() => handleClick()}>
+    <label class="switch-container">
+      <input
+        type="checkbox"
+        class={`switch-container__input ${chosenProps.class}`}
+        {...otherProps}
+      />
+      <div aria-hidden class={`switch switch${classChecked()}`}>
         <div class={`switch__circle switch__circle${classChecked()}`} />
-      </button>
-    </div>
+      </div>
+    </label>
   );
 }
