@@ -8,6 +8,7 @@ import { SwitchButton } from '@/shared/ui';
 import { Suspense, createEffect } from 'solid-js';
 import { createAsync } from '@solidjs/router';
 import { createForm } from '@tanstack/solid-form';
+import { assertIfError } from '@/shared/lib';
 
 export function ProfileNotificationSection() {
   const isSubscribed = createAsync(() => isUserSubscribed());
@@ -30,10 +31,10 @@ export function ProfileNotificationSection() {
     onSubmit: async ({ value }) => {
       try {
         await handleSubmit(value.subscription);
-      } catch (e) {
+      } catch (e: unknown) {
+        assertIfError(e);
         console.error('failed to change subscription state, reverting it:', e);
         form.setFieldValue('subscription', !value.subscription);
-        throw e;
       }
     },
   }));
