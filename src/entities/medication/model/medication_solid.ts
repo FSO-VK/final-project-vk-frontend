@@ -55,7 +55,7 @@ function createMedicationStore(medicationApi: MedicationApi): MedicationStore {
 
   const medicationByScan = async (dataCode: string) => {
     const med = await medicationApi.scan({ dataMatrixCode: dataCode });
-    return { ...med, amount: { value: 0, unit: 'шт.' } };
+    return { ...med };
   };
 
   const medicationsCount = () => medicationStore.medications.length;

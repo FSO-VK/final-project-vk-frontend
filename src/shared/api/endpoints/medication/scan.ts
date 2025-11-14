@@ -24,6 +24,10 @@ export const ScanMedicationDTO = z.object({
       z.transform((val) => new Date(val)),
     ),
   ),
+  amount: z.object({
+    value: z.number(),
+    unit: z.string(),
+  }),
 });
 
 export async function scan(
@@ -49,6 +53,10 @@ export async function scanMock(
     producer: {
       name: 'С.К. ТЕРАПИЯ С.А.',
       country: 'Румыния',
+    },
+    amount: {
+      value: 20,
+      unit: 'шт.',
     },
     expirationDate: new Date('2027-12-31'),
     releaseDate: new Date('2025-02-24'),
