@@ -7,7 +7,14 @@ import { createResource, Suspense, Show, ParentProps } from 'solid-js';
 import { RegisterPage } from '@/pages/register';
 import { LoginPage } from '@/pages/login';
 import { useMeStore } from '@/entities/me';
-import { AuthGuard, CalendarIcon, FolderIcon, TabbarOption, UserIcon } from '@/shared/ui';
+import {
+  AuthGuard,
+  CalendarIcon,
+  CenteredLoaderSpinner,
+  FolderIcon,
+  TabbarOption,
+  UserIcon,
+} from '@/shared/ui';
 import { isServer } from 'solid-js/web';
 import { MedicationsListPage } from '@/pages/medications_list';
 import { ProfilePage } from '@/pages/profile_page';
@@ -53,7 +60,7 @@ export function App(props: AppProps) {
   // TODO: add suspence (FSO-143)
   return (
     <Router url={isServer ? props.initialUrl : ''}>
-      <Suspense fallback={<div>Загрузка</div>}>
+      <Suspense fallback={<CenteredLoaderSpinner />}>
         <Show when={job}>
           <Route
             path="/"

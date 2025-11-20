@@ -8,6 +8,7 @@ import {
 import { Show, Suspense } from 'solid-js';
 import { useLayoutStore } from '@/widgets/layouts';
 import { SomethingBadScreen } from '@/features/something_bad';
+import { CenteredLoaderSpinner } from '@/shared/ui';
 
 export interface MedicationEditPageProps {
   medicationId: string;
@@ -37,7 +38,7 @@ export function MedicationEditPage(props: MedicationEditPageProps) {
 
   return (
     <main class="medication-edit-page">
-      <Suspense fallback="Загрузка...">
+      <Suspense fallback={<CenteredLoaderSpinner />}>
         <Show
           when={medication() !== null}
           fallback={<SomethingBadScreen reason="Препарат не найден (HTTP 404)" />}
