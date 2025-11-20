@@ -1,12 +1,13 @@
 import { useMedicationStore } from '@/entities/medication';
 import { MedicationCard } from '@/entities/medication';
-import { BubblePlusIcon, IconStyle, List, Popup, ScanIcon } from '@/shared/ui';
+import { BubblePlusIcon, CrossIcon, IconStyle, List, Popup, ScanIcon } from '@/shared/ui';
 import { A, createAsync, useNavigate } from '@solidjs/router';
 import './medication_list.css';
 import { createSignal, Show, Suspense } from 'solid-js';
 import { EmptyScreen } from '@/shared/ui/empty_screen/empty_screen';
 import { useLayoutStore } from '@/widgets/layouts';
 import { Scanner } from '@/features/medication_scan';
+import { Portal } from 'solid-js/web';
 
 export interface MedicationsListProps {
   onScanned: (result: string) => void;
@@ -77,11 +78,31 @@ export function MedicationsListPage(props: MedicationsListProps) {
           <Scanner
             class="medication-list-page__scanner"
             videoConstraints={{
-              facingMode: 'environment',
+              facingMode: { ideal: 'environment' },
+              width: { ideal: 4096 },
+              height: { ideal: 2160 },
             }}
             onScanResult={(result) => handleScanResult(result)}
           />
+          <div class="medication-list-page__video-shadow">
+            <div class="medication-list-page__video-light" />
+          </div>
         </Popup>
+        <Portal>
+          <div class="medication-list-page__scan-hint">
+            <span>Найдите код для сканирования</span>
+          </div>
+          <button
+            type="button"
+            class="medication-list-page__close-scanner-button"
+            onClick={() => setShowScanner(false)}
+          >
+            <CrossIcon
+              iconStyle={IconStyle.ActiveWhite}
+              elementClass="medication-list-page__close-scanner-icon"
+            />
+          </button>
+        </Portal>
       </Show>
     </main>
   );

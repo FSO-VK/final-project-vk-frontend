@@ -3,7 +3,7 @@
   inset: 0;
 
   &_shadowed {
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.35);
   }
 
   &__content {
