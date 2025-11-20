@@ -10,5 +10,6 @@ export { AuthGuard } from './auth_guard/auth_guard';
 export { SwitchButton } from './switch/switch';
 export { Popup } from './popup/popup';
 export { LoaderSpinner } from './loader_spinner/loader_spinner';
+export { CenteredLoaderSpinner } from './loader_spinner/centered_loader_spinner';
 
 export * from './icons';

@@ -7,6 +7,7 @@ import {
 } from '@/entities/medication';
 import { useLayoutStore } from '@/widgets/layouts';
 import { Suspense } from 'solid-js';
+import { CenteredLoaderSpinner } from '@/shared/ui';
 
 export interface MedicationAddPageProps {
   onBackClick: () => void;
@@ -41,7 +42,7 @@ export function MedicationAddPage(props: MedicationAddPageProps) {
 
   return (
     <main class="medication-add-page">
-      <Suspense fallback={<div>Загрузка...</div>}>
+      <Suspense fallback={<CenteredLoaderSpinner />}>
         <MedicationForm
           header="Добавление препарата"
           onBackClick={() => {

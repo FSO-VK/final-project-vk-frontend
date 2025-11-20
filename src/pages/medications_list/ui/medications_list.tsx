@@ -1,6 +1,14 @@
 import { useMedicationStore } from '@/entities/medication';
 import { MedicationCard } from '@/entities/medication';
-import { BubblePlusIcon, CrossIcon, IconStyle, List, Popup, ScanIcon } from '@/shared/ui';
+import {
+  BubblePlusIcon,
+  CenteredLoaderSpinner,
+  IconStyle,
+  List,
+  Popup,
+  ScanIcon,
+  CrossIcon,
+} from '@/shared/ui';
 import { A, createAsync, useNavigate } from '@solidjs/router';
 import './medication_list.css';
 import { createSignal, Show, Suspense } from 'solid-js';
@@ -40,7 +48,7 @@ export function MedicationsListPage(props: MedicationsListProps) {
   const medications = createAsync(medStore.allMedications);
   return (
     <main class="medications-list-page">
-      <Suspense fallback={<div>Загружаем...</div>}>
+      <Suspense fallback={<CenteredLoaderSpinner />}>
         <List
           elementClass="medication-list-page__list"
           items={medications()?.map((m) => (

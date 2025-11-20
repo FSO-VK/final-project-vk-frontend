@@ -11,7 +11,7 @@ import {
   JSXElement,
 } from 'solid-js';
 import './medication.css';
-import { BookmarkIcon, EditIcon, IconStyle, TrashIcon } from '@/shared/ui';
+import { BookmarkIcon, CenteredLoaderSpinner, EditIcon, IconStyle, TrashIcon } from '@/shared/ui';
 import { useLayoutStore } from '@/widgets/layouts';
 import { SomethingBadScreen } from '@/features/something_bad';
 
@@ -123,7 +123,7 @@ export function MedicationPage(props: MedicationPageProps) {
 
   return (
     <main class="medication-page">
-      <Suspense>
+      <Suspense fallback={<CenteredLoaderSpinner />}>
         <Show
           when={medication() !== undefined && medication() !== null}
           fallback=<SomethingBadScreen reason="Препарат не найден (HTTP 404)" />
