@@ -13,6 +13,7 @@ export default defineConfig({
       filename: 'sw.ts',
 
       injectRegister: null,
+      registerType: 'autoUpdate',
 
       manifest: {
         name: 'Умная аптечка',
