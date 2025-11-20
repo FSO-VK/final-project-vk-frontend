@@ -77,7 +77,9 @@ export function MedicationsListPage(props: MedicationsListProps) {
           <Scanner
             class="medication-list-page__scanner"
             videoConstraints={{
-              facingMode: 'environment',
+              facingMode: { ideal: 'environment' },
+              width: { ideal: 4096 },
+              height: { ideal: 2160 },
             }}
             onScanResult={(result) => handleScanResult(result)}
           />
