@@ -3,6 +3,10 @@
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   cursor: pointer;
 
+  &__gauge {
+    inline-size: var(--size-5);
+  }
+
   &_brand {
     padding: var(--size-1);
     border-radius: var(--size-1);

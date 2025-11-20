@@ -27,12 +27,37 @@
 
   &__expiration-card {
     display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: var(--clr-background);
+    border-radius: var(--size-2);
+    padding: var(--size-2);
+    gap: var(--size-2);
+    grid-column: 1 / span 2;
+  }
+
+  &__gauge-container {
+    position: relative;
+    inline-size: var(--size-6);
+  }
+
+  &__gauge {
+    inline-size: 100%;
+    block-size: 100%;
+  }
+
+  &__gauge-percent {
+    position: absolute;
+    inset-inline-start: 50%;
+    inset-block-start: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: var(--fw-semi-bold);
+  }
+
+  &__expiration-info {
+    display: flex;
     flex-direction: column;
     gap: var(--size-1);
-    background-color: var(--clr-background);
-    padding: var(--size-2);
-    border-radius: var(--size-2);
-    grid-column: 1 / span 2;
   }
 
   &__form-card {

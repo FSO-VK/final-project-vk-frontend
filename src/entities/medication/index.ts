@@ -21,6 +21,7 @@ export function useMedicationActions() {
 }
 
 export { MedicationCard } from './ui/medication_card/medication_card';
+export { getGaugeState, INITIAL_GAUGE_POSITION } from './ui/getGaugeState';
 
 export {
   validateAmountValue,
