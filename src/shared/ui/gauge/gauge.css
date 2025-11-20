@@ -1,0 +1,15 @@
+.gauge {
+  position: relative;
+
+  &__background-circle {
+    stroke: var(--clr-background);
+  }
+
+  &_stroke-brand {
+    stroke: var(--clr-brand-7);
+  }
+
+  &_fill-brand {
+    fill: var(--clr-brand-7);
+  }
+}
