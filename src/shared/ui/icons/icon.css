@@ -14,4 +14,8 @@
   &_secondary {
     fill: var(--clr-secondary);
   }
+
+  &_active-white {
+    fill: var(--clr-gray-1);
+  }
 }

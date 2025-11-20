@@ -6,6 +6,7 @@ export enum IconStyle {
   Active = 'icon_active',
   Danger = 'icon_danger',
   Secondary = 'icon_secondary',
+  ActiveWhite = 'icon_active-white',
 }
 
 export interface IconProps extends JSX.SvgSVGAttributes<SVGSVGElement> {
