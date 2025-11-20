@@ -3,7 +3,7 @@ import { Medication } from '../../model/medication';
 import './medication_card.css';
 import { useNavigate } from '@solidjs/router';
 import { getGaugeState, INITIAL_GAUGE_POSITION } from '../getGaugeState';
-import { createMemo } from 'solid-js';
+import { createMemo, Show } from 'solid-js';
 
 export interface MedicationCardProps {
   medication: Medication;
@@ -49,12 +49,14 @@ export function MedicationCard(props: MedicationCardProps) {
       </div>
       <div class="medication-card__info">
         <div class="medication-card__description">
-          <Gauge
-            initialDeg={INITIAL_GAUGE_POSITION}
-            fillPercentage={gaugeState().fillPercentage}
-            strokeColor={gaugeState().strokeColor}
-            class="medication-card__gauge"
-          />
+          <Show when={gaugeState().show}>
+            <Gauge
+              initialDeg={INITIAL_GAUGE_POSITION}
+              fillPercentage={gaugeState().fillPercentage}
+              strokeColor={gaugeState().strokeColor}
+              class="medication-card__gauge"
+            />
+          </Show>
           <div class="medication-card__text-column">
             <span class="medication-card__release-form">{props.medication.releaseForm}</span>
             <span
