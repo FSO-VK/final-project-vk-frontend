@@ -11,7 +11,7 @@ export async function isUserSubscribed(): Promise<boolean> {
   const swStore = useSwStore();
   const registration = swStore.getRegistration();
   if (registration === null) {
-    throw new Error('failed to check subscription: registration is null');
+    return false;
   }
   const existingSubscription = await registration.pushManager.getSubscription();
   return existingSubscription !== null;
