@@ -1,0 +1,5 @@
+.gauge {
+  &__background-circle {
+    stroke: var(--clr-background);
+  }
+}

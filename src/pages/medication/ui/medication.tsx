@@ -1,4 +1,9 @@
-import { useMedicationActions, useMedicationStore } from '@/entities/medication';
+import {
+  getGaugeState,
+  useMedicationActions,
+  useMedicationStore,
+  INITIAL_GAUGE_POSITION,
+} from '@/entities/medication';
 import { createAsync, useNavigate } from '@solidjs/router';
 import {
   For,
@@ -9,9 +14,19 @@ import {
   type JSX,
   splitProps,
   JSXElement,
+  Switch,
+  Match,
 } from 'solid-js';
 import './medication.css';
-import { BookmarkIcon, CenteredLoaderSpinner, EditIcon, IconStyle, TrashIcon } from '@/shared/ui';
+import {
+  BookmarkIcon,
+  CenteredLoaderSpinner,
+  Gauge,
+  EditIcon,
+  IconStyle,
+  TrashIcon,
+  CrossIcon,
+} from '@/shared/ui';
 import { useLayoutStore } from '@/widgets/layouts';
 import { SomethingBadScreen } from '@/features/something_bad';
 
@@ -121,6 +136,10 @@ export function MedicationPage(props: MedicationPageProps) {
     });
   });
 
+  const gaugeState = createMemo(() => {
+    return getGaugeState(medication());
+  });
+
   return (
     <main class="medication-page">
       <Suspense fallback={<CenteredLoaderSpinner />}>
@@ -152,14 +171,41 @@ export function MedicationPage(props: MedicationPageProps) {
             </Labeled>
           </section>
           <section class="medication-page__expiration-card">
-            <Labeled for="medication-page__expires-at" label="Годен до">
-              <span class="overflow-guard">
-                {expiresFormatter.format(medication()?.expirationDate)}
-              </span>
-            </Labeled>
-            <Labeled for="medication-page__remains" label="Осталось">
-              <span class="overflow-guard">{remains()}</span>
-            </Labeled>
+            <Show when={gaugeState().show}>
+              <div class="medication-page__gauge-container">
+                <Gauge
+                  initialDeg={INITIAL_GAUGE_POSITION}
+                  fillPercentage={gaugeState().fillPercentage}
+                  strokeColor={gaugeState().strokeColor}
+                  class="medication-page__gauge"
+                />
+                <Switch>
+                  <Match
+                    when={gaugeState().fillPercentage > 0 && gaugeState().fillPercentage < 100}
+                  >
+                    <span class="medication-page__gauge-percent">
+                      {`${Math.round(gaugeState().displayPercentage)} %`}
+                    </span>
+                  </Match>
+                  <Match when={gaugeState().fillPercentage >= 100}>
+                    <CrossIcon
+                      iconStyle={IconStyle.Danger}
+                      elementClass="medication-page__gauge-percent medication-page__gauge-expired"
+                    />
+                  </Match>
+                </Switch>
+              </div>
+            </Show>
+            <div class="medication-page__expiration-info">
+              <Labeled for="medication-page__expires-at" label="Годен до">
+                <span class="overflow-guard">
+                  {expiresFormatter.format(medication()?.expirationDate)}
+                </span>
+              </Labeled>
+              <Labeled for="medication-page__remains" label="Осталось">
+                <span class="overflow-guard">{remains()}</span>
+              </Labeled>
+            </div>
           </section>
           <section class="medication-page__form-card">
             <Labeled for="medication-page__release-form" label="Форма выпуска">

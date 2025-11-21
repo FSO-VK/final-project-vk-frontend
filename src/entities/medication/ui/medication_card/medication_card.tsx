@@ -1,7 +1,9 @@
-import { Button, ButtonStyle, EditIcon, IconStyle } from '@/shared/ui';
+import { Button, ButtonStyle, EditIcon, Gauge, IconStyle } from '@/shared/ui';
 import { Medication } from '../../model/medication';
 import './medication_card.css';
 import { useNavigate } from '@solidjs/router';
+import { getGaugeState, INITIAL_GAUGE_POSITION } from '../getGaugeState';
+import { createMemo, Show } from 'solid-js';
 
 export interface MedicationCardProps {
   medication: Medication;
@@ -18,6 +20,10 @@ export function MedicationCard(props: MedicationCardProps) {
   let editButtonHTML!: HTMLButtonElement;
 
   const navigate = useNavigate();
+
+  const gaugeState = createMemo(() => {
+    return getGaugeState(props.medication);
+  });
 
   return (
     <section
@@ -43,6 +49,14 @@ export function MedicationCard(props: MedicationCardProps) {
       </div>
       <div class="medication-card__info">
         <div class="medication-card__description">
+          <Show when={gaugeState().show}>
+            <Gauge
+              initialDeg={INITIAL_GAUGE_POSITION}
+              fillPercentage={gaugeState().fillPercentage}
+              strokeColor={gaugeState().strokeColor}
+              class="medication-card__gauge"
+            />
+          </Show>
           <div class="medication-card__text-column">
             <span class="medication-card__release-form">{props.medication.releaseForm}</span>
             <span
