@@ -54,6 +54,10 @@
     font-weight: var(--fw-semi-bold);
   }
 
+  &__gauge-expired {
+    inline-size: var(--size-3);
+  }
+
   &__expiration-info {
     display: flex;
     flex-direction: column;

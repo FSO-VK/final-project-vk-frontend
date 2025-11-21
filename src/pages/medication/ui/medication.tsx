@@ -14,6 +14,8 @@ import {
   type JSX,
   splitProps,
   JSXElement,
+  Switch,
+  Match,
 } from 'solid-js';
 import './medication.css';
 import {
@@ -23,6 +25,7 @@ import {
   EditIcon,
   IconStyle,
   TrashIcon,
+  CrossIcon,
 } from '@/shared/ui';
 import { useLayoutStore } from '@/widgets/layouts';
 import { SomethingBadScreen } from '@/features/something_bad';
@@ -176,11 +179,21 @@ export function MedicationPage(props: MedicationPageProps) {
                   strokeColor={gaugeState().strokeColor}
                   class="medication-page__gauge"
                 />
-                <Show when={gaugeState().fillPercentage > 0}>
-                  <span class="medication-page__gauge-percent">
-                    {`${Math.round(gaugeState().displayPercentage)} %`}
-                  </span>
-                </Show>
+                <Switch>
+                  <Match
+                    when={gaugeState().fillPercentage > 0 && gaugeState().fillPercentage < 100}
+                  >
+                    <span class="medication-page__gauge-percent">
+                      {`${Math.round(gaugeState().displayPercentage)} %`}
+                    </span>
+                  </Match>
+                  <Match when={gaugeState().fillPercentage >= 100}>
+                    <CrossIcon
+                      iconStyle={IconStyle.Danger}
+                      elementClass="medication-page__gauge-percent medication-page__gauge-expired"
+                    />
+                  </Match>
+                </Switch>
               </div>
             </Show>
             <div class="medication-page__expiration-info">

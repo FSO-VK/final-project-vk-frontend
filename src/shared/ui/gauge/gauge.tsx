@@ -61,23 +61,12 @@ export function Gauge(props: GaugeProps) {
 
       <Switch>
         <Match when={selectedProps.fillPercentage < 100 && selectedProps.fillPercentage > 0}>
-          <circle
-            cx={initialPosition().x}
-            cy={initialPosition().y}
-            r={STROKE_WIDTH / 2}
-            fill={selectedProps.strokeColor}
-          />
           <path
             d={`M${initialPosition().x} ${initialPosition().y} A ${RADIUS} ${RADIUS} ${currentState().phi} ${currentState().largeFlag} 0 ${currentState().x} ${currentState().y}`}
             stroke-width={STROKE_WIDTH}
             fill="transparent"
             stroke={selectedProps.strokeColor}
-          />
-          <circle
-            cx={currentState().x}
-            cy={currentState().y}
-            r={STROKE_WIDTH / 2}
-            fill={selectedProps.strokeColor}
+            stroke-linecap="round"
           />
         </Match>
 

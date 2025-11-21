@@ -2,6 +2,11 @@ import { Medication } from '../model/medication';
 
 export const INITIAL_GAUGE_POSITION = 90;
 
+const HIGH_EXPIRATION_LEVEL_COLOR = 'var(--clr-danger-5)';
+const MEDIUM_EXPIRATION_LEVEL_COLOR = 'var(--clr-warning-6)';
+const LOW_EXPIRATION_LEVEL_COLOR = 'var(--clr-brand-6)';
+const EXPIRED_COLOR = 'var(--clr-danger-5)';
+
 export const getGaugeState = (medication: Medication | undefined | null) => {
   if (!medication) {
     return {
@@ -31,7 +36,7 @@ export const getGaugeState = (medication: Medication | undefined | null) => {
     return {
       fillPercentage: 100,
       displayPercentage: 0,
-      strokeColor: 'var(--clr-danger-5)',
+      strokeColor: EXPIRED_COLOR,
       show: true,
     };
   }
@@ -39,11 +44,11 @@ export const getGaugeState = (medication: Medication | undefined | null) => {
   let strokeColor: string;
 
   if (percentage <= 30) {
-    strokeColor = 'var(--clr-danger-5)';
+    strokeColor = HIGH_EXPIRATION_LEVEL_COLOR;
   } else if (percentage <= 60) {
-    strokeColor = 'var(--clr-warning-6)';
+    strokeColor = MEDIUM_EXPIRATION_LEVEL_COLOR;
   } else {
-    strokeColor = 'var(--clr-success-6)';
+    strokeColor = LOW_EXPIRATION_LEVEL_COLOR;
   }
 
   return {
