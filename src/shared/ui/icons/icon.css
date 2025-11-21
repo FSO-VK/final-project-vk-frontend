@@ -18,4 +18,12 @@
   &_active-white {
     fill: var(--clr-gray-1);
   }
+
+  &_success {
+    fill: var(--clr-success-7);
+  }
+
+  &_warning {
+    fill: var(--clr-warning-6);
+  }
 }

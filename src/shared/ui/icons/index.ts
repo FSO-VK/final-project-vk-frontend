@@ -10,4 +10,7 @@ export { EmptyIcon } from './empty';
 export { DotsIcon } from './dots';
 export { ScanIcon } from './scan';
 export { CrossIcon } from './cross';
+export { SuccessIcon } from './success';
+export { WarningIcon } from './warning';
+export { ErrorIcon } from './error';
 export { type IconComponent, IconStyle, type IconProps } from './icon';
