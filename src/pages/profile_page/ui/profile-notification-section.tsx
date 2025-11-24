@@ -9,6 +9,7 @@ import { createEffect } from 'solid-js';
 import { createAsync } from '@solidjs/router';
 import { createForm } from '@tanstack/solid-form';
 import { assertIfError } from '@/shared/lib';
+import { toast } from '@/features/toaster';
 
 export function ProfileNotificationSection() {
   const isSubscribed = createAsync(() => isUserSubscribed());
@@ -37,7 +38,6 @@ export function ProfileNotificationSection() {
         await handleSubmit(value.subscription);
       } catch (e: unknown) {
         assertIfError(e);
-        console.error('failed to change subscription state, reverting it:', e);
         setTimeout(() => {
           form.setFieldValue('subscription', !value.subscription);
         }, REVERT_SWITCH_STATE_TIMEOUT);
@@ -66,7 +66,7 @@ export function ProfileNotificationSection() {
                   const isChecked = e.target.checked;
                   field().handleChange(isChecked);
                   form.handleSubmit().catch(() => {
-                    console.error("can't change subscription state");
+                    toast.error('Не удалось изменить подписку, попробуйте позже');
                   });
                 }}
               />

@@ -9,6 +9,7 @@ import { Show, Suspense } from 'solid-js';
 import { useLayoutStore } from '@/widgets/layouts';
 import { SomethingBadScreen } from '@/features/something_bad';
 import { CenteredLoaderSpinner } from '@/shared/ui';
+import { toast } from '@/features/toaster';
 
 export interface MedicationEditPageProps {
   medicationId: string;
@@ -49,9 +50,14 @@ export function MedicationEditPage(props: MedicationEditPageProps) {
               props.onBackClick();
             }}
             onSaveClick={(m: MedicationDraft) => {
-              handleSave(m).catch(() => {
-                console.error('failed to edit medication');
-              });
+              handleSave(m).then(
+                () => {
+                  toast.success('Препарат изменен');
+                },
+                () => {
+                  toast.error('Не удалось изменить препарат, попробуйте позже');
+                },
+              );
             }}
             initialMedication={medication() ?? undefined}
           />

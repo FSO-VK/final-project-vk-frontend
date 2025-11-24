@@ -6,6 +6,7 @@ import './profile.css';
 import { Show } from 'solid-js';
 import { ProfileNotificationSection } from './profile-notification-section';
 import { useLayoutStore } from '@/widgets/layouts';
+import { toast } from '@/features/toaster';
 
 export function ProfilePage() {
   const meActions = useMeActions();
@@ -26,7 +27,7 @@ export function ProfilePage() {
         navigate('/');
       },
       () => {
-        console.error('failed to log out');
+        toast.error('Не удалось выйти из аккаунта, попробуйте позже');
       },
     );
   };

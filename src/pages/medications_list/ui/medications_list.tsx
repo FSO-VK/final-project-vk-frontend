@@ -16,6 +16,7 @@ import { EmptyScreen } from '@/shared/ui/empty_screen/empty_screen';
 import { useLayoutStore } from '@/widgets/layouts';
 import { Scanner } from '@/features/medication_scan';
 import { Portal } from 'solid-js/web';
+import { toast } from '@/features/toaster';
 
 export interface MedicationsListProps {
   onScanned: (result: string) => void;
@@ -91,6 +92,10 @@ export function MedicationsListPage(props: MedicationsListProps) {
               height: { ideal: 2160 },
             }}
             onScanResult={(result) => handleScanResult(result)}
+            onUserMediaError={() => {
+              toast.error('Не удалось включить камеру');
+              setShowScanner(false);
+            }}
           />
           <div class="medication-list-page__video-shadow">
             <div class="medication-list-page__video-light" />
