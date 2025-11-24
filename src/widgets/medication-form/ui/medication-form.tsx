@@ -25,6 +25,7 @@ export function MedicationForm(props: MedicationFormProps) {
     },
     releaseForm: '',
     expirationDate: new Date(Date.now()),
+    releaseDate: new Date(Date.now()),
   } as MedicationDraft);
 
   const requiredForm = useAppForm(() => ({
@@ -64,6 +65,7 @@ export function MedicationForm(props: MedicationFormProps) {
       ),
       group: props.initialMedication?.group ?? ([] as string[]),
       producer: props.initialMedication?.producer?.name ?? '',
+      releaseDate: props.initialMedication?.releaseDate?.toISOString().split('T')[0] ?? '',
       comment: props.initialMedication?.comment ?? '',
     },
     onSubmit: ({ value }) => {
@@ -81,6 +83,7 @@ export function MedicationForm(props: MedicationFormProps) {
           name: value.producer,
           country: '',
         },
+        releaseDate: new Date(value.releaseDate),
         comment: value.comment,
       });
       props.onSaveClick(medDraft());
