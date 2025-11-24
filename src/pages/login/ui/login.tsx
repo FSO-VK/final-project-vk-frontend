@@ -8,6 +8,7 @@ import { Button, ButtonStyle } from '@/shared/ui';
 import { A } from '@solidjs/router';
 import './login.css';
 import { useLayoutStore } from '@/widgets/layouts/model/layout_solid';
+import { toast } from '@/features/toaster';
 
 export interface LoginPageProps {
   registerLocation?: string;
@@ -57,7 +58,7 @@ export function LoginPage(props: LoginPageProps) {
           e.preventDefault();
           e.stopPropagation();
           form.handleSubmit().catch(() => {
-            console.error('failed to submit login form');
+            toast.error('Не удалось войти, попробуйте позже');
           });
         }}
         novalidate

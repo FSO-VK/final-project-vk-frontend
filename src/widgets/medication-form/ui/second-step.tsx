@@ -25,6 +25,7 @@ import {
   validateActiveSubstanceValue,
   ValidationError,
 } from '@/entities/medication/model/medication';
+import { toast } from '@/features/toaster';
 
 export const VALIDATION_ERROR_STRINGS = {
   [ValidationError.MustBePositive]: 'Введите положительное число',
@@ -55,7 +56,7 @@ export const MedicationFormOptionalForm = withForm({
           e.preventDefault();
           e.stopPropagation();
           props.form.handleSubmit().catch(() => {
-            console.error('failed to submit optional form');
+            toast.error('Не удалось сохранить введенные данные');
           });
         }}
       >

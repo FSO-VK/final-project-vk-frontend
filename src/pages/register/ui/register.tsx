@@ -7,6 +7,7 @@ import { useMeActions } from '@/entities/me';
 import './register.css';
 import { transformFieldState } from '@/shared/ui';
 import { useLayoutStore } from '@/widgets/layouts';
+import { toast } from '@/features/toaster';
 
 export interface RegisterPageProps {
   loginLocation: string;
@@ -49,9 +50,14 @@ export function RegisterPage(props: RegisterPageProps) {
         onSubmit={(e) => {
           e.preventDefault();
           e.stopPropagation();
-          form.handleSubmit().catch(() => {
-            console.error('failed to submit registration form');
-          });
+          form.handleSubmit().then(
+            () => {
+              toast.success('Добро пожаловать!');
+            },
+            () => {
+              toast.error('Не удалось зарегистрироваться, попробуйте позже');
+            },
+          );
         }}
         novalidate
       >

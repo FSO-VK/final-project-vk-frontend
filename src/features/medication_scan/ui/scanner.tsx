@@ -106,7 +106,9 @@ export function Scanner(props: ScannerProps) {
 
     if (!acquiredUserMedia()) {
       requestUserMedia().catch((e) => {
-        console.error('failed to request user media', e);
+        if (import.meta.env.MODE === 'development') {
+          console.error('failed to request user media', e);
+        }
       });
     }
   });

@@ -29,6 +29,7 @@ import {
 } from '@/shared/ui';
 import { useLayoutStore } from '@/widgets/layouts';
 import { SomethingBadScreen } from '@/features/something_bad';
+import { toast } from '@/features/toaster';
 
 const MS_IN_MONTH = 1000 * 60 * 60 * 24 * 30;
 const MS_IN_YEAR = 1000 * 60 * 60 * 24 * 365;
@@ -88,9 +89,14 @@ export function MedicationPage(props: MedicationPageProps) {
         icon: TrashIcon,
         text: 'Удалить',
         onClick: () => {
-          handleDelete().catch((e) => {
-            console.error('failed to delete medication:', e);
-          });
+          handleDelete().then(
+            () => {
+              toast.success('Препарат удален');
+            },
+            () => {
+              toast.error('Не удалось удалить препарат, попробуйте позже');
+            },
+          );
         },
         style: 'danger',
       },

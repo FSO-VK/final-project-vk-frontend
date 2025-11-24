@@ -8,6 +8,7 @@ import {
 import { useLayoutStore } from '@/widgets/layouts';
 import { Suspense } from 'solid-js';
 import { CenteredLoaderSpinner } from '@/shared/ui';
+import { toast } from '@/features/toaster';
 
 export interface MedicationAddPageProps {
   onBackClick: () => void;
@@ -49,9 +50,14 @@ export function MedicationAddPage(props: MedicationAddPageProps) {
             props.onBackClick();
           }}
           onSaveClick={(m: MedicationDraft) => {
-            handleSave(m).catch(() => {
-              console.error('failed to add medication');
-            });
+            handleSave(m).then(
+              () => {
+                toast.success('Препарат добавлен');
+              },
+              () => {
+                toast.error('Не удалось добавить препарат, попробуйте позже');
+              },
+            );
           }}
           initialMedication={medication() ?? undefined}
         />
