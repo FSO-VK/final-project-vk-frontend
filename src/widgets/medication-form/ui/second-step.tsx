@@ -10,6 +10,7 @@ import {
   TextareaField,
   transformFieldState,
   FieldState,
+  DateField,
 } from '@/shared/ui';
 import { Index, Show } from 'solid-js';
 import './second-step.css';
@@ -37,6 +38,7 @@ export const MedicationFormOptionalForm = withForm({
     }[],
     group: [] as string[],
     producer: '',
+    releaseDate: '',
     comment: '',
   },
   props: {
@@ -253,6 +255,25 @@ export const MedicationFormOptionalForm = withForm({
                   maxlength={MAX_PRODUCER_NAME_LEN}
                   value={field().state.value}
                   onChange={(e) => field().handleChange(e.target.value)}
+                />
+              </LabelsWrapper>
+            );
+          }}
+        />
+        <props.form.Field
+          name="releaseDate"
+          children={(field) => {
+            return (
+              <LabelsWrapper
+                label="Дата производства"
+                labelFor={field().name}
+                feedbackMessage={field().state.meta.errors.join(', ')}
+              >
+                <DateField
+                  name={field().name}
+                  id={field().name}
+                  value={field().state.value}
+                  onChange={(e) => field().handleChange(e.currentTarget.value)}
                 />
               </LabelsWrapper>
             );
