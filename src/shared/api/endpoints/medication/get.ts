@@ -54,6 +54,7 @@ export async function getMock(
         unit: 'мг',
       },
     ],
+    barCode: '5944702206931',
     expirationDate: new Date('2027-12-31'),
     releaseDate: new Date('2024-10-31'),
     comment:

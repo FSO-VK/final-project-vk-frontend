@@ -4,7 +4,7 @@ import {
   useMedicationStore,
   INITIAL_GAUGE_POSITION,
 } from '@/entities/medication';
-import { createAsync, useNavigate } from '@solidjs/router';
+import { A, createAsync, useNavigate } from '@solidjs/router';
 import {
   For,
   Suspense,
@@ -26,6 +26,8 @@ import {
   IconStyle,
   TrashIcon,
   CrossIcon,
+  ChatBubblePlusIcon,
+  PaperIcon,
 } from '@/shared/ui';
 import { useLayoutStore } from '@/widgets/layouts';
 import { SomethingBadScreen } from '@/features/something_bad';
@@ -52,6 +54,8 @@ export interface MedicationPageProps {
   medicationId: string;
   medicationEditLocation: string;
   medicationsLocation: string;
+  instructionViewLocation: string;
+  assistantAskLocation: string;
 }
 
 export function MedicationPage(props: MedicationPageProps) {
@@ -242,6 +246,22 @@ export function MedicationPage(props: MedicationPageProps) {
               </div>
             </Labeled>
           </section>
+          <Show when={medication()?.barCode}>
+            <A class="medication-page__assistant-button" href={props.assistantAskLocation}>
+              <span>Спросить чат-бот</span>
+              <ChatBubblePlusIcon
+                iconStyle={IconStyle.Active}
+                elementClass="medication-page__assistant-icon"
+              />
+            </A>
+            <A class="medication-page__instruction-button" href={props.instructionViewLocation}>
+              <span>Инструкция</span>
+              <PaperIcon
+                iconStyle={IconStyle.Active}
+                elementClass="medication-page__instruction-icon"
+              />
+            </A>
+          </Show>
           <Show when={medication()?.comment}>
             <section class="medication-page__comment-card">
               <Labeled

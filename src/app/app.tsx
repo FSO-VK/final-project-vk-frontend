@@ -162,6 +162,8 @@ export function App(props: AppProps) {
                       medicationId={params.id}
                       medicationEditLocation="/medications/edit"
                       medicationsLocation="/medications"
+                      instructionViewLocation="instruction"
+                      assistantAskLocation="assistant"
                     />
                   );
                 }}
