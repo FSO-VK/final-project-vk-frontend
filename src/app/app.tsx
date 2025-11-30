@@ -39,7 +39,7 @@ export interface AppProps {
 }
 
 export function App(props: AppProps) {
-  const job = createResource(props.initialJob ?? (() => Promise.resolve()));
+  const jobData = createResource(props.initialJob ?? (() => Promise.resolve()))[0];
   const meStore = useMeStore();
 
   const handleBackClick = () => {
@@ -68,7 +68,7 @@ export function App(props: AppProps) {
     <>
       <Router url={isServer ? props.initialUrl : ''}>
         <Suspense fallback={<CenteredLoaderSpinner />}>
-          <Show when={job}>
+          <Show when={!jobData.loading}>
             <Route
               path="/"
               component={(p: ParentProps) => (

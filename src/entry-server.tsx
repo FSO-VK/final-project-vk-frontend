@@ -3,7 +3,7 @@ import { App } from './app';
 import { useMeStore } from './entities/me';
 
 export async function render(url: string, sessionid: string) {
-  if (sessionid !== '') {
+  if (sessionid !== '' || import.meta.env.MODE === 'development') {
     // We believe user if he sends session id
     // Anyway he wont be able to load data
     const meStore = useMeStore();
