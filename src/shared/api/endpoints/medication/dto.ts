@@ -35,4 +35,5 @@ export const BaseDTO = z.object({
       z.transform((val) => new Date(val)),
     ),
   ),
+  barCode: z.optional(z.string()),
 });

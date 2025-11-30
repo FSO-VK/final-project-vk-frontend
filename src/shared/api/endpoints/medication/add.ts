@@ -4,7 +4,9 @@ import { RequiredOptions, OptionalOptions } from './options';
 
 import * as z from 'zod/mini';
 
-export interface AddMedicationOptions extends RequiredOptions, OptionalOptions {}
+export interface AddMedicationOptions extends RequiredOptions, OptionalOptions {
+  barCode: string;
+}
 
 export const AddMedicationDTO = BaseDTO;
 

@@ -52,6 +52,7 @@ export interface MedicationDraft {
   expirationDate: Date;
   releaseDate?: Date;
   comment?: string;
+  barCode?: string;
 }
 
 export interface Medication extends MedicationDraft {
