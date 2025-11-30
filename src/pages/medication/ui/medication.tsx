@@ -81,7 +81,7 @@ export function MedicationPage(props: MedicationPageProps) {
 
   layoutStore.setNavbarState({
     showBackButton: true,
-    showDropdownMenu: false,
+    showDropdownMenu: true,
     dropdownMenuItems: [
       {
         icon: EditIcon,
