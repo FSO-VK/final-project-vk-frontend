@@ -16,17 +16,20 @@ export interface MedicationFormProps {
 
 export function MedicationForm(props: MedicationFormProps) {
   const [selected, setSelected] = createSignal(0);
-  const [medDraft, setMedDraft] = createSignal({
-    name: '',
-    internationalName: '',
-    amount: {
-      value: 0,
-      unit: '',
-    },
-    releaseForm: '',
-    expirationDate: new Date(Date.now()),
-    releaseDate: new Date(Date.now()),
-  } as MedicationDraft);
+  const [medDraft, setMedDraft] = createSignal(
+    props.initialMedication ??
+      ({
+        name: '',
+        internationalName: '',
+        amount: {
+          value: 0,
+          unit: '',
+        },
+        releaseForm: '',
+        expirationDate: new Date(Date.now()),
+        releaseDate: new Date(Date.now()),
+      } as MedicationDraft),
+  );
 
   const requiredForm = useAppForm(() => ({
     defaultValues: {
