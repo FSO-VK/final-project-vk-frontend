@@ -1,0 +1,27 @@
+.calendar-row {
+  &__container {
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(7, auto);
+    justify-content: space-between;
+  }
+
+  &__cell {
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &_today {
+      color: var(--clr-brand-7);
+    }
+
+    &_selected {
+      background-color: var(--clr-brand-6);
+      color: var(--clr-gray-1);
+      border-radius: var(--size-1);
+    }
+  }
+}

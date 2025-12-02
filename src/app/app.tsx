@@ -21,10 +21,10 @@ import { ProfilePage } from '@/pages/profile_page';
 import { MedicationAddPage } from '@/pages/medication_add';
 import { MedicationEditPage } from '@/pages/medication_edit';
 import { MedicationPage } from '@/pages/medication';
-import { PlanningPage } from '@/pages/planning';
 import { NotFoundPage } from '@/pages/not_found';
 import { lazy } from 'solid-js';
 import { LlmAssistantPage } from '@/pages/llm_assistant';
+import { SchedulePage } from '@/pages/schedule';
 
 const Toaster = lazy(async () => {
   const { Toaster } = await import('@/features/toaster');
@@ -191,7 +191,7 @@ export function App(props: AppProps) {
                     currentTabBarOption={1}
                     tabbarOptions={tabbarOptions}
                   >
-                    <PlanningPage />
+                    <SchedulePage />
                   </NavTabbarLayout>
                 )}
               />
