@@ -2,9 +2,11 @@ import { useMedicationStore } from '@/entities/medication';
 import { CenteredLoaderSpinner } from '@/shared/ui';
 import { useLayoutStore } from '@/widgets/layouts';
 import { createAsync } from '@solidjs/router';
-import { Suspense, Show, createMemo, For } from 'solid-js';
+import { Suspense, Show, createMemo, For, createSignal } from 'solid-js';
 import { SomethingBadScreen } from '@/features/something_bad';
 import { INSTRUCTION_I11N } from '@/entities/medication/model/medication';
+import { Folder } from './folder';
+import './instruction.css';
 
 export interface InstructionPageProps {
   medicationId: string;
@@ -60,14 +62,26 @@ export function InstructionPage(props: InstructionPageProps) {
           when={instruction()}
           fallback=<SomethingBadScreen reason="Препарат не найден (HTTP 404)" />
         >
-          <For each={instructionRender()}>
-            {({ header, content }) => (
-              <div>
-                <div>{header}</div>
-                <div>{content}</div>
-              </div>
-            )}
-          </For>
+          <div class="instruction-page__sections-container">
+            <For each={instructionRender()}>
+              {({ header, content }) => {
+                const [opened, setOpened] = createSignal(false);
+                return (
+                  <section class="instruction-page__section">
+                    <Folder
+                      caption={header}
+                      opened={opened()}
+                      onOpenClick={() => {
+                        setOpened(!opened());
+                      }}
+                    >
+                      {content}
+                    </Folder>
+                  </section>
+                );
+              }}
+            </For>
+          </div>
         </Show>
       </Suspense>
     </main>

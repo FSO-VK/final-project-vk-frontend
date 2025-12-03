@@ -14,15 +14,17 @@ export const NavbarLayout = (props: NavbarLayoutProps) => {
 
   return (
     <div class="navbar-layout">
-      <Navbar
-        elementClass="navbar-layout__navbar"
-        onBackButtonClick={props.onBackClick}
-        title={layoutStore.navbarState().title}
-        showBackButton={layoutStore.navbarState().showBackButton}
-        showDropdownMenu={layoutStore.navbarState().showDropdownMenu}
-        dropdownMenuItems={layoutStore.navbarState().dropdownMenuItems}
-      />
-      <Divider />
+      <div class="navbar-layout__navbar-container">
+        <Navbar
+          elementClass="navbar-layout__navbar"
+          onBackButtonClick={props.onBackClick}
+          title={layoutStore.navbarState().title}
+          showBackButton={layoutStore.navbarState().showBackButton}
+          showDropdownMenu={layoutStore.navbarState().showDropdownMenu}
+          dropdownMenuItems={layoutStore.navbarState().dropdownMenuItems}
+        />
+        <Divider />
+      </div>
       <div class="navbar-layout__page">{props.children}</div>
     </div>
   );
