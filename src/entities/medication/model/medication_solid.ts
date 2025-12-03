@@ -11,9 +11,7 @@ import { ReactiveMap } from '@solid-primitives/map';
 function createMedicationStore(medicationApi: MedicationApi): MedicationStore {
   const [medicationStore, setMedicationStore] = createStore({
     medications: [] as Medication[],
-    assistantLogs: new Map() as Map<string, AssistantQuery[]>,
   });
-
   const assistantLogs = new ReactiveMap<string, AssistantQuery[]>();
 
   const addMedication = (m: Medication) => {
