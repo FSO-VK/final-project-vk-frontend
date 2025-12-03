@@ -188,7 +188,7 @@ export function App(props: AppProps) {
                         medicationId={params.id}
                         medicationEditLocation="/medications/edit"
                         medicationsLocation="/medications"
-                        instructionViewLocation="instruction"
+                        instructionViewLocation={`/medications/instruction/${params.id}`}
                         assistantAskLocation={`/medications/assistant/${params.id}`}
                       />
                     );
