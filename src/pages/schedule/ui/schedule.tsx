@@ -1,5 +1,5 @@
 import { createSignal } from 'solid-js';
-import { CalendarRowSection, Day } from './calendar';
+import { CalendarRowSection, type Day } from './calendar';
 
 export function SchedulePage() {
   const days: Day[] = [

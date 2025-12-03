@@ -1,5 +1,5 @@
 import './calendar.css';
-import { createSelector, For, JSX } from 'solid-js';
+import { createSelector, For, type JSX } from 'solid-js';
 
 export interface Day {
   dayOfWeek: string;
