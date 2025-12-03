@@ -4,6 +4,7 @@
   gap: var(--size-3);
 
   overflow-y: auto;
+  margin-bottom: 20dvi;
 
   &__qna-block {
     display: flex;
@@ -24,11 +25,18 @@
     }
   }
 
-  &__query-form {
+  &__form-container {
     position: fixed;
-    inset-inline: var(--size-3);
-    inset-block-end: var(--size-3);
+    inset-inline: 0;
+    inset-block-end: 0;
 
+    padding-inline: var(--size-3);
+    padding-block-end: var(--size-3);
+
+    background-color: var(--clr-gray-1);
+  }
+
+  &__query-form {
     display: flex;
     flex-direction: row;
     justify-content: end;
