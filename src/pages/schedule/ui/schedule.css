@@ -1,0 +1,12 @@
+.schedule-page {
+  &__calendar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-3);
+  }
+
+  &__current-date {
+    text-align: center;
+    color: var(--clr-brand-6);
+  }
+}
