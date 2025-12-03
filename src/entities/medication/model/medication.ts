@@ -1,6 +1,5 @@
 import { type MedicationApi } from '@/shared/api';
 import { assertIfError } from '@/shared/lib';
-import { ReactiveMap } from '@solid-primitives/map';
 
 export enum ValidationError {
   MustBePositive,
@@ -80,7 +79,7 @@ export interface MedicationStore {
   medicationById: (id: string) => Promise<Medication | null>;
   medicationByScan: (dataCode: string) => Promise<MedicationDraft | null>;
   medicationsCount: () => number;
-  fullAssistantLog: () => ReactiveMap<string, AssistantQuery[]>;
+  fullAssistantLog: () => Map<string, AssistantQuery[]>;
 
   // Setters
   setMedications: (medications: Medication[]) => void;
