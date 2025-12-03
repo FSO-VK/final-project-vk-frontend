@@ -103,42 +103,44 @@ export function LlmAssistantPage(props: LlmAssistantPageProps) {
               );
             }}
           </For>
-          <form
-            class="llm-assistant-page__query-form"
-            novalidate
-            onSubmit={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              handleSubmitQuery();
-            }}
-          >
-            <form.Field
-              name="query"
-              children={(field) => {
-                return (
-                  <textarea
-                    class="llm-assistant-page__query-input"
-                    name={field().name}
-                    id={field().name}
-                    maxlength={300}
-                    value={field().state.value}
-                    onInput={(e) => {
-                      field().handleChange(e.target.value);
-                    }}
-                    onKeyDown={(event) => submitOnEnter(event)}
-                  >
-                    {field().state.value}
-                  </textarea>
-                );
+          <div class="llm-assistant-page__form-container">
+            <form
+              class="llm-assistant-page__query-form"
+              novalidate
+              onSubmit={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                handleSubmitQuery();
               }}
-            />
-            <button class="llm-assistant-page__submit-query-button" type="submit">
-              <ArrowUpIcon
-                elementClass="llm-assistant-page__submit-query-icon"
-                iconStyle={IconStyle.Active}
+            >
+              <form.Field
+                name="query"
+                children={(field) => {
+                  return (
+                    <textarea
+                      class="llm-assistant-page__query-input"
+                      name={field().name}
+                      id={field().name}
+                      maxlength={300}
+                      value={field().state.value}
+                      onInput={(e) => {
+                        field().handleChange(e.target.value);
+                      }}
+                      onKeyDown={(event) => submitOnEnter(event)}
+                    >
+                      {field().state.value}
+                    </textarea>
+                  );
+                }}
               />
-            </button>
-          </form>
+              <button class="llm-assistant-page__submit-query-button" type="submit">
+                <ArrowUpIcon
+                  elementClass="llm-assistant-page__submit-query-icon"
+                  iconStyle={IconStyle.Active}
+                />
+              </button>
+            </form>
+          </div>
         </Show>
       </Suspense>
     </main>

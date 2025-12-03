@@ -35,6 +35,7 @@ export {
   MAX_GROUP_SIZE,
   MAX_RELEASE_FORM_LEN,
   MAX_COMMENT_LEN,
+  INSTRUCTION_I11N,
   ValidationError,
   type ActiveSubstance,
   type MedicationDraft,

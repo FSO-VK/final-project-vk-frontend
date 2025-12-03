@@ -65,6 +65,41 @@ export interface AssistantQuery {
   answer?: string;
 }
 
+export interface Instruction {
+  medicationId: string;
+  pharmInfluence: string;
+  pharmKinetics: string;
+  dosage: string;
+  overDosage: string;
+  interaction: string;
+  lactation: string;
+  sideEffects: string;
+  usingIndication: string;
+  usingCounterIndication: string;
+  specialInstruction: string;
+  renalInfluence: string;
+  hepaticInfluence: string;
+  elderlyUsage: string;
+  childUsage: string;
+}
+
+export const INSTRUCTION_I11N: Record<string, string> = {
+  pharmInfluence: 'Фармакологическое действие',
+  pharmKinetics: 'Фармакокинетика',
+  dosage: 'Режим дозирования',
+  overDosage: 'Передозировка',
+  interaction: 'Лекарственное взаимодействие',
+  lactation: 'Применение при беременности и кормлении грудью',
+  sideEffects: 'Побочное действие',
+  usingIndication: 'Показания к применению',
+  usingCounterIndication: 'Противопоказания к применению',
+  renalInfluence: 'Применение при нарушениях функции почек',
+  specialInstruction: 'Особые указания',
+  hepaticInfluence: 'Применение при нарушениях функции печени',
+  elderlyUsage: 'Применение у пожилых пациентов',
+  childUsage: 'Применение у детей',
+};
+
 export const MAX_NAME_LEN = 100;
 export const MAX_INTERNATIONAL_NAME_LEN = 100;
 export const MAX_GROUP_NAME_LEN = 100;
@@ -80,6 +115,7 @@ export interface MedicationStore {
   medicationByScan: (dataCode: string) => Promise<MedicationDraft | null>;
   medicationsCount: () => number;
   fullAssistantLog: () => Map<string, AssistantQuery[]>;
+  instructionByMedicationId: (id: string) => Promise<Instruction | null>;
 
   // Setters
   setMedications: (medications: Medication[]) => void;
@@ -89,6 +125,7 @@ export interface MedicationStore {
   clearMedications: () => void;
   appendAssistantLog: (id: string, query: AssistantQuery) => void;
   updateLastAssistantLog: (id: string, query: AssistantQuery) => void;
+  setMedicationInstruction: (instruction: Instruction) => void;
 }
 
 export interface MedicationStoreFabric {

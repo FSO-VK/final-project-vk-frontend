@@ -3,13 +3,17 @@
   block-size: 100dvb;
   inline-size: 100dvi;
 
-  &__navbar {
+  display: grid;
+  grid-template-rows: auto 1fr;
+
+  &__navbar-container {
     inline-size: 100%;
   }
 
   &__page {
     position: relative;
     padding: var(--size-3);
+    overflow-y: auto;
   }
 }
 

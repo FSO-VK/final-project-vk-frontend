@@ -14,5 +14,5 @@ export { SuccessIcon } from './success';
 export { WarningIcon } from './warning';
 export { ErrorIcon } from './error';
 export { PaperIcon } from './paper';
-export { ArrowUpIcon } from './arrow';
+export { ArrowUpIcon, NakedArrowDownIcon } from './arrow';
 export { type IconComponent, IconStyle, type IconProps } from './icon';
