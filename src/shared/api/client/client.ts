@@ -59,7 +59,7 @@ class Client {
 
   private makeUrl_ = (endpoint: string, query: Record<string, string> | undefined = undefined) => {
     if (query !== undefined) {
-      return new URL(this.backendOrigin_ + endpoint + makeQueryParams(query).toString());
+      return new URL(this.backendOrigin_ + endpoint + '?' + makeQueryParams(query).toString());
     } else {
       return new URL(this.backendOrigin_ + endpoint);
     }

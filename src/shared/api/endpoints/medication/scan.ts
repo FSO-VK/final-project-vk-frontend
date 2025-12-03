@@ -34,7 +34,7 @@ export const ScanMedicationDTO = z.object({
 export async function scan(
   options: ScanMedicationOptions,
 ): Promise<z.infer<typeof ScanMedicationDTO>> {
-  const body = await backendClient.get(`/medication/scan?`, {
+  const body = await backendClient.get(`/medication/scan`, {
     query: {
       data: options.dataMatrixCode,
     },
