@@ -5,6 +5,10 @@ import type { AskAssistantOptions, AskAssistantDTO as _AskAssistantDTO } from '.
 import type { GetMedicationOptions, GetMedicationDTO as _GetDTO } from './get';
 import type { ScanMedicationOptions, ScanMedicationDTO as _ScanDTO } from './scan';
 import type { GetAllMedicationsDTO as _GetListDTO } from './getAll';
+import type {
+  GetInstructionOptions,
+  GetInstructionDTO as _GetInstructionDTO,
+} from './getInstruction';
 import { add, addMock } from './add';
 import { update, updateMock } from './update';
 import { del, delMock } from './delete';
@@ -12,6 +16,7 @@ import { get, getMock } from './get';
 import { scan, scanMock } from './scan';
 import { getAll, getAllMock } from './getAll';
 import { askAssistant, askAssistantMock } from './askAssistant';
+import { getInstruction, getInstructionMock } from './getInstruction';
 
 import * as z from 'zod/mini';
 
@@ -29,6 +34,7 @@ export type AddMedicationDTO = z.infer<typeof _AddDTO>;
 export type UpdateMedicationDTO = z.infer<typeof _UpdateDTO>;
 export type ScanMedicationDTO = z.infer<typeof _ScanDTO>;
 export type AskAssistantDTO = z.infer<typeof _AskAssistantDTO>;
+export type GetInstructionDTO = z.infer<typeof _GetInstructionDTO>;
 
 export interface MedicationApi {
   get: (o: GetMedicationOptions) => Promise<GetMedicationDTO>;
@@ -38,6 +44,7 @@ export interface MedicationApi {
   delete: (o: DeleteMedicationOptions) => Promise<void>;
   scan: (o: ScanMedicationOptions) => Promise<ScanMedicationDTO>;
   askAssistant: (o: AskAssistantOptions) => Promise<AskAssistantDTO>;
+  getInstruction: (o: GetInstructionOptions) => Promise<GetInstructionDTO>;
 }
 
 export let medicationApi: MedicationApi;
@@ -51,6 +58,7 @@ if (import.meta.env.MODE === 'development') {
     delete: delMock,
     scan: scanMock,
     askAssistant: askAssistantMock,
+    getInstruction: getInstructionMock,
   };
 } else {
   medicationApi = {
@@ -61,5 +69,6 @@ if (import.meta.env.MODE === 'development') {
     delete: del,
     scan: scan,
     askAssistant,
+    getInstruction,
   };
 }
