@@ -4,6 +4,7 @@ import {
   type Medication,
   type MedicationStoreFabric,
   type AssistantQuery,
+  type Instruction,
 } from './medication';
 import { type MedicationApi } from '@/shared/api';
 import { ReactiveMap } from '@solid-primitives/map';
@@ -13,6 +14,7 @@ function createMedicationStore(medicationApi: MedicationApi): MedicationStore {
     medications: [] as Medication[],
   });
   const assistantLogs = new ReactiveMap<string, AssistantQuery[]>();
+  const instructions = new ReactiveMap<string, Instruction>();
 
   const addMedication = (m: Medication) => {
     setMedicationStore('medications', (currentMedications) => [...currentMedications, m]);
@@ -87,6 +89,16 @@ function createMedicationStore(medicationApi: MedicationApi): MedicationStore {
 
   const medicationsCount = () => medicationStore.medications.length;
 
+  const setMedicationInstruction = (instruction: Instruction) => {
+    instructions.set(instruction.medicationId, instruction);
+  };
+
+  const instructionByMedicationId = async (id: string) => {
+    const dto = await medicationApi.getInstruction({ medicationId: id });
+    setMedicationInstruction({ ...dto, medicationId: id });
+    return instructions.get(id) ?? null;
+  };
+
   const result: MedicationStore = {
     allMedications,
     medicationById,
@@ -100,6 +112,8 @@ function createMedicationStore(medicationApi: MedicationApi): MedicationStore {
     fullAssistantLog,
     appendAssistantLog,
     updateLastAssistantLog,
+    instructionByMedicationId,
+    setMedicationInstruction,
   };
 
   return result;

@@ -25,6 +25,7 @@ import { NotFoundPage } from '@/pages/not_found';
 import { lazy } from 'solid-js';
 import { LlmAssistantPage } from '@/pages/llm_assistant';
 import { SchedulePage } from '@/pages/schedule';
+import { InstructionPage } from '@/pages/instruction';
 
 const Toaster = lazy(async () => {
   const { Toaster } = await import('@/features/toaster');
@@ -107,6 +108,18 @@ export function App(props: AppProps) {
                   return (
                     <NavbarLayout onBackClick={() => handleBackClick()}>
                       <LlmAssistantPage medicationId={params.id} />
+                    </NavbarLayout>
+                  );
+                }}
+              />
+
+              <Route
+                path="/medications/instruction/:id"
+                component={() => {
+                  const params = useParams();
+                  return (
+                    <NavbarLayout onBackClick={() => handleBackClick()}>
+                      <InstructionPage medicationId={params.id} />
                     </NavbarLayout>
                   );
                 }}
