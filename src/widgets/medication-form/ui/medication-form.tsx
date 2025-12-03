@@ -3,7 +3,7 @@ import './medication-form.css';
 import { MedicationFormRequiredForm } from './first-step';
 import { MedicationFormOptionalForm } from './second-step';
 import { Dynamic } from 'solid-js/web';
-import { createSignal } from 'solid-js';
+import { createSignal, onMount } from 'solid-js';
 import { ACTIVE_SUBSTANCE_UNIT, AMOUNT_UNITS } from '@/entities/medication';
 import { ActiveSubstance, MedicationDraft } from '@/entities/medication';
 
@@ -16,20 +16,23 @@ export interface MedicationFormProps {
 
 export function MedicationForm(props: MedicationFormProps) {
   const [selected, setSelected] = createSignal(0);
-  const [medDraft, setMedDraft] = createSignal(
-    props.initialMedication ??
-      ({
-        name: '',
-        internationalName: '',
-        amount: {
-          value: 0,
-          unit: '',
-        },
-        releaseForm: '',
-        expirationDate: new Date(Date.now()),
-        releaseDate: new Date(Date.now()),
-      } as MedicationDraft),
-  );
+  const [medDraft, setMedDraft] = createSignal({
+    name: '',
+    internationalName: '',
+    amount: {
+      value: 0,
+      unit: '',
+    },
+    releaseForm: '',
+    expirationDate: new Date(Date.now()),
+    releaseDate: new Date(Date.now()),
+  } as MedicationDraft);
+
+  onMount(() => {
+    if (props.initialMedication !== undefined) {
+      setMedDraft(props.initialMedication);
+    }
+  });
 
   const requiredForm = useAppForm(() => ({
     defaultValues: {
