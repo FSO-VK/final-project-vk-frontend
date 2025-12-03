@@ -37,7 +37,7 @@ export function Navbar(props: NavbarProps) {
         </button>
       </Show>
       <div class="navbar__header">{props.title ?? ''}</div>
-      <Show when={!props.showDropdownMenu && (props.dropdownMenuItems?.length ?? 0) > 0}>
+      <Show when={props.showDropdownMenu && (props.dropdownMenuItems?.length ?? 0) > 0}>
         <Dropdown
           class="navbar__dropdown-menu dropdown-menu"
           triggerElement={

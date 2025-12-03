@@ -97,6 +97,40 @@
     gap: var(--size-1);
   }
 
+  &__assistant-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-decoration: none;
+
+    color: inherit;
+    background-color: var(--clr-background);
+    border-radius: var(--size-2);
+    padding: var(--size-2);
+  }
+
+  &__assistant-icon {
+    inline-size: 50%;
+  }
+
+  &__instruction-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-decoration: none;
+
+    color: inherit;
+    background-color: var(--clr-background);
+    border-radius: var(--size-2);
+    padding: var(--size-2);
+  }
+
+  &__instruction-icon {
+    inline-size: 50%;
+  }
+
   &__comment-card {
     display: flex;
     flex-direction: column;

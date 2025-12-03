@@ -24,6 +24,7 @@ import { MedicationPage } from '@/pages/medication';
 import { PlanningPage } from '@/pages/planning';
 import { NotFoundPage } from '@/pages/not_found';
 import { lazy } from 'solid-js';
+import { LlmAssistantPage } from '@/pages/llm_assistant';
 
 const Toaster = lazy(async () => {
   const { Toaster } = await import('@/features/toaster');
@@ -38,7 +39,7 @@ export interface AppProps {
 }
 
 export function App(props: AppProps) {
-  const job = createResource(props.initialJob ?? (() => Promise.resolve()));
+  const jobData = createResource(props.initialJob ?? (() => Promise.resolve()))[0];
   const meStore = useMeStore();
 
   const handleBackClick = () => {
@@ -67,7 +68,7 @@ export function App(props: AppProps) {
     <>
       <Router url={isServer ? props.initialUrl : ''}>
         <Suspense fallback={<CenteredLoaderSpinner />}>
-          <Show when={job}>
+          <Show when={!jobData.loading}>
             <Route
               path="/"
               component={(p: ParentProps) => (
@@ -98,101 +99,116 @@ export function App(props: AppProps) {
                   {p.children}
                 </AuthGuard>
               )}
-            />
-            <Route
-              path="/medications"
-              component={(p) => (
-                <NavTabbarLayout
-                  onBackClick={() => handleBackClick()}
-                  currentTabBarOption={0}
-                  tabbarOptions={tabbarOptions}
-                >
-                  {p.children}
-                </NavTabbarLayout>
-              )}
             >
               <Route
-                path="/"
-                component={() => {
-                  const navigate = useNavigate();
-                  return (
-                    <MedicationsListPage
-                      onScanned={(result) => {
-                        navigate(`/medications/add?data=${encodeURIComponent(result)}`);
-                      }}
-                    />
-                  );
-                }}
-              />
-              <Route
-                path="/add"
-                component={() => {
-                  const rawData = useSearchParams()[0].data;
-                  const data = rawData instanceof Array ? rawData[0] : rawData;
-
-                  return (
-                    <MedicationAddPage
-                      onBackClick={() => handleBackClick()}
-                      afterSaveLocation="/medications"
-                      initialDataMatrix={data}
-                    />
-                  );
-                }}
-              />
-              <Route
-                path="/edit/:id"
+                path="/medications/assistant/:id"
                 component={() => {
                   const params = useParams();
                   return (
-                    <MedicationEditPage
-                      onBackClick={() => handleBackClick()}
-                      afterSaveLocation="/medications"
-                      medicationId={params.id}
-                    />
+                    <NavbarLayout onBackClick={() => handleBackClick()}>
+                      <LlmAssistantPage medicationId={params.id} />
+                    </NavbarLayout>
                   );
                 }}
               />
 
               <Route
-                path="/view/:id"
-                component={() => {
-                  const params = useParams();
-                  return (
-                    <MedicationPage
-                      medicationId={params.id}
-                      medicationEditLocation="/medications/edit"
-                      medicationsLocation="/medications"
-                    />
-                  );
-                }}
+                path="/medications"
+                component={(p) => (
+                  <NavTabbarLayout
+                    onBackClick={() => handleBackClick()}
+                    currentTabBarOption={0}
+                    tabbarOptions={tabbarOptions}
+                  >
+                    {p.children}
+                  </NavTabbarLayout>
+                )}
+              >
+                <Route
+                  path="/"
+                  component={() => {
+                    const navigate = useNavigate();
+                    return (
+                      <MedicationsListPage
+                        onScanned={(result) => {
+                          navigate(`/medications/add?data=${encodeURIComponent(result)}`);
+                        }}
+                      />
+                    );
+                  }}
+                />
+                <Route
+                  path="/add"
+                  component={() => {
+                    const rawData = useSearchParams()[0].data;
+                    const data = rawData instanceof Array ? rawData[0] : rawData;
+
+                    return (
+                      <MedicationAddPage
+                        onBackClick={() => handleBackClick()}
+                        afterSaveLocation="/medications"
+                        initialDataMatrix={data}
+                      />
+                    );
+                  }}
+                />
+                <Route
+                  path="/edit/:id"
+                  component={() => {
+                    const params = useParams();
+                    return (
+                      <MedicationEditPage
+                        onBackClick={() => handleBackClick()}
+                        afterSaveLocation="/medications"
+                        medicationId={params.id}
+                      />
+                    );
+                  }}
+                />
+
+                <Route
+                  path="/view/:id"
+                  component={() => {
+                    const params = useParams();
+                    return (
+                      <MedicationPage
+                        medicationId={params.id}
+                        medicationEditLocation="/medications/edit"
+                        medicationsLocation="/medications"
+                        instructionViewLocation="instruction"
+                        assistantAskLocation={`/medications/assistant/${params.id}`}
+                      />
+                    );
+                  }}
+                />
+              </Route>
+
+              <Route
+                path="/planning"
+                component={() => (
+                  <NavTabbarLayout
+                    onBackClick={() => handleBackClick()}
+                    currentTabBarOption={1}
+                    tabbarOptions={tabbarOptions}
+                  >
+                    <PlanningPage />
+                  </NavTabbarLayout>
+                )}
+              />
+
+              <Route
+                path="/me"
+                component={() => (
+                  <NavTabbarLayout
+                    onBackClick={() => handleBackClick()}
+                    currentTabBarOption={2}
+                    tabbarOptions={tabbarOptions}
+                  >
+                    <ProfilePage />
+                  </NavTabbarLayout>
+                )}
               />
             </Route>
-
-            <Route
-              path="/planning"
-              component={() => (
-                <NavTabbarLayout
-                  onBackClick={() => handleBackClick()}
-                  currentTabBarOption={1}
-                  tabbarOptions={tabbarOptions}
-                >
-                  <PlanningPage />
-                </NavTabbarLayout>
-              )}
-            />
-
-            <Route
-              path="/me"
-              component={() => (
-                <NavTabbarLayout
-                  onBackClick={() => handleBackClick()}
-                  currentTabBarOption={2}
-                  tabbarOptions={tabbarOptions}
-                >
-                  <ProfilePage />
-                </NavTabbarLayout>
-              )}
-            />
 
             <Route path="*" component={FullscreenFixedLayout}>
               <Route path="*" component={() => <NotFoundPage />} />

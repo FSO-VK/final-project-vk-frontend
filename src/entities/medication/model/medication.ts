@@ -1,4 +1,5 @@
 import { type MedicationApi } from '@/shared/api';
+import { assertIfError } from '@/shared/lib';
 
 export enum ValidationError {
   MustBePositive,
@@ -59,6 +60,11 @@ export interface Medication extends MedicationDraft {
   id: string;
 }
 
+export interface AssistantQuery {
+  query: string;
+  answer?: string;
+}
+
 export const MAX_NAME_LEN = 100;
 export const MAX_INTERNATIONAL_NAME_LEN = 100;
 export const MAX_GROUP_NAME_LEN = 100;
@@ -73,6 +79,7 @@ export interface MedicationStore {
   medicationById: (id: string) => Promise<Medication | null>;
   medicationByScan: (dataCode: string) => Promise<MedicationDraft | null>;
   medicationsCount: () => number;
+  fullAssistantLog: () => Map<string, AssistantQuery[]>;
 
   // Setters
   setMedications: (medications: Medication[]) => void;
@@ -80,6 +87,8 @@ export interface MedicationStore {
   updateMedication: (m: Medication) => void;
   removeMedication: (id: string) => void;
   clearMedications: () => void;
+  appendAssistantLog: (id: string, query: AssistantQuery) => void;
+  updateLastAssistantLog: (id: string, query: AssistantQuery) => void;
 }
 
 export interface MedicationStoreFabric {
@@ -108,5 +117,19 @@ export class MedicationActions {
   async removeMedication(id: string) {
     await this.medicationApi_.delete({ id });
     this.store_.removeMedication(id);
+  }
+
+  async askAssistant(id: string, query: string) {
+    this.store_.appendAssistantLog(id, {
+      query,
+    });
+    try {
+      const response = await this.medicationApi_.askAssistant({ medicationId: id, query });
+      this.store_.updateLastAssistantLog(id, { query, answer: response.llmAnswer });
+    } catch (e: unknown) {
+      assertIfError(e);
+      this.store_.updateLastAssistantLog(id, { query, answer: '' });
+      throw e;
+    }
   }
 }

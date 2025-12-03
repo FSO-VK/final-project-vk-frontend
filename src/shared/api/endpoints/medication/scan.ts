@@ -28,6 +28,7 @@ export const ScanMedicationDTO = z.object({
     value: z.number(),
     unit: z.string(),
   }),
+  barCode: z.string(),
 });
 
 export async function scan(
@@ -58,6 +59,7 @@ export async function scanMock(
       value: 20,
       unit: 'шт.',
     },
+    barCode: '5944702206931',
     expirationDate: new Date('2027-12-31'),
     releaseDate: new Date('2025-02-24'),
   });
