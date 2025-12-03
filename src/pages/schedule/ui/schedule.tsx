@@ -1,24 +1,30 @@
 import { createSignal } from 'solid-js';
+import { useLayoutStore } from '@/widgets/layouts';
 import { CalendarRowSection, type Day } from './calendar';
+import './schedule.css';
+import { EmptyScreen } from '@/shared/ui/empty_screen/empty_screen';
+import { getCurrentWeek, getDateFormatted } from './date';
 
 export function SchedulePage() {
-  const days: Day[] = [
-    { dayOfWeek: 'пн', day: 1 },
-    { dayOfWeek: 'вт', day: 2 },
-    { dayOfWeek: 'ср', day: 3 },
-    { dayOfWeek: 'чт', day: 4 },
-    { dayOfWeek: 'пт', day: 5 },
-    { dayOfWeek: 'сб', day: 6 },
-    { dayOfWeek: 'вс', day: 7 },
-  ];
+  const layoutStore = useLayoutStore();
 
-  const currentDay = 3;
+  layoutStore.setNavbarState({
+    showBackButton: false,
+    showDropdownMenu: false,
+    dropdownMenuItems: [],
+    title: 'Расписание',
+  });
+
+  const date = new Date();
+  const days: Day[] = getCurrentWeek(date);
+  const currentDay = date.getDate();
 
   const [selectedDay, setSelectedDay] = createSignal(currentDay);
 
   return (
-    <main>
-      <section>
+    <main class="schedule-page">
+      <section class="schedule-page__calendar">
+        <div class="schedule-page__current-date">{getDateFormatted(date)}</div>
         <CalendarRowSection
           days={days}
           today={currentDay}
@@ -28,6 +34,7 @@ export function SchedulePage() {
           }}
         />
       </section>
+      <EmptyScreen />
     </main>
   );
 }
