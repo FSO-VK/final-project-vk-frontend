@@ -4,7 +4,7 @@ import { useLayoutStore } from '@/widgets/layouts';
 import { createAsync } from '@solidjs/router';
 import { Suspense, Show, createMemo, For, createSignal } from 'solid-js';
 import { SomethingBadScreen } from '@/features/something_bad';
-import { INSTRUCTION_I11N } from '@/entities/medication/model/medication';
+import { INSTRUCTION_I11N } from '@/entities/medication';
 import { Folder } from './folder';
 import './instruction.css';
 
