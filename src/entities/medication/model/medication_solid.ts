@@ -1,11 +1,20 @@
 import { createStore } from 'solid-js/store';
-import { type MedicationStore, type Medication, type MedicationStoreFabric } from './medication';
+import {
+  type MedicationStore,
+  type Medication,
+  type MedicationStoreFabric,
+  type AssistantQuery,
+} from './medication';
 import { type MedicationApi } from '@/shared/api';
+import { ReactiveMap } from '@solid-primitives/map';
 
 function createMedicationStore(medicationApi: MedicationApi): MedicationStore {
   const [medicationStore, setMedicationStore] = createStore({
     medications: [] as Medication[],
+    assistantLogs: new Map() as Map<string, AssistantQuery[]>,
   });
+
+  const assistantLogs = new ReactiveMap<string, AssistantQuery[]>();
 
   const addMedication = (m: Medication) => {
     setMedicationStore('medications', (currentMedications) => [...currentMedications, m]);
@@ -58,6 +67,26 @@ function createMedicationStore(medicationApi: MedicationApi): MedicationStore {
     return { ...med };
   };
 
+  const fullAssistantLog = () => {
+    return assistantLogs;
+  };
+
+  const appendAssistantLog = (id: string, query: AssistantQuery) => {
+    const oldArray = assistantLogs.get(id) ?? [];
+    assistantLogs.set(id, [...oldArray, query]);
+  };
+
+  const updateLastAssistantLog = (id: string, query: AssistantQuery) => {
+    const oldArray = assistantLogs.get(id) ?? [];
+    if (oldArray.length < 1) {
+      return;
+    }
+    oldArray[oldArray.length - 1] = query;
+    // without full cleaning the store is not updated
+    assistantLogs.set(id, []);
+    assistantLogs.set(id, oldArray);
+  };
+
   const medicationsCount = () => medicationStore.medications.length;
 
   const result: MedicationStore = {
@@ -70,6 +99,9 @@ function createMedicationStore(medicationApi: MedicationApi): MedicationStore {
     clearMedications,
     setMedications,
     medicationByScan,
+    fullAssistantLog,
+    appendAssistantLog,
+    updateLastAssistantLog,
   };
 
   return result;
