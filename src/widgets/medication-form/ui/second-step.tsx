@@ -97,7 +97,7 @@ export const MedicationFormOptionalForm = withForm({
                                 placeholder="Действующее вещество"
                                 value={subfield().state.value}
                                 maxlength={MAX_ACTIVE_SUBSTANCE_NAME_LEN}
-                                onChange={(e) => subfield().handleChange(e.target.value)}
+                                onInput={(e) => subfield().handleChange(e.target.value)}
                               />
                             );
                           }}
@@ -122,8 +122,8 @@ export const MedicationFormOptionalForm = withForm({
                                 id={subfield().name}
                                 placeholder="мг"
                                 value={subfield().state.value}
-                                onChange={(e) => subfield().handleChange(Number(e.target.value))}
-                                onBlur={() => field().handleChange(field().state.value)}
+                                onInput={(e) => subfield().handleChange(Number(e.target.value))}
+                                onBlur={field().handleBlur}
                                 state={
                                   transformFieldState(subfield) == FieldState.Error
                                     ? FieldState.Error
@@ -197,7 +197,7 @@ export const MedicationFormOptionalForm = withForm({
                                 placeholder="Начните вводить"
                                 value={subfield().state.value}
                                 maxlength={MAX_GROUP_NAME_LEN}
-                                onChange={(e) => subfield().handleChange(e.target.value)}
+                                onInput={(e) => subfield().handleChange(e.target.value)}
                               />
                               <Button
                                 class="optional-form__remove-field-button"
@@ -255,7 +255,7 @@ export const MedicationFormOptionalForm = withForm({
                   id={field().name}
                   maxlength={MAX_PRODUCER_NAME_LEN}
                   value={field().state.value}
-                  onChange={(e) => field().handleChange(e.target.value)}
+                  onInput={(e) => field().handleChange(e.target.value)}
                 />
               </LabelsWrapper>
             );
@@ -274,7 +274,7 @@ export const MedicationFormOptionalForm = withForm({
                   name={field().name}
                   id={field().name}
                   value={field().state.value}
-                  onChange={(e) => field().handleChange(e.currentTarget.value)}
+                  onInput={(e) => field().handleChange(e.currentTarget.value)}
                 />
               </LabelsWrapper>
             );
@@ -306,7 +306,7 @@ export const MedicationFormOptionalForm = withForm({
         />
         <props.form.Subscribe
           selector={(state) => ({
-            canSubmit: state.canSubmit && state.isValid,
+            canSubmit: state.canSubmit,
           })}
           children={(state) => {
             return (

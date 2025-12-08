@@ -71,7 +71,7 @@ export const MedicationFormRequiredForm = withForm({
                   id={field().name}
                   maxlength={MAX_NAME_LEN}
                   value={field().state.value}
-                  onChange={(e) => field().handleChange(e.currentTarget.value)}
+                  onInput={(e) => field().handleChange(e.currentTarget.value)}
                 />
               </LabelsWrapper>
             );
@@ -91,7 +91,7 @@ export const MedicationFormRequiredForm = withForm({
                   name={field().name}
                   id={field().name}
                   value={field().state.value}
-                  onChange={(e) => field().handleChange(e.currentTarget.value)}
+                  onInput={(e) => field().handleChange(e.currentTarget.value)}
                 />
               </LabelsWrapper>
             );
@@ -118,7 +118,7 @@ export const MedicationFormRequiredForm = withForm({
                     id={field().name}
                     maxlength={MAX_RELEASE_FORM_LEN}
                     value={field().state.value}
-                    onChange={(e) => field().handleChange(e.currentTarget.value)}
+                    onInput={(e) => field().handleChange(e.currentTarget.value)}
                   />
                 </PilledWrapper>
               </LabelsWrapper>
@@ -151,7 +151,7 @@ export const MedicationFormRequiredForm = withForm({
                     id={field().name}
                     placeholder="Количество"
                     value={field().state.value}
-                    onChange={(e) => field().handleChange(Number(e.currentTarget.value))}
+                    onInput={(e) => field().handleChange(Number(e.currentTarget.value))}
                     state={
                       transformFieldState(field) == FieldState.Error
                         ? FieldState.Error
@@ -166,7 +166,7 @@ export const MedicationFormRequiredForm = withForm({
                         id={field().name}
                         options={props.amountOptions ?? []}
                         value={field().state.value}
-                        onChange={(e) => field().handleChange(e.currentTarget.value)}
+                        onInput={(e) => field().handleChange(e.currentTarget.value)}
                       />
                     )}
                   />
@@ -179,7 +179,6 @@ export const MedicationFormRequiredForm = withForm({
           selector={(state) => ({
             canSubmit:
               state.canSubmit &&
-              state.isValid &&
               Object.values(state.values).every((field) => field) &&
               state.values.amount.value,
           })}
