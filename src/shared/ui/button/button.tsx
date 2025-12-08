@@ -21,6 +21,7 @@ export function Button(props: ButtonProps) {
     <button
       class={`${buttonProps.class ?? ''} button button_${buttonProps.colorStyle ?? ButtonStyle.brand} ${buttonProps.isDisabled ? 'button_disabled' : ''}`}
       aria-disabled={buttonProps.isDisabled ?? false}
+      disabled={buttonProps.isDisabled ?? false}
       {...otherProps}
     />
   );

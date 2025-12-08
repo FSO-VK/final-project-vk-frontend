@@ -8,3 +8,17 @@ export const transformFieldState = (field: Accessor<AnyFieldApi>) => {
   }
   return FieldState.None;
 };
+
+export const handleGrasefulFieldChange = (
+  field: Accessor<AnyFieldApi>,
+  value: unknown,
+  isValid: boolean,
+) => {
+  if (isValid || field().state.meta.isBlurred) {
+    field().handleChange(value);
+  }
+
+  if (!field().state.meta.isPristine && field().state.meta.isBlurred) {
+    field().handleChange(value);
+  }
+};
