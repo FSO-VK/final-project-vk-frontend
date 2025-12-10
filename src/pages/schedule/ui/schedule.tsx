@@ -25,14 +25,16 @@ export function SchedulePage() {
     <main class="schedule-page">
       <section class="schedule-page__calendar">
         <div class="schedule-page__current-date">{getDateFormatted(date)}</div>
-        <CalendarRowSection
-          days={days}
-          today={currentDay}
-          currentDay={selectedDay()}
-          onDateClick={(day: number) => {
-            setSelectedDay(day);
-          }}
-        />
+        <div class="schedule-page__calendar-row">
+          <CalendarRowSection
+            days={days}
+            today={currentDay}
+            currentDay={selectedDay()}
+            onDateClick={(day: number) => {
+              setSelectedDay(day);
+            }}
+          />
+        </div>
       </section>
       <EmptyScreen />
     </main>
