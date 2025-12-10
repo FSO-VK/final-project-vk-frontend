@@ -9,7 +9,7 @@ export const transformFieldState = (field: Accessor<AnyFieldApi>) => {
   return FieldState.None;
 };
 
-export const handleGrasefulFieldChange = (
+export const handleGracefulFieldChange = (
   field: Accessor<AnyFieldApi>,
   value: unknown,
   isValid: boolean,
