@@ -14,9 +14,10 @@ export function getCurrentWeek(time: Date): Day[] {
   const dayOfWeek = time.getDay();
 
   // because week starts from sunday
-  const durationFromMonday = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
+  const daysFromMonday = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
 
-  const day = new Date(time.getDate() - durationFromMonday);
+  const day = new Date(time);
+  day.setDate(time.getDate() - daysFromMonday);
 
   const formatter = new Intl.DateTimeFormat('ru-RU', {
     weekday: 'short',
@@ -25,7 +26,7 @@ export function getCurrentWeek(time: Date): Day[] {
   for (let i = 0; i < 7; i++) {
     const current = new Date(day);
     week.push({
-      day: current.getDate(),
+      date: current.getDate(),
       dayOfWeek: formatter.format(current),
     });
     day.setDate(day.getDate() + 1);

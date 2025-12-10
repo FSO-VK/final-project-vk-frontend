@@ -3,7 +3,7 @@ import { createSelector, For, type JSX } from 'solid-js';
 
 export interface Day {
   dayOfWeek: string;
-  day: number;
+  date: number;
 }
 
 export interface CalendarRowSectionProps extends JSX.HTMLAttributes<HTMLDivElement> {
@@ -31,10 +31,10 @@ export function CalendarRowSection(props: CalendarRowSectionProps) {
       <For each={props.days}>
         {(day) => (
           <div
-            class={`calendar-row__cell ${classModifier(day.day)}`}
-            onClick={[props.onDateClick, day.day]}
+            class={`calendar-row__cell ${classModifier(day.date)}`}
+            onClick={[props.onDateClick, day.date]}
           >
-            <div>{day.day}</div>
+            <div>{day.date}</div>
             <div>{day.dayOfWeek}</div>
           </div>
         )}

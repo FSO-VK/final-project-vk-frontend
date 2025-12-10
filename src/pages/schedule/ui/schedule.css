@@ -9,4 +9,10 @@
     text-align: center;
     color: var(--clr-brand-6);
   }
+
+  &__calendar-row {
+    inline-size: 100%;
+    max-inline-size: var(--size-10);
+    margin-inline: auto;
+  }
 }
