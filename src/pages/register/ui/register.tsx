@@ -1,4 +1,4 @@
-import { Button, Input, ButtonStyle, handleGrasefulFieldChange } from '@/shared/ui';
+import { Button, Input, ButtonStyle, handleGracefulFieldChange } from '@/shared/ui';
 import { A, useNavigate } from '@solidjs/router';
 import { createForm } from '@tanstack/solid-form';
 import { EMAIL_ERROR_STRINGS, emailValidator, MAX_EMAIL_LEN } from '@/entities/email';
@@ -97,11 +97,11 @@ export function RegisterPage(props: RegisterPageProps) {
               onFocusOut={(e) => {
                 field().handleBlur();
                 const value = (e.target as HTMLInputElement).value;
-                handleGrasefulFieldChange(field, value, !validateEmail(value));
+                handleGracefulFieldChange(field, value, !validateEmail(value));
               }}
               onInput={(e: InputEvent) => {
                 const value = (e.target as HTMLInputElement).value;
-                handleGrasefulFieldChange(field, value, !validateEmail(value));
+                handleGracefulFieldChange(field, value, !validateEmail(value));
               }}
               class="register-page__email"
             />
@@ -130,11 +130,11 @@ export function RegisterPage(props: RegisterPageProps) {
                 onFocusOut={(e) => {
                   field().handleBlur();
                   const value = (e.target as HTMLInputElement).value;
-                  handleGrasefulFieldChange(field, value, validatePassword(value) === undefined);
+                  handleGracefulFieldChange(field, value, validatePassword(value) === undefined);
                 }}
                 onInput={(e: InputEvent) => {
                   const value = (e.target as HTMLInputElement).value;
-                  handleGrasefulFieldChange(field, value, validatePassword(value) === undefined);
+                  handleGracefulFieldChange(field, value, validatePassword(value) === undefined);
                 }}
                 class="register-page__password"
                 value={field().state.value}
