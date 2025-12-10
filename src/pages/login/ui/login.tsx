@@ -7,7 +7,6 @@ import { MAX_PASSWORD_LEN } from '@/entities/password';
 import { Button, ButtonStyle } from '@/shared/ui';
 import { A } from '@solidjs/router';
 import './login.css';
-import { useLayoutStore } from '@/widgets/layouts/model/layout_solid';
 import { toast } from '@/features/toaster';
 
 export interface LoginPageProps {
@@ -17,14 +16,6 @@ export interface LoginPageProps {
 export function LoginPage(props: LoginPageProps) {
   const meActions = useMeActions();
   const navigate = useNavigate();
-  const layoutStore = useLayoutStore();
-
-  layoutStore.setNavbarState({
-    showBackButton: false,
-    showDropdownMenu: false,
-    dropdownMenuItems: [],
-    title: 'Вход',
-  });
 
   const form = createForm(() => ({
     defaultValues: {
@@ -98,14 +89,15 @@ export function LoginPage(props: LoginPageProps) {
           )}
         />
         <div class="login-page__button-container">
-          <Button colorStyle={ButtonStyle.secondary} type="button">
-            <A class="login-page__register-button" href={props.registerLocation ?? ''}>
+          <A class="login-page__register-button" href={props.registerLocation ?? ''}>
+            <Button colorStyle={ButtonStyle.secondary} type="button">
               Зарегистрироваться
-            </A>
-          </Button>
+            </Button>
+          </A>
           <form.Subscribe
             selector={(state) => ({
-              canSubmit: state.isTouched && state.isValid,
+              canSubmit: state.canSubmit,
+              isPristine: state.isPristine,
             })}
             children={(state) => {
               return (
@@ -113,7 +105,7 @@ export function LoginPage(props: LoginPageProps) {
                   class="login-page__submit-button"
                   colorStyle={ButtonStyle.brand}
                   type="submit"
-                  isDisabled={!state().canSubmit}
+                  isDisabled={!state().canSubmit || state().isPristine}
                 >
                   Войти
                 </Button>

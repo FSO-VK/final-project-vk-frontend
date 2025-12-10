@@ -36,6 +36,7 @@
     text-wrap-mode: wrap;
     text-wrap-style: pretty;
     text-align: center;
+    min-block-size: 1lh;
     grid-column: 2;
   }
 

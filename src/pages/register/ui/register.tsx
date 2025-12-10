@@ -1,4 +1,4 @@
-import { Button, Input, ButtonStyle } from '@/shared/ui';
+import { Button, Input, ButtonStyle, handleGracefulFieldChange } from '@/shared/ui';
 import { A, useNavigate } from '@solidjs/router';
 import { createForm } from '@tanstack/solid-form';
 import { EMAIL_ERROR_STRINGS, emailValidator, MAX_EMAIL_LEN } from '@/entities/email';
@@ -6,7 +6,6 @@ import { MAX_PASSWORD_LEN, PASSWORD_ERROR_STRINGS, passwordValidator } from '@/e
 import { useMeActions } from '@/entities/me';
 import './register.css';
 import { transformFieldState } from '@/shared/ui';
-import { useLayoutStore } from '@/widgets/layouts';
 import { toast } from '@/features/toaster';
 
 export interface RegisterPageProps {
@@ -16,15 +15,6 @@ export interface RegisterPageProps {
 export function RegisterPage(props: RegisterPageProps) {
   const meActions = useMeActions();
   const navigate = useNavigate();
-
-  const layoutStore = useLayoutStore();
-
-  layoutStore.setNavbarState({
-    showBackButton: false,
-    showDropdownMenu: false,
-    dropdownMenuItems: [],
-    title: 'Регистрация',
-  });
 
   const form = createForm(() => ({
     defaultValues: {
@@ -40,7 +30,30 @@ export function RegisterPage(props: RegisterPageProps) {
       // Will be removed when medications list will be there.
       navigate('/', { replace: true });
     },
+    validators: {
+      onChange: ({ value }) => {
+        return value.email && value.password && value.passwordConfirm
+          ? undefined
+          : 'Заполните обязательные поля';
+      },
+    },
   }));
+
+  const validateEmail = (email: string) => {
+    const validationResult = emailValidator.validate(email);
+    if (validationResult === undefined) {
+      return validationResult;
+    }
+    return EMAIL_ERROR_STRINGS[validationResult];
+  };
+
+  const validatePassword = (pass: string) => {
+    const validationResult = passwordValidator.validate(pass);
+    if (validationResult === undefined) {
+      return validationResult;
+    }
+    return PASSWORD_ERROR_STRINGS[validationResult];
+  };
 
   return (
     <main class="register-page">
@@ -65,11 +78,7 @@ export function RegisterPage(props: RegisterPageProps) {
           name="email"
           validators={{
             onChange: ({ value }) => {
-              const validationResult = emailValidator.validate(value);
-              if (validationResult === undefined) {
-                return validationResult;
-              }
-              return EMAIL_ERROR_STRINGS[validationResult];
+              return validateEmail(value);
             },
           }}
           children={(field) => (
@@ -85,9 +94,15 @@ export function RegisterPage(props: RegisterPageProps) {
               placeholder="Введите email"
               maxlength={MAX_EMAIL_LEN}
               state={transformFieldState(field)}
-              onFocusOut={(e: FocusEvent) =>
-                field().handleChange((e.target as HTMLInputElement).value)
-              }
+              onFocusOut={(e) => {
+                field().handleBlur();
+                const value = (e.target as HTMLInputElement).value;
+                handleGracefulFieldChange(field, value, !validateEmail(value));
+              }}
+              onInput={(e: InputEvent) => {
+                const value = (e.target as HTMLInputElement).value;
+                handleGracefulFieldChange(field, value, !validateEmail(value));
+              }}
               class="register-page__email"
             />
           )}
@@ -97,11 +112,7 @@ export function RegisterPage(props: RegisterPageProps) {
             name="password"
             validators={{
               onChange: ({ value }) => {
-                const validationResult = passwordValidator.validate(value);
-                if (validationResult === undefined) {
-                  return validationResult;
-                }
-                return PASSWORD_ERROR_STRINGS[validationResult];
+                return validatePassword(value);
               },
             }}
             children={(field) => (
@@ -116,9 +127,15 @@ export function RegisterPage(props: RegisterPageProps) {
                 placeholder="Введите пароль"
                 maxlength={MAX_PASSWORD_LEN}
                 state={transformFieldState(field)}
-                onInput={(e: InputEvent) =>
-                  field().handleChange((e.target as HTMLInputElement).value)
-                }
+                onFocusOut={(e) => {
+                  field().handleBlur();
+                  const value = (e.target as HTMLInputElement).value;
+                  handleGracefulFieldChange(field, value, validatePassword(value) === undefined);
+                }}
+                onInput={(e: InputEvent) => {
+                  const value = (e.target as HTMLInputElement).value;
+                  handleGracefulFieldChange(field, value, validatePassword(value) === undefined);
+                }}
                 class="register-page__password"
                 value={field().state.value}
               />
@@ -129,7 +146,10 @@ export function RegisterPage(props: RegisterPageProps) {
             validators={{
               onChangeListenTo: ['password'],
               onChange: ({ value, fieldApi }) => {
-                if (value !== '' && value !== fieldApi.form.getFieldValue('password')) {
+                if (
+                  fieldApi.state.meta.isTouched &&
+                  value !== fieldApi.form.getFieldValue('password')
+                ) {
                   return 'Введенные пароли не совпадают';
                 }
                 return;
@@ -148,14 +168,10 @@ export function RegisterPage(props: RegisterPageProps) {
                 maxlength={MAX_PASSWORD_LEN}
                 state={transformFieldState(field)}
                 class="register-page__password-confirm"
-                onFocusOut={(e: FocusEvent) =>
-                  field().handleChange((e.target as HTMLInputElement).value)
-                }
                 onInput={(e: InputEvent) => {
-                  if (!field().state.meta.isValid) {
-                    return field().handleChange((e.target as HTMLInputElement).value);
-                  }
+                  field().handleChange((e.target as HTMLInputElement).value);
                 }}
+                onBlur={field().handleBlur}
                 value={field().state.value}
               />
             )}
@@ -165,17 +181,15 @@ export function RegisterPage(props: RegisterPageProps) {
           <A href={props.loginLocation}>Уже есть аккаунт?</A>
           <form.Subscribe
             selector={(state) => ({
-              canSubmit:
-                state.isTouched &&
-                state.isFieldsValid &&
-                Object.values(state.values).every((field) => field.length > 0),
+              canSubmit: state.canSubmit,
+              isPristine: state.isPristine,
             })}
             children={(state) => {
               return (
                 <Button
                   colorStyle={ButtonStyle.brand}
                   type="submit"
-                  isDisabled={!state().canSubmit}
+                  isDisabled={!state().canSubmit || state().isPristine}
                 >
                   Зарегистрироваться
                 </Button>

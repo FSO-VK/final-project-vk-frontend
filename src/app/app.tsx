@@ -84,9 +84,7 @@ export function App(props: AppProps) {
 
               <Route
                 path="/"
-                component={(c) => (
-                  <NavbarLayout onBackClick={() => handleBackClick()}>{c.children}</NavbarLayout>
-                )}
+                component={(c) => <FullscreenFixedLayout>{c.children}</FullscreenFixedLayout>}
               >
                 <Route path="/register" component={() => <RegisterPage loginLocation="/login" />} />
                 <Route path="/login" component={() => <LoginPage registerLocation="/register" />} />
