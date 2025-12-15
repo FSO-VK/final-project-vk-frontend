@@ -1,0 +1,5 @@
+.medication-select-form {
+  &__header {
+    color: var(--clr-brand-6);
+  }
+}
