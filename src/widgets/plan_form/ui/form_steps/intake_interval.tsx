@@ -25,10 +25,19 @@ export const IntakeIntervalForm = withForm({
     return (
       <div class="intake-interval-form">
         <h2 class="intake-interval-form__header">Когда вы планируете принимать препарат?</h2>
+
         <P>Укажите продолжительность курса и настройте интервал</P>
         <form class="intake-interval-form__form">
           <props.form.Field
             name="intakeStart"
+            validators={{
+              onSubmit: ({ value }) => {
+                if (!value) {
+                  return 'Заполните это поле';
+                }
+                return;
+              },
+            }}
             children={(field) => {
               return (
                 <LabelsWrapper
@@ -41,6 +50,10 @@ export const IntakeIntervalForm = withForm({
                     id={field().name}
                     value={field().state.value}
                     onInput={(e) => field().handleChange(e.currentTarget.value)}
+                    state={
+                      field().state.meta.isValid ? FieldState.None : transformFieldState(field)
+                    }
+                    onBlur={() => field().handleBlur()}
                   />
                 </LabelsWrapper>
               );
@@ -56,6 +69,16 @@ export const IntakeIntervalForm = withForm({
                   new Date(value) < new Date(fieldApi.form.getFieldValue('intakeStart'))
                 ) {
                   return 'Дата окончания должна быть позже даты начала';
+                }
+
+                if (new Date(value) < new Date(Date.now())) {
+                  return 'Дата окончания должна быть в будущем';
+                }
+                return;
+              },
+              onSubmit: ({ value }) => {
+                if (!value) {
+                  return 'Заполните это поле';
                 }
                 return;
               },
@@ -75,6 +98,7 @@ export const IntakeIntervalForm = withForm({
                       field().state.meta.isValid ? FieldState.None : transformFieldState(field)
                     }
                     onInput={(e) => field().handleChange(e.currentTarget.value)}
+                    onBlur={() => field().handleBlur()}
                   />
                 </LabelsWrapper>
               );
@@ -108,6 +132,7 @@ export const IntakeIntervalForm = withForm({
                       }
                       onInput={(e) => field().handleChange(Number(e.currentTarget.value))}
                       max={ONE_YEAR}
+                      onBlur={() => field().handleBlur()}
                     />
                   </LabelsWrapper>
                 );

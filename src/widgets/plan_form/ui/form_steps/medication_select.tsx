@@ -1,15 +1,15 @@
 import { withForm } from '@/shared/lib';
 import { LabelsWrapper, RadioGroup, SearchFilter } from '@/shared/ui';
-import { type ShortMedication } from '@/entities/medication';
+import { Medication } from '@/entities/medication';
 import { createMemo, createSignal } from 'solid-js';
 import './medication_select.css';
 
 export const MedicationSelectForm = withForm({
   defaultValues: {
-    medicationId: '',
+    medication: null as null | Medication,
   },
   props: {
-    medications: [] as ShortMedication[],
+    medications: [] as Medication[],
   },
   render: function Render(props) {
     const medOptions = createMemo(() =>
@@ -37,10 +37,10 @@ export const MedicationSelectForm = withForm({
 
         <form class="medication-select-form__options">
           <props.form.Field
-            name="medicationId"
+            name="medication"
             validators={{
               onSubmit: ({ value }) => {
-                if (!value) {
+                if (value === null) {
                   return 'Выберите препарат';
                 }
                 return;
@@ -50,7 +50,6 @@ export const MedicationSelectForm = withForm({
               return (
                 <LabelsWrapper
                   label="Найдите лекарство в поиске или сразу выберите из списка"
-                  labelFor={field().name}
                   feedbackMessage={field().state.meta.errors.join(', ')}
                 >
                   <SearchFilter
@@ -62,9 +61,9 @@ export const MedicationSelectForm = withForm({
                     name={field().name}
                     options={filtered()}
                     selectedIdx={selectedIdx()}
-                    onOptionSelected={(opt, idx) => {
+                    onOptionSelected={(_, idx) => {
                       setSelectedIdx(idx);
-                      field().handleChange(opt.value);
+                      field().handleChange(props.medications[idx]);
                     }}
                   />
                 </LabelsWrapper>

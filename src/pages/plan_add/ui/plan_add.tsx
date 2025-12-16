@@ -22,7 +22,7 @@ export function PlanAddPage() {
     <Suspense fallback={<CenteredLoaderSpinner />}>
       <Show when={medications()}>
         <main class="plan-add-page">
-          <PlanForm medications={medications() ?? []} />
+          <PlanForm medications={medications() ?? []} onSubmit={(plan) => console.log(plan)} />
         </main>
       </Show>
     </Suspense>

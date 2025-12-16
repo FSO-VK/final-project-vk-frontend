@@ -19,9 +19,15 @@ export const DayPeriodForm = withForm({
   defaultValues: {
     period: null as PlanDayPeriod | null,
   },
-  props: {},
+  props: {
+    initialSelected: undefined as PlanDayPeriod | undefined,
+  },
   render: function Render(props) {
-    const [selectedIdx, setSelectedIdx] = createSignal(undefined as number | undefined);
+    const [selectedIdx, setSelectedIdx] = createSignal(
+      props.initialSelected
+        ? DAY_PERIOD_OPTIONS.findIndex((opt) => opt.value === props.initialSelected)
+        : undefined,
+    );
 
     return (
       <div class="day-period-form">

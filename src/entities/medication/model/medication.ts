@@ -60,11 +60,6 @@ export interface Medication extends MedicationDraft {
   id: string;
 }
 
-export interface ShortMedication {
-  id: string;
-  name: string;
-}
-
 export interface AssistantQuery {
   query: string;
   answer?: string;

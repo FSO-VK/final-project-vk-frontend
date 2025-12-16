@@ -30,6 +30,7 @@ export function RadioGroup(props: RadioGroupProps) {
               <div
                 class={`radiogroup__option ${idx() === otherProps.selectedIdx ? 'radiogroup__option_active' : ''}`}
                 onClick={() => inputElement.click()}
+                id={otherProps.name}
               >
                 <input
                   ref={inputElement}
