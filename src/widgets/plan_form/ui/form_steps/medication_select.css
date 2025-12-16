@@ -2,4 +2,9 @@
   &__header {
     color: var(--clr-brand-6);
   }
+
+  &__radiogroup {
+    overflow-y: auto;
+    max-block-size: calc(8 * var(--lh-8));
+  }
 }

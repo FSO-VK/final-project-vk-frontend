@@ -39,12 +39,13 @@ export const MedicationSelectForm = withForm({
           searchValues={medOptions()}
           onFiltered={(filtered) => handleFiltered(filtered)}
         />
-        <div class="medication-select__options">
+        <form class="medication-select-form__options">
           <props.form.Field
             name="medicationId"
             children={(field) => {
               return (
                 <RadioGroup
+                  class="medication-select-form__radiogroup"
                   name={field().name}
                   options={filtered()}
                   selectedIdx={selectedIdx()}
@@ -52,14 +53,14 @@ export const MedicationSelectForm = withForm({
                     setSelectedIdx(idx);
                     field().handleChange(opt.value);
                     props.form.handleSubmit().catch((e) => {
-                      console.error(e);
+                      console.error('failed to submit medication select form: ', e);
                     });
                   }}
                 />
               );
             }}
           />
-        </div>
+        </form>
       </div>
     );
   },
