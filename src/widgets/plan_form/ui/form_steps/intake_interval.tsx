@@ -10,6 +10,8 @@ import {
 import { Show } from 'solid-js';
 import './intake_interval.css';
 
+const ONE_YEAR = 365;
+
 export const IntakeIntervalForm = withForm({
   defaultValues: {
     intakeStart: '',
@@ -105,6 +107,7 @@ export const IntakeIntervalForm = withForm({
                         field().state.meta.isValid ? FieldState.None : transformFieldState(field)
                       }
                       onInput={(e) => field().handleChange(Number(e.currentTarget.value))}
+                      max={ONE_YEAR}
                     />
                   </LabelsWrapper>
                 );
