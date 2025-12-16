@@ -2,7 +2,7 @@ import { medicationApi } from '@/shared/api';
 import { medicationStoreFabric } from './model/medication_solid';
 import { MedicationActions } from './model/medication';
 
-export type { Medication, ShortMedication, MedicationStore } from './model/medication';
+export type { Medication, MedicationStore } from './model/medication';
 
 export function createMedicationStore() {
   return medicationStoreFabric.createMedicationStore(medicationApi);
