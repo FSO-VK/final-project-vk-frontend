@@ -13,7 +13,6 @@ export interface AddPlanOptions {
 export const AddPlanDTO = z.object({
   id: z.uuid(),
   medicationId: z.uuid(),
-  userId: z.uuid(),
   amount: z.object({
     value: z.number(),
     unit: z.string(),
@@ -43,7 +42,6 @@ export async function addMock(_: AddPlanOptions): Promise<z.infer<typeof AddPlan
   return await Promise.resolve(
     AddPlanDTO.parse({
       medicationId: '019b2759-7bc6-731a-8837-e4cdf8aa1700',
-      userId: '343ee34d-7ff4-4b72-b76c-19d10f878a60',
       amount: {
         value: 5,
         unit: 'мл',

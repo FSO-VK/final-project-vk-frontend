@@ -28,9 +28,22 @@ export interface Plan {
   recurrenceRule: string[];
 }
 
+export interface IntakeRecord {
+  id: string;
+  medicationId: string;
+  medicationName: string;
+  amount: MedicationAmount;
+  status: 'Запланировано' | 'Принято' | 'Пропущено';
+  plannedAt: Date;
+  takenAt?: Date;
+}
+
+export type Schedule = IntakeRecord[];
+
 export interface PlanStore {
   // Getters
   allPlans: () => Promise<Plan[]>;
+  getSchedule: (day: Date) => Promise<Schedule>;
 
   // Setters
   addPlan: (p: Plan) => void;

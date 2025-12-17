@@ -24,7 +24,7 @@ import { MedicationPage } from '@/pages/medication';
 import { NotFoundPage } from '@/pages/not_found';
 import { lazy } from 'solid-js';
 import { LlmAssistantPage } from '@/pages/llm_assistant';
-import { SchedulePage } from '@/pages/planning';
+import { PlanningPage } from '@/pages/planning';
 import { InstructionPage } from '@/pages/instruction';
 import { PlanAddPage } from '@/pages/plan_add';
 
@@ -207,7 +207,7 @@ export function App(props: AppProps) {
                   </NavTabbarLayout>
                 )}
               >
-                <Route path="/" component={() => <SchedulePage />} />
+                <Route path="/" component={() => <PlanningPage />} />
                 <Route path="/add" component={() => <PlanAddPage />} />
               </Route>
 
