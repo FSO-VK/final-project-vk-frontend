@@ -30,9 +30,35 @@ export const AddPlanDTO = z.object({
   recurrenceRule: z.array(z.string()),
 });
 
+function toIsoString(date: Date) {
+  const tzo = -date.getTimezoneOffset(),
+    dif = tzo >= 0 ? '+' : '-',
+    pad = function (num: number) {
+      return (num < 10 ? '0' : '') + num;
+    };
+
+  return (
+    date.getFullYear() +
+    '-' +
+    pad(date.getMonth() + 1) +
+    '-' +
+    pad(date.getDate()) +
+    'T' +
+    pad(date.getHours()) +
+    ':' +
+    pad(date.getMinutes()) +
+    ':' +
+    pad(date.getSeconds()) +
+    dif +
+    pad(Math.floor(Math.abs(tzo) / 60)) +
+    ':' +
+    pad(Math.abs(tzo) % 60)
+  );
+}
+
 export async function add(options: AddPlanOptions): Promise<z.infer<typeof AddPlanDTO>> {
   const body = await backendClient.post('/planning/plan', {
-    body: options,
+    body: { ...options, startDate: toIsoString(options.startDate) },
     useCredentials: true,
   });
   return AddPlanDTO.parse(body);
