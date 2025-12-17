@@ -15,4 +15,6 @@ export { WarningIcon } from './warning';
 export { ErrorIcon } from './error';
 export { PaperIcon } from './paper';
 export { ArrowUpIcon, NakedArrowDownIcon } from './arrow';
+export { SearchIcon } from './search';
+export { TimeIcon } from './time';
 export { type IconComponent, IconStyle, type IconProps } from './icon';

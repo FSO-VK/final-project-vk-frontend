@@ -26,6 +26,7 @@ import { lazy } from 'solid-js';
 import { LlmAssistantPage } from '@/pages/llm_assistant';
 import { SchedulePage } from '@/pages/schedule';
 import { InstructionPage } from '@/pages/instruction';
+import { PlanAddPage } from '@/pages/plan_add';
 
 const Toaster = lazy(async () => {
   const { Toaster } = await import('@/features/toaster');
@@ -196,16 +197,19 @@ export function App(props: AppProps) {
 
               <Route
                 path="/planning"
-                component={() => (
+                component={(c) => (
                   <NavTabbarLayout
                     onBackClick={() => handleBackClick()}
                     currentTabBarOption={1}
                     tabbarOptions={tabbarOptions}
                   >
-                    <SchedulePage />
+                    {c.children}
                   </NavTabbarLayout>
                 )}
-              />
+              >
+                <Route path="/" component={() => <SchedulePage />} />
+                <Route path="/add" component={() => <PlanAddPage />} />
+              </Route>
 
               <Route
                 path="/me"

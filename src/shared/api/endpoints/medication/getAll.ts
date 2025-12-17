@@ -41,8 +41,8 @@ export async function getAllMock(): Promise<z.infer<typeof GetAllMedicationsDTO>
         releaseDate: new Date('2023-12-31'),
       },
       {
-        id: '23637986-6453-43ad-9d10-7a7c8a271c71',
-        name: 'Фарингосепт',
+        id: '23637986-6453-43ad-9d10-7a7c8a271c72',
+        name: 'Терафлю',
         internationalName: 'Амбазон',
         amount: {
           value: 20,
@@ -65,7 +65,7 @@ export async function getAllMock(): Promise<z.infer<typeof GetAllMedicationsDTO>
         releaseDate: new Date('2023-12-31'),
       },
       {
-        id: '23637986-6453-43ad-9d10-7a7c8a271c71',
+        id: '23637986-6453-43ad-9d10-7a7c8a271c73',
         name: 'Фарингосепт',
         internationalName: 'Амбазон',
         amount: {

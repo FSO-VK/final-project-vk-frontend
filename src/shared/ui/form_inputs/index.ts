@@ -2,6 +2,7 @@ export {
   FieldState,
   HiddenInputField,
   InputField,
+  TimeField,
   SelectField,
   TextareaField,
   DateField,

@@ -24,17 +24,19 @@ export function InputField(props: InputFieldProps) {
       class={`input-field ${props.state ? stateToClass[props.state] : stateToClass[FieldState.None]} input-field_border`}
     >
       <input {...props} class={`input-field__input ${props.inputClass}`} />
-      <Show when={props.afterElements && props.state !== FieldState.None}>
+      <Show when={props.afterElements !== undefined || props.state !== FieldState.None}>
         <div class="input-field__after-elements">
           <Show when={props.afterElements !== undefined}>{props.afterElements}</Show>
-          <Switch>
-            <Match when={props.state === FieldState.Success}>
-              <img alt="Галочка" src={CheckMarkSvg} class="input-field__state-icon" />
-            </Match>
-            <Match when={props.state === FieldState.Error}>
-              <img alt="Крестик" src={CrossMarkSvg} class="input-field__state-icon" />
-            </Match>
-          </Switch>
+          <Show when={props.state !== FieldState.None}>
+            <Switch>
+              <Match when={props.state === FieldState.Success}>
+                <img alt="Галочка" src={CheckMarkSvg} class="input-field__state-icon" />
+              </Match>
+              <Match when={props.state === FieldState.Error}>
+                <img alt="Крестик" src={CrossMarkSvg} class="input-field__state-icon" />
+              </Match>
+            </Switch>
+          </Show>
         </div>
       </Show>
     </div>

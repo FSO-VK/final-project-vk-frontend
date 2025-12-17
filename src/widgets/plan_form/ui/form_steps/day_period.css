@@ -1,0 +1,5 @@
+.day-period-form {
+  &__header {
+    color: var(--clr-brand-6);
+  }
+}
