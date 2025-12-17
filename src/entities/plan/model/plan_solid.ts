@@ -16,8 +16,8 @@ function createPlanStore(planApi: PlanApi): PlanStore {
   };
 
   const getSchedule = async (d: Date) => {
-    const start = new Date(d.getFullYear(), d.getMonth(), d.getDay(), 0, 0, 0, 0);
-    const end = new Date(d.getFullYear(), d.getMonth(), d.getDay(), 23, 59, 59, 999);
+    const start = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 0, 0, 0, 0);
+    const end = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 23, 59, 59, 999);
     const schedule = await planApi.getSchedule({
       startDate: start,
       endDate: end,

@@ -1,9 +1,9 @@
 import { createResource, createSignal, Suspense } from 'solid-js';
 import { useLayoutStore } from '@/widgets/layouts';
-import { CalendarRowSection, type Day } from './calendar';
+import { CalendarRowSection } from './calendar';
 import './schedule.css';
 import { EmptyScreen } from '@/shared/ui/empty_screen/empty_screen';
-import { getCurrentWeek, getDateFormatted } from './date';
+import { ExtendedDay, getCurrentWeek, getDateFormatted } from './date';
 import { createMemo, Show } from 'solid-js';
 import { IntakeRecordCard, usePlanStore } from '@/entities/plan';
 import { For } from 'solid-js';
@@ -21,14 +21,12 @@ export function SchedulePage() {
   });
 
   const date = new Date();
-  const days: Day[] = getCurrentWeek(date);
+  const days: ExtendedDay[] = getCurrentWeek(date);
   const currentDay = date.getDate();
 
   const [selectedDay, setSelectedDay] = createSignal(currentDay);
   const selectedDate = createMemo(() => {
-    const d = new Date(Date.now());
-    d.setDate(selectedDay());
-    return d;
+    return days.find((d) => d.date === selectedDay())?.dateObj;
   });
 
   const timeFormatter = Intl.DateTimeFormat('ru-RU', {
@@ -40,6 +38,9 @@ export function SchedulePage() {
   const [currentSchedule] = createResource(
     selectedDate,
     async (day) => {
+      if (!day) {
+        return undefined;
+      }
       const schedule = await planStore.getSchedule(day);
       const scheduleMap = new Map<string, IntakeRecord[]>();
       schedule.forEach((intakeRecord) => {

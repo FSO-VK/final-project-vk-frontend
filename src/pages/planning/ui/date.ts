@@ -10,7 +10,11 @@ export function getDateFormatted(date: Date): string {
   return formatted.charAt(0).toUpperCase() + formatted.slice(1);
 }
 
-export function getCurrentWeek(time: Date): Day[] {
+export interface ExtendedDay extends Day {
+  dateObj: Date;
+}
+
+export function getCurrentWeek(time: Date): ExtendedDay[] {
   const dayOfWeek = time.getDay();
 
   // because week starts from sunday
@@ -22,12 +26,13 @@ export function getCurrentWeek(time: Date): Day[] {
   const formatter = new Intl.DateTimeFormat('ru-RU', {
     weekday: 'short',
   });
-  const week: Day[] = [];
+  const week: ExtendedDay[] = [];
   for (let i = 0; i < 7; i++) {
     const current = new Date(day);
     week.push({
       date: current.getDate(),
       dayOfWeek: formatter.format(current),
+      dateObj: new Date(current),
     });
     day.setDate(day.getDate() + 1);
   }
