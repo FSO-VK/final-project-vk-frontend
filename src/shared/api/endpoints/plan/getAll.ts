@@ -17,16 +17,15 @@ export async function getAllMock(): Promise<z.infer<typeof GetAllPlansDTO>> {
   return await Promise.resolve({
     allUserPlans: [
       AddPlanDTO.parse({
-        medicationId: '019b2759-7bc6-731a-8837-e4cdf8aa1700',
-        userId: '343ee34d-7ff4-4b72-b76c-19d10f878a60',
+        medicationId: '23637986-6453-43ad-9d10-7a7c8a271c71',
         amount: {
           value: 5,
           unit: 'мл',
         },
         condition: 'Надо принять аспирин с верхней полки',
         status: 'active',
-        startDate: '2025-12-15T00:00:00+03:00',
-        endDate: '2027-02-28T00:00:00Z',
+        startDate: '2025-12-15',
+        endDate: '2027-02-28',
         recurrenceRule: [
           'DTSTART;TZID=:20251215T000000\nRRULE:FREQ=WEEKLY;INTERVAL=2;UNTIL=20270228T000000Z;BYDAY=MO;BYHOUR=12;BYMINUTE=45',
           'DTSTART;TZID=:20251215T000000\nRRULE:FREQ=DAILY;UNTIL=20270228T000000Z;BYHOUR=20;BYMINUTE=15',
@@ -34,16 +33,47 @@ export async function getAllMock(): Promise<z.infer<typeof GetAllPlansDTO>> {
         id: '019b2759-dc5b-7291-bf1b-b7077bd62752',
       }),
       AddPlanDTO.parse({
-        medicationId: '019b2759-7bc6-731a-8837-e4cdf8aa1700',
-        userId: '343ee34d-7ff4-4b72-b76c-19d10f878a60',
+        medicationId: '23637986-6453-43ad-9d10-7a7c8a271c71',
+        amount: {
+          value: 5,
+          unit: 'мл',
+        },
+        condition: 'Надо принять аспирин с верхней полки',
+        status: 'finished',
+        startDate: '2025-12-15',
+        endDate: '2027-02-28',
+        recurrenceRule: [
+          'DTSTART;TZID=:20251215T000000\nRRULE:FREQ=WEEKLY;INTERVAL=2;UNTIL=20270228T000000Z;BYDAY=MO;BYHOUR=12;BYMINUTE=45',
+          'DTSTART;TZID=:20251215T000000\nRRULE:FREQ=DAILY;UNTIL=20270228T000000Z;BYHOUR=20;BYMINUTE=15',
+        ],
+        id: '019b2759-dc5b-7291-bf1b-b7077bd62752',
+      }),
+      AddPlanDTO.parse({
+        medicationId: '23637986-6453-43ad-9d10-7a7c8a271c71',
         amount: {
           value: 5,
           unit: 'мл',
         },
         condition: 'Надо принять аспирин с верхней полки',
         status: 'active',
-        startDate: '2025-12-15T00:00:00+03:00',
-        endDate: '2027-02-28T00:00:00Z',
+        startDate: '2025-12-15',
+        endDate: '2027-02-28',
+        recurrenceRule: [
+          'DTSTART;TZID=:20251215T000000\nRRULE:FREQ=WEEKLY;INTERVAL=2;UNTIL=20270228T000000Z;BYDAY=MO;BYHOUR=12;BYMINUTE=45',
+          'DTSTART;TZID=:20251215T000000\nRRULE:FREQ=DAILY;UNTIL=20270228T000000Z;BYHOUR=20;BYMINUTE=15',
+        ],
+        id: '019b2759-dc5b-7291-bf1b-b7077bd62752',
+      }),
+      AddPlanDTO.parse({
+        medicationId: '23637986-6453-43ad-9d10-7a7c8a271c71',
+        amount: {
+          value: 5,
+          unit: 'мл',
+        },
+        condition: 'Надо принять аспирин с верхней полки',
+        status: 'finished',
+        startDate: '2025-12-15',
+        endDate: '2027-02-28',
         recurrenceRule: [
           'DTSTART;TZID=:20251215T000000\nRRULE:FREQ=WEEKLY;INTERVAL=2;UNTIL=20270228T000000Z;BYDAY=MO;BYHOUR=12;BYMINUTE=45',
           'DTSTART;TZID=:20251215T000000\nRRULE:FREQ=DAILY;UNTIL=20270228T000000Z;BYHOUR=20;BYMINUTE=15',

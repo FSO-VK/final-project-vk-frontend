@@ -1,0 +1,29 @@
+.plans-page {
+  &__header {
+    color: var(--clr-brand-6);
+  }
+
+  &__finished-plans {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-2);
+  }
+
+  &__active-plans {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-2);
+  }
+
+  &__plans-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-1);
+  }
+
+  &__all-plans {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-3);
+  }
+}
