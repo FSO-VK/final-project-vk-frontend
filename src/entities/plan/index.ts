@@ -16,3 +16,4 @@ export function usePlanActions() {
 }
 
 export { IntakeRecordCard } from './ui/intake_record';
+export { PlanCard } from './ui/plan';

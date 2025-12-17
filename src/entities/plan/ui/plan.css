@@ -1,0 +1,11 @@
+.plan-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--size-1);
+  padding: var(--size-2) var(--size-1);
+  background-color: var(--clr-background);
+
+  &__header {
+    font-weight: var(--fw-semi-bold);
+  }
+}

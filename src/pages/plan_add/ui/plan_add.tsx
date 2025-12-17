@@ -27,7 +27,7 @@ export function PlanAddPage() {
     planActions.addPlan(plan).then(
       () => {
         toast.success('План успешно добавлен');
-        navigate('/');
+        navigate('/planning');
       },
       (e) => {
         console.log(e);

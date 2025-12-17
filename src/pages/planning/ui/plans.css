@@ -1,0 +1,43 @@
+.plans-page {
+  &__header {
+    color: var(--clr-brand-6);
+  }
+
+  &__finished-plans {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-2);
+  }
+
+  &__active-plans {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-2);
+  }
+
+  &__plans-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-1);
+  }
+
+  &__all-plans {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-3);
+  }
+
+  &__add-plan-options {
+    position: fixed;
+    inset-block-end: calc(var(--size-3) + var(--size-5) + var(--size-2));
+    inset-inline-end: var(--size-3);
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-3);
+  }
+
+  &__add-plan-button-icon {
+    inline-size: var(--size-5);
+  }
+}
