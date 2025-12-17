@@ -14,3 +14,5 @@ const planActions = new PlanActions(planApi, planStore);
 export function usePlanActions() {
   return planActions;
 }
+
+export { IntakeRecordCard } from './ui/intake_record';

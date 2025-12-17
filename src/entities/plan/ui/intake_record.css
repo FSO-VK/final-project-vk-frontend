@@ -1,0 +1,21 @@
+.intake-record-card {
+  background-color: var(--clr-background);
+  padding: var(--size-1) var(--size-2);
+  border-radius: var(--size-1);
+
+  &__top-block {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: var(--size-1);
+    align-items: center;
+  }
+
+  &__taken-at {
+    color: var(--clr-success-5);
+  }
+
+  &__intake-icon {
+    inline-size: var(--size-4);
+  }
+}

@@ -17,4 +17,5 @@ export { PaperIcon } from './paper';
 export { ArrowUpIcon, NakedArrowDownIcon } from './arrow';
 export { SearchIcon } from './search';
 export { TimeIcon } from './time';
+export { CircleIcon, CircleOkIcon, CircleErrorIcon } from './circle';
 export { type IconComponent, IconStyle, type IconProps } from './icon';
