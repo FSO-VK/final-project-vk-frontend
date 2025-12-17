@@ -1,8 +1,8 @@
 import { useMedicationStore } from '@/entities/medication';
 import { usePlanStore } from '@/entities/plan';
 import { PlanCard } from '@/entities/plan';
-import { CenteredLoaderSpinner } from '@/shared/ui';
-import { createAsync } from '@solidjs/router';
+import { BubblePlusIcon, CenteredLoaderSpinner, IconStyle } from '@/shared/ui';
+import { A, createAsync } from '@solidjs/router';
 import { createMemo, For, Suspense, Show } from 'solid-js';
 import { type Plan } from '@/entities/plan';
 import { type Medication } from '@/entities/medication';
@@ -73,6 +73,14 @@ export function PlansPage() {
               </div>
             </section>
           </Show>
+        </div>
+        <div class="plans-page__add-plan-options">
+          <A href="/planning/add" class="plans-page__add-plan-button">
+            <BubblePlusIcon
+              iconStyle={IconStyle.Active}
+              elementClass="plans-page__add-plan-button-icon"
+            />
+          </A>
         </div>
       </Suspense>
     </main>
