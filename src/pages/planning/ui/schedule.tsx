@@ -52,7 +52,7 @@ export function SchedulePage() {
         }
       });
       return {
-        keys: Array.from(scheduleMap.keys()),
+        keys: Array.from(scheduleMap.keys()).sort(),
         values: schedule,
         map: scheduleMap,
       };
