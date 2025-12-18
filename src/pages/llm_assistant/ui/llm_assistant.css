@@ -64,6 +64,10 @@
       outline: none;
     }
 
+    &::placeholder {
+      color: var(--clr-secondary);
+    }
+
     background-color: transparent;
   }
 
@@ -75,6 +79,6 @@
   }
 
   &__submit-query-icon {
-    inline-size: var(--size-3);
+    inline-size: var(--size-4);
   }
 }

@@ -89,6 +89,10 @@ export function LlmAssistantPage(props: LlmAssistantPageProps) {
           when={medication() !== undefined && medication() !== null}
           fallback=<SomethingBadScreen reason="Препарат не найден (HTTP 404)" />
         >
+          <div class="llm-assistant-page__assistant-greeting">
+            Привет! Я могу помочь вам с вопросами по препарату. Cпросите меня о чём-нибудь.
+            Например: "Какая дозировка препарата?"
+          </div>
           <For each={assistantLog()}>
             {(queryLog) => {
               return (
@@ -123,6 +127,7 @@ export function LlmAssistantPage(props: LlmAssistantPageProps) {
                       id={field().name}
                       maxlength={300}
                       value={field().state.value}
+                      placeholder="Ваш вопрос"
                       onInput={(e) => {
                         field().handleChange(e.target.value);
                       }}
@@ -133,12 +138,23 @@ export function LlmAssistantPage(props: LlmAssistantPageProps) {
                   );
                 }}
               />
-              <button class="llm-assistant-page__submit-query-button" type="submit">
-                <ArrowUpIcon
-                  elementClass="llm-assistant-page__submit-query-icon"
-                  iconStyle={IconStyle.Active}
-                />
-              </button>
+              <form.Subscribe
+                selector={(state) => ({
+                  canSubmit: state.canSubmit && state.values.query?.trim().length > 0,
+                })}
+                children={(state) => (
+                  <button
+                    class="llm-assistant-page__submit-query-button"
+                    type="submit"
+                    disabled={!state().canSubmit || submitBlocked()}
+                  >
+                    <ArrowUpIcon
+                      elementClass="llm-assistant-page__submit-query-icon"
+                      iconStyle={state().canSubmit ? IconStyle.Active : IconStyle.Inactive}
+                    />
+                  </button>
+                )}
+              />
             </form>
           </div>
         </Show>
