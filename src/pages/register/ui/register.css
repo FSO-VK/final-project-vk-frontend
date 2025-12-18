@@ -1,0 +1,25 @@
+.register-page {
+  &__header {
+    color: var(--clr-brand-7);
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-3);
+  }
+
+  &__password-block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-1);
+  }
+
+  &__button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: baseline;
+    gap: var(--size-3);
+  }
+}

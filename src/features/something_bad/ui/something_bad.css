@@ -1,0 +1,23 @@
+.something-bad-screen {
+  text-align: left;
+  margin-bottom: var(--size-3);
+
+  &__img-container {
+    padding: var(--size-3) 0px;
+  }
+
+  &__img {
+    inline-size: min(50%, 50%);
+    margin: auto;
+  }
+
+  &__header {
+    text-align: center;
+    margin: var(--size-2) auto;
+  }
+
+  &__reason {
+    text-align: center;
+    color: var(--clr-secondary);
+  }
+}

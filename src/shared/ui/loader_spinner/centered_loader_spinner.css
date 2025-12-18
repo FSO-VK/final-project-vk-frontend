@@ -1,0 +1,11 @@
+.centered-wrapper {
+  position: fixed;
+  inset-inline-start: 50%;
+  inset-block-start: 50%;
+  transform: translate(-50%, -50%);
+
+  &_normal-size {
+    inline-size: var(--size-5);
+    block-size: var(--size-5);
+  }
+}

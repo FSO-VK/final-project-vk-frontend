@@ -1,0 +1,29 @@
+.icon {
+  &_active {
+    fill: var(--clr-brand-7);
+  }
+
+  &_inactive {
+    fill: var(--clr-disable);
+  }
+
+  &_danger {
+    fill: var(--clr-danger-7);
+  }
+
+  &_secondary {
+    fill: var(--clr-secondary);
+  }
+
+  &_active-white {
+    fill: var(--clr-gray-1);
+  }
+
+  &_success {
+    fill: var(--clr-success-7);
+  }
+
+  &_warning {
+    fill: var(--clr-warning-6);
+  }
+}

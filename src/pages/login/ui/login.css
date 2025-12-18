@@ -1,0 +1,28 @@
+.login-page {
+  &__header {
+    color: var(--clr-brand-7);
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-3);
+  }
+
+  &__button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: baseline;
+    gap: var(--size-3);
+  }
+
+  &__register-button {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  &__submit-button {
+    flex: 0 0 auto;
+  }
+}

@@ -1,0 +1,19 @@
+.toast {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  gap: var(--size-1);
+  padding: var(--size-2);
+
+  &_standard {
+    background-color: var(--clr-gray-9);
+    color: var(--clr-gray-1);
+    border-radius: var(--size-1);
+  }
+
+  &__icon {
+    inline-size: var(--size-4);
+    flex: 0 0 auto;
+  }
+}

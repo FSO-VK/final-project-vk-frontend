@@ -1,0 +1,84 @@
+.llm-assistant-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-3);
+
+  overflow-y: auto;
+  margin-bottom: 20dvi;
+
+  &__qna-block {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: var(--size-2);
+  }
+
+  &__user-message {
+    align-self: flex-end;
+    padding: var(--size-2);
+    border-radius: var(--size-1);
+
+    margin-inline-start: 20%;
+
+    &_brand {
+      background-color: var(--clr-brand-1);
+    }
+  }
+
+  &__form-container {
+    position: fixed;
+    inset-inline: 0;
+    inset-block-end: 0;
+
+    padding-inline: var(--size-3);
+    padding-block-end: var(--size-3);
+
+    background-color: var(--clr-gray-1);
+  }
+
+  &__query-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: end;
+
+    border-radius: var(--size-1);
+    background-color: var(--clr-background);
+
+    padding-inline: var(--size-2);
+    padding-block: var(--size-1);
+  }
+
+  &__query-input {
+    border: none;
+
+    resize: none;
+
+    inline-size: 100%;
+
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &:focus {
+      outline: none;
+    }
+
+    &::placeholder {
+      color: var(--clr-secondary);
+    }
+
+    background-color: transparent;
+  }
+
+  &__submit-query-button {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  &__submit-query-icon {
+    inline-size: var(--size-4);
+  }
+}

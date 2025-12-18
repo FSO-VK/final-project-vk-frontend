@@ -1,0 +1,6 @@
+.medication-form {
+  &__header {
+    color: var(--clr-brand-7);
+    font-size: var(--fs-5);
+  }
+}

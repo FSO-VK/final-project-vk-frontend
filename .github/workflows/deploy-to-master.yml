@@ -1,0 +1,51 @@
+name: Deploy — manual publish frontend image
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: "target branch to publish"
+        required: true
+        default: "master"
+
+env:
+  IMAGE_REPO: ghcr.io/fso-vk/fso-frontend
+  NODE_VERSION: '24.9.x'
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to GHCR
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GHCR_PAT || secrets.GITHUB_TOKEN }}
+
+      - name: Build and push image
+        env:
+          TARGET: ${{ github.event.inputs.target }}
+        run: |
+          MODE="prod"
+          IMAGE_TAG="${{ env.IMAGE_REPO }}:prod"
+          echo "Publishing ${IMAGE_TAG} with mode=${MODE}"
+          docker buildx build --push --platform linux/amd64,linux/arm64 \
+            --build-arg mode=${MODE} \
+            --tag "${IMAGE_TAG}" \
+            -f ./Dockerfile .

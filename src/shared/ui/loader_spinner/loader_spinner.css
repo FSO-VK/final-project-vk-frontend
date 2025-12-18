@@ -1,0 +1,67 @@
+.loader-spinner {
+  position: relative;
+  inline-size: 100%;
+  block-size: 100%;
+  animation: spin 1.5s linear infinite;
+
+  &__outer-circle {
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: var(--clr-gray-3);
+  }
+
+  &__inner-circle {
+    position: absolute;
+    inset: 8%;
+    z-index: 1;
+
+    border-radius: 50%;
+    background-color: var(--clr-gray-1);
+  }
+
+  /* This is located at bottom left */
+  &__first-quadrant {
+    position: absolute;
+    inset-inline-start: 0;
+    inset-block-end: 0;
+    inline-size: 50%;
+    block-size: 50%;
+
+    /* webkit rule must be before ordinary, or it will break gradient on chrome */
+    background: -webkit-gradient(top left, var(--clr-brand-7) 0%, var(--clr-brand-4) 100%);
+    background: linear-gradient(to bottom right, var(--clr-brand-7) 0%, var(--clr-brand-4) 100%);
+  }
+
+  &__second-quadrant {
+    position: absolute;
+    inset-inline-end: 0;
+    inset-block-end: 0;
+    inline-size: 50%;
+    block-size: 50%;
+
+    /* webkit rule must be before ordinary, or it will break gradient on chrome */
+    background: -webkit-gradient(bottom left, var(--clr-brand-4) 0%, var(--clr-brand-2) 100%);
+    background: linear-gradient(to top right, var(--clr-brand-4) 0%, var(--clr-brand-2) 100%);
+  }
+
+  &__third-quadrant {
+    position: absolute;
+    inset-inline-end: 0;
+    inset-block-start: 0;
+    inline-size: 50%;
+    block-size: 50%;
+
+    /* webkit rule must be before ordinary, or it will break gradient on chrome */
+    background: -webkit-gradient(top right, var(--clr-brand-2) 0%, var(--clr-gray-3) 100%);
+    background: linear-gradient(to top left, var(--clr-brand-2) 0%, var(--clr-gray-3) 100%);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

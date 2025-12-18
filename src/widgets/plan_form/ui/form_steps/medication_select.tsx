@@ -1,0 +1,77 @@
+import { withForm } from '@/shared/lib';
+import { LabelsWrapper, RadioGroup, SearchFilter } from '@/shared/ui';
+import { Medication } from '@/entities/medication';
+import { createMemo, createSignal } from 'solid-js';
+import './medication_select.css';
+
+export const MedicationSelectForm = withForm({
+  defaultValues: {
+    medication: null as null | Medication,
+  },
+  props: {
+    medications: [] as Medication[],
+  },
+  render: function Render(props) {
+    const medOptions = createMemo(() =>
+      props.medications.map((med) => {
+        return {
+          value: med.id,
+          label: med.name,
+        };
+      }),
+    );
+
+    const [filtered, setFiltered] = createSignal([] as { value: string; label: string }[]);
+    const [selectedIdx, setSelectedIdx] = createSignal(undefined as number | undefined);
+
+    const handleFiltered = (filtered: { value: string; label: string }[]) => {
+      setFiltered(filtered);
+      setSelectedIdx(undefined);
+    };
+
+    return (
+      <div class="medication-select-form">
+        <h2 class="medication-select-form__header">
+          Прием какого препарата вы хотите запланировать?
+        </h2>
+
+        <form class="medication-select-form__options">
+          <props.form.Field
+            name="medication"
+            validators={{
+              onSubmit: ({ value }) => {
+                if (value === null) {
+                  return 'Выберите препарат';
+                }
+                return;
+              },
+            }}
+            children={(field) => {
+              return (
+                <LabelsWrapper
+                  label="Найдите лекарство в поиске или сразу выберите из списка"
+                  feedbackMessage={field().state.meta.errors.join(', ')}
+                >
+                  <SearchFilter
+                    searchValues={medOptions()}
+                    onFiltered={(filtered) => handleFiltered(filtered)}
+                  />
+                  <RadioGroup
+                    class="medication-select-form__radiogroup"
+                    name={field().name}
+                    options={filtered()}
+                    selectedIdx={selectedIdx()}
+                    onOptionSelected={(_, idx) => {
+                      setSelectedIdx(idx);
+                      field().handleChange(props.medications[idx]);
+                    }}
+                  />
+                </LabelsWrapper>
+              );
+            }}
+          />
+        </form>
+      </div>
+    );
+  },
+});

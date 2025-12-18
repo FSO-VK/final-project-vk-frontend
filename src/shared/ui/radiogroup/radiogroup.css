@@ -1,0 +1,13 @@
+.radiogroup {
+  padding: 0;
+  border: none;
+
+  &__option {
+    padding: var(--size-2);
+    cursor: pointer;
+
+    &_active {
+      background-color: var(--clr-brand-1);
+    }
+  }
+}

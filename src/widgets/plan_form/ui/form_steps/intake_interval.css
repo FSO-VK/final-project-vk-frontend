@@ -1,0 +1,11 @@
+.intake-interval-form {
+  &__header {
+    color: var(--clr-brand-6);
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-2);
+  }
+}

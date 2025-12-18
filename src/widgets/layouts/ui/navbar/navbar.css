@@ -1,0 +1,25 @@
+.navbar-layout {
+  box-sizing: border-box;
+  block-size: 100dvb;
+  inline-size: 100dvi;
+
+  display: grid;
+  grid-template-rows: auto 1fr;
+
+  &__navbar-container {
+    inline-size: 100%;
+  }
+
+  &__page {
+    position: relative;
+    padding: var(--size-3);
+    overflow-y: auto;
+  }
+}
+
+@media (min-width: 50em) {
+  .navbar-layout {
+    max-inline-size: var(--max-screen-size);
+    margin: 0px auto;
+  }
+}

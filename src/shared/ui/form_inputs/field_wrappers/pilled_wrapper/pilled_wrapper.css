@@ -1,0 +1,39 @@
+.pilled-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-1);
+
+  &__autosuggestions {
+    display: flex;
+    flex-direction: row;
+    gap: var(--size-1);
+
+    overflow-x: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &__pill {
+    border-radius: var(--size-3);
+    padding-inline: var(--size-2);
+    padding-block: var(--size-0);
+    cursor: pointer;
+    text-overflow: ellipsis;
+    text-align: center;
+    overflow: hidden;
+    min-inline-size: fit-content;
+
+    &:clicked {
+      background-color: inherit;
+    }
+
+    &_brand {
+      color: var(--clr-brand-1);
+      background-color: var(--clr-brand-5);
+    }
+  }
+}

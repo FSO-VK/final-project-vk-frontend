@@ -1,0 +1,45 @@
+.select-field {
+  /* Used to move arrow icon */
+  position: relative;
+
+  &_border {
+    border: var(--size-00) solid;
+    border-radius: var(--size-0);
+  }
+
+  &_brand {
+    border-color: var(--clr-brand-5);
+  }
+
+  &__select {
+    border: none;
+    appearance: none;
+    inline-size: 100%;
+    padding-inline: var(--size-2);
+    padding-block: var(--size-1);
+    background-color: inherit;
+
+    &:focus {
+      outline: none;
+    }
+
+    &_brand {
+      border: var(--size-00) solid;
+      border-radius: var(--size-0);
+      border-color: var(--clr-brand-5);
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    inset-inline-end: 0;
+    inset-block-start: 50%;
+    transform: translate(-50%, -50%);
+
+    inline-size: var(--size-3);
+    block-size: var(--size-3);
+
+    /* To make select before the icon */
+    z-index: -1;
+  }
+}

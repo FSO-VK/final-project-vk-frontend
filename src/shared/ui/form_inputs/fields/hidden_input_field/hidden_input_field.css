@@ -1,0 +1,17 @@
+.hidden-input-field {
+  &__show-button {
+    display: block;
+    cursor: pointer;
+    text-decoration: none;
+    border: none;
+    background-color: transparent;
+    -webkit-tap-highlight-color: transparent;
+    inline-size: var(--size-3);
+    block-size: var(--size-3);
+    padding: 0;
+  }
+
+  &__eye {
+    size: fit-object;
+  }
+}

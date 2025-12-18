@@ -1,0 +1,59 @@
+.hello-page {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  /* Without this line the page wont fill all of the layout
+  * and the buttons wont be on the bottom */
+  block-size: 100%;
+
+  &__logo-container {
+    padding: var(--size-3) 0px;
+  }
+
+  &__logo {
+    inline-size: min(50vb, 50vi);
+    margin: auto;
+  }
+
+  &__info {
+    text-align: left;
+    block-size: fit-content;
+    margin-bottom: var(--size-3);
+  }
+
+  &__subpage {
+    animation: fade-up 0.5s;
+  }
+
+  &__info-header {
+    text-align: center;
+    margin: var(--size-2) auto;
+  }
+
+  &__button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: var(--size-2);
+    background-color: var(--clr-gray-1);
+    min-block-size: fit-content;
+  }
+
+  &__button {
+    inline-size: 50%;
+  }
+
+  &__login-link {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+@keyframes fade-up {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

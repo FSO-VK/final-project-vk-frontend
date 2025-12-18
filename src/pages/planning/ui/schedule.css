@@ -1,0 +1,42 @@
+.schedule-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-3);
+
+  &__calendar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-3);
+  }
+
+  &__current-date {
+    text-align: center;
+    color: var(--clr-brand-6);
+  }
+
+  &__calendar-row {
+    inline-size: 100%;
+    max-inline-size: var(--size-10);
+    margin-inline: auto;
+  }
+
+  &__intake-record-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-1);
+  }
+
+  &__intake-record-time-block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-2);
+  }
+
+  &__intake-time {
+    line-height: var(--lh-3);
+    font-size: var(--fs-5);
+    color: var(--clr-brand-6);
+    font-weight: var(--fw-semi-bold);
+    padding: 0 var(--size-2);
+  }
+}

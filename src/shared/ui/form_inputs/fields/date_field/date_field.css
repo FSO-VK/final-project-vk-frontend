@@ -1,0 +1,31 @@
+.date-field {
+  /* Hide the default date picker icon in Chrome, Safari, and Edge */
+  &::-webkit-calendar-picker-indicator {
+    background: transparent;
+    opacity: 0;
+    position: absolute;
+    left: 0; /* Ensures the calendar still shows up */
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+
+  &::-webkit-inner-spin-button {
+    display: none;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  /* Hide the default date picker icon in Firefox */
+  appearance: none;
+  position: relative;
+  z-index: 2;
+  background: transparent;
+
+  &__icon {
+    inline-size: var(--size-3);
+    position: absolute;
+  }
+}

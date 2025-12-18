@@ -1,0 +1,5 @@
+.search-filter {
+  &__search-icon {
+    block-size: var(--size-3);
+  }
+}

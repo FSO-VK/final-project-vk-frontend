@@ -1,0 +1,56 @@
+.optional-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-3);
+
+  &__header {
+    font-size: var(--fs-3);
+    font-weight: var(--fw-regular);
+  }
+
+  &__combined-field {
+    display: grid;
+    grid-template-columns: 4fr 1fr var(--lh-6);
+    gap: var(--size-1);
+  }
+
+  &__group-input {
+    display: grid;
+    grid-template-columns: 1fr var(--lh-6);
+    gap: var(--size-1);
+  }
+
+  &__add-field-button {
+    border-color: var(--clr-brand-5);
+    color: var(--clr-brand-5);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: var(--size-1);
+    outline-color: var(--clr-brand-7);
+
+    &-icon {
+      inline-size: var(--fs-4);
+    }
+  }
+
+  &__remove-field-button {
+    border-color: var(--clr-danger-5);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    outline-color: var(--clr-danger-7);
+  }
+
+  &__button-container {
+    display: flex;
+    flex-direction: row;
+    gap: var(--size-1);
+  }
+
+  &__button {
+    flex: 1 1 0;
+  }
+}
