@@ -1,4 +1,3 @@
-import { useMeStore } from '@/entities/me';
 import { notificationApi } from '@/shared/api';
 import { useSwStore } from '@/shared/lib';
 
@@ -30,8 +29,11 @@ export async function subscribeUserToPush() {
   }
   const existingSubscription = await registration.pushManager.getSubscription();
   if (existingSubscription !== null) {
-    console.warn('user already subscribed');
-    return;
+    console.warn('user already subscribed: unsubscribed');
+    const isSuccess = await existingSubscription.unsubscribe();
+    if (!isSuccess) {
+      throw new Error('failed to unsubscribe user: browser subscription failed');
+    }
   }
 
   const { vapidPublicKey } = await notificationApi.getVapid();
@@ -70,16 +72,10 @@ export async function unsubscribeUserFromPush(): Promise<void> {
     return;
   }
 
-  const meStore = useMeStore();
-  const userId = meStore.userId();
-  if (userId === null) {
-    throw new Error('failed to unsubscribe user: user is null');
-  }
-
-  await notificationApi.unsubscribe();
-
   const isSuccess = await existingSubscription.unsubscribe();
   if (!isSuccess) {
     throw new Error('failed to unsubscribe user: browser subscription failed');
   }
+
+  await notificationApi.unsubscribe();
 }
