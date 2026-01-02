@@ -8,6 +8,15 @@ export interface CalendarDate {
   year: number;
 }
 
+// shitty way to create keys for comparison of CalendarDates
+// cause createSelector compares by reference (===)
+const getCalendarDateKey = (date: CalendarDate | undefined) => {
+  if (!date) {
+    return '';
+  }
+  return `${date.year}-${date.month}-${date.day}`;
+};
+
 export interface CalendarRowSectionProps extends JSX.HTMLAttributes<HTMLDivElement> {
   days?: CalendarDate[];
   today?: CalendarDate;
@@ -16,17 +25,14 @@ export interface CalendarRowSectionProps extends JSX.HTMLAttributes<HTMLDivEleme
 }
 
 export function CalendarRowSection(props: CalendarRowSectionProps) {
-  const isSelected = createSelector(() => props.selectedDay);
+  const isSelected = createSelector(() => getCalendarDateKey(props.selectedDay));
 
   const classModifier = (day: CalendarDate) => {
-    if (isSelected(day)) {
+    const key = getCalendarDateKey(day);
+    if (isSelected(key)) {
       return 'calendar-row__cell_selected';
     }
-    if (
-      day.day === props?.today?.day &&
-      day.month === props?.today?.month &&
-      day.year === props?.today?.year
-    ) {
+    if (getCalendarDateKey(props.today) === key) {
       return 'calendar-row__cell_today';
     }
     return '';

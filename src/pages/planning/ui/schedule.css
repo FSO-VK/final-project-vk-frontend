@@ -26,6 +26,9 @@
     inline-size: 300%;
     transform: translateX(-33.33%);
     transition: none;
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
   }
 
   &__calendar-slide {
