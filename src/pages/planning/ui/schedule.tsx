@@ -164,6 +164,7 @@ export function SchedulePage() {
             onPointerDown={pointerDownHandler}
             onPointerUp={pointerUpHandler}
             onPointerMove={pointerMoveHandler}
+            onPointerCancel={pointerUpHandler}
             onTransitionEnd={transitionEndHandler}
           >
             <For each={weeks()}>
