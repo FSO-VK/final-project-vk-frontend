@@ -14,10 +14,22 @@
     color: var(--clr-brand-6);
   }
 
-  &__calendar-row {
+  &__calendar-window {
+    overflow: hidden;
     inline-size: 100%;
     max-inline-size: var(--size-10);
     margin-inline: auto;
+  }
+
+  &__calendar-track {
+    display: flex;
+    inline-size: 300%;
+    transform: translateX(-33.33%);
+    transition: none;
+  }
+
+  &__calendar-slide {
+    inline-size: 33.33%;
   }
 
   &__intake-record-list {
