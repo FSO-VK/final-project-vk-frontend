@@ -1,26 +1,32 @@
 import './calendar.css';
 import { createSelector, For, type JSX } from 'solid-js';
 
-export interface Day {
+export interface CalendarDate {
   dayOfWeek: string;
-  date: number;
+  day: number;
+  month: number;
+  year: number;
 }
 
 export interface CalendarRowSectionProps extends JSX.HTMLAttributes<HTMLDivElement> {
-  days?: Day[];
-  today?: number;
-  currentDay?: number;
-  onDateClick: (day: number) => void;
+  days?: CalendarDate[];
+  today?: CalendarDate;
+  selectedDay?: CalendarDate;
+  onDateClick: (day: CalendarDate) => void;
 }
 
 export function CalendarRowSection(props: CalendarRowSectionProps) {
-  const isSelected = createSelector(() => props.currentDay);
+  const isSelected = createSelector(() => props.selectedDay);
 
-  const classModifier = (day: number) => {
+  const classModifier = (day: CalendarDate) => {
     if (isSelected(day)) {
       return 'calendar-row__cell_selected';
     }
-    if (day === props.today) {
+    if (
+      day.day === props?.today?.day &&
+      day.month === props?.today?.month &&
+      day.year === props?.today?.year
+    ) {
       return 'calendar-row__cell_today';
     }
     return '';
@@ -31,10 +37,10 @@ export function CalendarRowSection(props: CalendarRowSectionProps) {
       <For each={props.days}>
         {(day) => (
           <div
-            class={`calendar-row__cell ${classModifier(day.date)}`}
-            onClick={[props.onDateClick, day.date]}
+            class={`calendar-row__cell ${classModifier(day)}`}
+            onClick={[props.onDateClick, day]}
           >
-            <div>{day.date}</div>
+            <div>{day.day}</div>
             <div>{day.dayOfWeek}</div>
           </div>
         )}
