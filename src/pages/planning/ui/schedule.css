@@ -24,15 +24,17 @@
   &__calendar-track {
     display: flex;
     inline-size: 300%;
-    transform: translateX(-33.33%);
+    transform: translateX(calc(-100% / 3));
     transition: none;
     touch-action: pan-y;
     user-select: none;
     -webkit-user-select: none;
+    will-change: transform;
   }
 
   &__calendar-slide {
-    inline-size: 33.33%;
+    inline-size: calc(100% / 3);
+    flex-shrink: 0;
   }
 
   &__intake-record-list {
