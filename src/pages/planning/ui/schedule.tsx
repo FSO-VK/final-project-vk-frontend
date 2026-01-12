@@ -21,6 +21,7 @@ export function SchedulePage() {
   });
 
   const [anchorDate, setAnchorDate] = createSignal(new Date());
+  // create 3 weeks: previous, current and next for swipe purposes
   const weeks: () => ExtendedDay[][] = createMemo(() => {
     const date = new Date(anchorDate());
     return [getWeek(addDays(date, -7)), getWeek(date), getWeek(addDays(date, 7))];
@@ -29,19 +30,11 @@ export function SchedulePage() {
   const currentDay: CalendarDate = {
     day: currentDate.getDate(),
     dayOfWeek: currentDate.toLocaleDateString('ru-RU', { weekday: 'short' }),
-    month: currentDate.getMonth() + 1,
+    month: currentDate.getMonth(),
     year: currentDate.getFullYear(),
   };
   const [selectedDay, setSelectedDay] = createSignal(currentDay);
-  const selectedDate = createMemo(() => {
-    return weeks()[1].find((d) => {
-      return (
-        d.day === selectedDay().day &&
-        d.month === selectedDay().month &&
-        d.year === selectedDay().year
-      );
-    })?.dateObj;
-  });
+  const [selectedDate, setSelectedDate] = createSignal(currentDate);
 
   const timeFormatter = Intl.DateTimeFormat('ru-RU', {
     hour: '2-digit',
@@ -80,6 +73,11 @@ export function SchedulePage() {
   let swipeStartX = 0;
   let currentTransform = 0;
 
+  const DRAG_THRESHOLD = 10;
+  const SWIPE_THRESHOLD_PERCENTAGE = 30;
+  const TRANSITION_NONE = 'none';
+  const TRANSITION_TRANSFORM = 'transform 0.5s ease-in-out';
+
   const pointerDownHandler = (e: PointerEvent) => {
     const elem = e.currentTarget as HTMLElement;
     // cause there are 3 week rows in a track (previous, current and next).
@@ -88,7 +86,7 @@ export function SchedulePage() {
     swipeStartX = e.clientX;
     isPointerHold = true;
 
-    elem.style.transition = 'none';
+    elem.style.transition = TRANSITION_NONE;
   };
 
   const pointerMoveHandler = (e: PointerEvent) => {
@@ -97,8 +95,7 @@ export function SchedulePage() {
     }
 
     const diffX = e.clientX - swipeStartX;
-    const dragThreshold = 10;
-    if (Math.abs(diffX) <= dragThreshold) {
+    if (Math.abs(diffX) <= DRAG_THRESHOLD) {
       // got a small move, assume is's as a click.
       // it's necessary to handle click on date cells.
       return;
@@ -112,7 +109,13 @@ export function SchedulePage() {
     elem.style.transform = `translateX(${currentTransform}px)`;
   };
 
-  let weekSwipeDirection = 0; // -1 - previous week, 0 - current week, 1 - next week
+  enum SwipeDirection {
+    NoSwipe,
+    Previous,
+    Next,
+  }
+
+  let weekSwipeDirection = SwipeDirection.NoSwipe;
   const pointerUpHandler = (e: PointerEvent) => {
     if (isPointerHold && !isDrag) {
       // no swipe just a click
@@ -126,30 +129,39 @@ export function SchedulePage() {
     const diffTransform = currentTransform - -calendarRowWidth; // by default translateX is negative
 
     // need to adjust CalendarRow position after swipe: Monday is left and Sunday is right.
-    const swipeThreshold = 0.6 * calendarRowWidth;
+    const swipeThreshold = (SWIPE_THRESHOLD_PERCENTAGE / 100) * calendarRowWidth;
     let adjustedTransform = -calendarRowWidth;
     if (diffTransform > swipeThreshold) {
-      adjustedTransform = 0;
-      weekSwipeDirection = -1;
+      weekSwipeDirection = SwipeDirection.Previous;
+      adjustedTransform = 0; // index of previous week
     } else if (diffTransform < -swipeThreshold) {
-      adjustedTransform = -2 * calendarRowWidth;
-      weekSwipeDirection = 1;
+      weekSwipeDirection = SwipeDirection.Next;
+      adjustedTransform = 2 * -calendarRowWidth; // index of next week
     }
 
     currentTransform = 0;
-    elem.style.transition = `transform 0.5s ease-in-out`;
+    elem.style.transition = TRANSITION_TRANSFORM;
     elem.style.transform = `translateX(${adjustedTransform}px)`;
   };
 
   const transitionEndHandler = (e: TransitionEvent) => {
-    if (weekSwipeDirection === 0) {
+    if (weekSwipeDirection === SwipeDirection.NoSwipe) {
       return;
     }
 
-    setAnchorDate((date) => addDays(date, weekSwipeDirection * 7));
+    switch (weekSwipeDirection) {
+      case SwipeDirection.Previous:
+        setAnchorDate((date) => addDays(date, -7));
+        break;
+      case SwipeDirection.Next:
+        setAnchorDate((date) => addDays(date, 7));
+        break;
+      default:
+        console.error('unknown swipe direction:', weekSwipeDirection);
+    }
 
     const elem = e.currentTarget as HTMLElement;
-    elem.style.transition = 'none';
+    elem.style.transition = TRANSITION_NONE;
     elem.style.transform = `translateX(${-calendarRowWidth}px)`;
     weekSwipeDirection = 0;
   };
@@ -157,7 +169,7 @@ export function SchedulePage() {
   return (
     <main class="schedule-page">
       <section class="schedule-page__calendar">
-        <div class="schedule-page__current-date">{getDateFormatted(currentDate)}</div>
+        <div class="schedule-page__current-date">{getDateFormatted(selectedDate())}</div>
         <div class="schedule-page__calendar-window">
           <div
             class="schedule-page__calendar-track"
@@ -177,6 +189,7 @@ export function SchedulePage() {
                       selectedDay={selectedDay()}
                       onDateClick={(day: CalendarDate) => {
                         setSelectedDay(day);
+                        setSelectedDate(new Date(day.year, day.month, day.day));
                       }}
                     />
                   </div>

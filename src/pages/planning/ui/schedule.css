@@ -24,7 +24,7 @@
   &__calendar-track {
     display: flex;
     inline-size: 300%;
-    transform: translateX(calc(-100% / 3));
+    transform: translateX(-33.333%);
     transition: none;
     touch-action: pan-y;
     user-select: none;
