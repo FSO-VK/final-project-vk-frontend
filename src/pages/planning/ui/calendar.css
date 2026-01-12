@@ -10,7 +10,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-width: 0;
+    min-inline-size: 0;
 
     &_today {
       color: var(--clr-brand-6);

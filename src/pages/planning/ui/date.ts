@@ -32,7 +32,7 @@ export function getWeek(time: Date): ExtendedDay[] {
     week.push({
       day: current.getDate(),
       dayOfWeek: formatter.format(current),
-      month: current.getMonth() + 1,
+      month: current.getMonth(),
       year: current.getFullYear(),
       dateObj: new Date(current),
     });
