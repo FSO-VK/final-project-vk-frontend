@@ -20,11 +20,11 @@ export const AddPlanDTO = z.object({
   condition: z.string(),
   status: z.enum(['active', 'finished', 'draft']),
   startDate: z.pipe(
-    z.iso.date(),
+    z.iso.datetime(),
     z.transform((val) => new Date(val)),
   ),
   endDate: z.pipe(
-    z.iso.date(),
+    z.iso.datetime(),
     z.transform((val) => new Date(val)),
   ),
   recurrenceRule: z.array(z.string()),
