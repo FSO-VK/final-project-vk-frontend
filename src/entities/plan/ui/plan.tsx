@@ -22,7 +22,7 @@ export function PlanCard(props: PlanCardProps) {
     return formatter.format(props.plan.endDate);
   });
   const startDate = createMemo(() => {
-    return formatter.format(props.plan.endDate);
+    return formatter.format(props.plan.startDate);
   });
   const endDate = createMemo(() => {
     return formatter.format(props.plan.endDate);
