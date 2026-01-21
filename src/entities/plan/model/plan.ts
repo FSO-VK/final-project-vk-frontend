@@ -44,9 +44,12 @@ export interface PlanStore {
   // Getters
   allPlans: () => Promise<Plan[]>;
   getSchedule: (day: Date) => Promise<Schedule>;
+  currentSchedule: () => Schedule;
 
   // Setters
   addPlan: (p: Plan) => void;
+  takeMedication: (intakeRecord: IntakeRecord) => void;
+  cancelMedicationIntake: (intakeRecord: IntakeRecord) => void;
 }
 
 export class PlanActions {
@@ -61,5 +64,15 @@ export class PlanActions {
   async addPlan(planDraft: PlanDraft) {
     const addedPlan = await this.planApi_.add(planDraft);
     this.planStore_.addPlan(addedPlan);
+  }
+
+  async takeMedication(intakeRecord: IntakeRecord) {
+    await this.planApi_.takeMedication(intakeRecord.id);
+    this.planStore_.takeMedication(intakeRecord);
+  }
+
+  async cancelMedicationIntake(intakeRecord: IntakeRecord) {
+    await this.planApi_.cancelMedicationIntake(intakeRecord.id);
+    this.planStore_.cancelMedicationIntake(intakeRecord);
   }
 }
