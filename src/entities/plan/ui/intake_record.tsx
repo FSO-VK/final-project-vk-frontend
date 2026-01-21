@@ -1,11 +1,12 @@
-import { Match, Show, Switch } from 'solid-js';
+import { Match, Show, Switch, JSX } from 'solid-js';
 import { IntakeRecord } from '../model/plan';
 import { createMemo } from 'solid-js';
 import './intake_record.css';
 import { CircleErrorIcon, CircleIcon, CircleOkIcon, IconStyle } from '@/shared/ui';
 
-export interface IntakeRecordProps {
+export interface IntakeRecordProps extends JSX.HTMLAttributes<HTMLDivElement> {
   intakeRecord: IntakeRecord;
+  onCircleClick: () => void;
 }
 
 export function IntakeRecordCard(props: IntakeRecordProps) {
@@ -28,7 +29,7 @@ export function IntakeRecordCard(props: IntakeRecordProps) {
           <h3 class="intake-record-card__header">{props.intakeRecord.medicationName}</h3>
           <div class="intake-record-card__amount">{`${props.intakeRecord.amount.value} ${props.intakeRecord.amount.unit}`}</div>
         </div>
-        <div class="intake-record-card__intake-button">
+        <div class="intake-record-card__intake-button" onClick={() => props.onCircleClick()}>
           <Switch>
             <Match when={props.intakeRecord.status === 'Принято'}>
               <CircleOkIcon

@@ -5,6 +5,8 @@ import type { GetScheduleOptions, GetScheduleDTO as _GetScheduleDTO } from './ge
 import { add, addMock } from './add';
 import { getAll, getAllMock } from './getAll';
 import { getSchedule, getScheduleMock } from './getSchedule';
+import { takeMedication, takeMedicationMock } from './takeMedication';
+import { cancelMedicationIntake, cancelMedicationIntakeMock } from './cancelMedicationIntake';
 
 import * as z from 'zod/mini';
 
@@ -19,6 +21,8 @@ export interface PlanApi {
   add: (o: AddPlanOptions) => Promise<AddPlanDTO>;
   getAll: () => Promise<GetAllPlansDTO>;
   getSchedule: (o: GetScheduleOptions) => Promise<GetScheduleDTO>;
+  takeMedication: (intakeRecordId: string) => Promise<void>;
+  cancelMedicationIntake: (intakeRecordId: string) => Promise<void>;
 }
 
 export let planApi: PlanApi;
@@ -28,11 +32,15 @@ if (import.meta.env.MODE === 'development') {
     add: addMock,
     getAll: getAllMock,
     getSchedule: getScheduleMock,
+    takeMedication: takeMedicationMock,
+    cancelMedicationIntake: cancelMedicationIntakeMock,
   };
 } else {
   planApi = {
     add,
     getAll,
     getSchedule,
+    takeMedication,
+    cancelMedicationIntake,
   };
 }

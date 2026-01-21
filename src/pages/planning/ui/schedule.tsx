@@ -5,10 +5,10 @@ import './schedule.css';
 import { EmptyScreen } from '@/shared/ui/empty_screen/empty_screen';
 import { type ExtendedDay, getWeek, getDateFormatted, addDays } from './date';
 import { createMemo, Show } from 'solid-js';
-import { IntakeRecordCard, usePlanStore } from '@/entities/plan';
+import { IntakeRecordCard, usePlanActions, usePlanStore } from '@/entities/plan';
 import { For } from 'solid-js';
 import { CenteredLoaderSpinner } from '@/shared/ui';
-import { IntakeRecord } from '@/entities/plan/model/plan';
+import { type IntakeRecord } from '@/entities/plan/model/plan';
 
 export function SchedulePage() {
   const layoutStore = useLayoutStore();
@@ -42,27 +42,16 @@ export function SchedulePage() {
   });
 
   const planStore = usePlanStore();
+  const planActions = usePlanActions();
+
   const [currentSchedule] = createResource(
     selectedDate,
     async (day) => {
       if (!day) {
         return undefined;
       }
-      const schedule = await planStore.getSchedule(day);
-      const scheduleMap = new Map<string, IntakeRecord[]>();
-      schedule.forEach((intakeRecord) => {
-        const time = timeFormatter.format(intakeRecord.plannedAt);
-        if (scheduleMap.has(time)) {
-          scheduleMap.set(time, [...scheduleMap.get(time)!, intakeRecord]);
-        } else {
-          scheduleMap.set(time, [intakeRecord]);
-        }
-      });
-      return {
-        keys: Array.from(scheduleMap.keys()).sort(),
-        values: schedule,
-        map: scheduleMap,
-      };
+      await planStore.getSchedule(day);
+      return true;
     },
     { ssrLoadFrom: 'initial' },
   );
@@ -165,6 +154,22 @@ export function SchedulePage() {
     elem.style.transform = `translateX(${-calendarRowWidth}px)`;
     weekSwipeDirection = 0;
   };
+  const scheduleByTime = createMemo(() => {
+    const schedule = planStore.currentSchedule();
+    const scheduleMap = new Map<string, IntakeRecord[]>();
+    schedule.forEach((intakeRecord) => {
+      const time = timeFormatter.format(intakeRecord.plannedAt);
+      if (scheduleMap.has(time)) {
+        scheduleMap.set(time, [...scheduleMap.get(time)!, intakeRecord]);
+      } else {
+        scheduleMap.set(time, [intakeRecord]);
+      }
+    });
+    return {
+      keys: Array.from(scheduleMap.keys()).sort(),
+      map: scheduleMap,
+    };
+  });
 
   return (
     <main class="schedule-page">
@@ -201,15 +206,31 @@ export function SchedulePage() {
       </section>
       <Suspense fallback={<CenteredLoaderSpinner />}>
         <Show when={currentSchedule.latest !== undefined} fallback={<EmptyScreen />}>
-          <For each={currentSchedule.latest?.keys}>
+          <For each={scheduleByTime().keys}>
             {(time) => {
               return (
                 <div class="schedule-page__intake-record-time-block">
                   <div class="schedule-page__intake-time">{time}</div>
                   <div class="schedule-page__intake-record-list">
-                    <For each={currentSchedule.latest?.map.get(time) ?? []}>
+                    <For each={scheduleByTime().map.get(time) ?? []}>
                       {(intakeRecord) => {
-                        return <IntakeRecordCard intakeRecord={intakeRecord} />;
+                        const handleCircleClick = () => {
+                          const action =
+                            intakeRecord.status === 'Принято'
+                              ? planActions.cancelMedicationIntake(intakeRecord)
+                              : planActions.takeMedication(intakeRecord);
+
+                          action.catch((e) => {
+                            console.error(e);
+                          });
+                        };
+
+                        return (
+                          <IntakeRecordCard
+                            intakeRecord={intakeRecord}
+                            onCircleClick={handleCircleClick}
+                          />
+                        );
                       }}
                     </For>
                   </div>
