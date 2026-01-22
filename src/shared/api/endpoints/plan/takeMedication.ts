@@ -1,7 +1,9 @@
 import { backendClient } from '../../client';
 
 export async function takeMedication(intakeRecordId: string): Promise<void> {
-  await backendClient.post(`/planning/intake/${intakeRecordId}/take`);
+  await backendClient.post(`/planning/intake/${intakeRecordId}/take`, {
+    useCredentials: true,
+  });
 }
 
 export async function takeMedicationMock(_: string): Promise<void> {
